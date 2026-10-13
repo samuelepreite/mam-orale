@@ -667,7 +667,7 @@ $$ \vec{V}_C = \vec{\omega}_2\wedge(C - K) $$
 
 Ne risulta che il verso della velocità angolare della biella $\vec{\omega}_2$ è orario.
 
-[NdT: verificato con prodotti vettoriali: K in alto a destra, B−K diretto in basso a sinistra; $\vec V_B$ verso l'alto a sinistra richiede $\vec\omega_2 = -\omega_2\hat k$ (orario); allora $\vec V_C = \vec\omega_2\wedge(C-K)$ con C−K verso il basso dà $\vec V_C$ verso sinistra, come in figura. Il verso orario vale per $0<\theta<\pi$ con ω₁ antioraria.]
+[NdT: verificato con prodotti vettoriali: K in alto a destra, B−K diretto in basso a sinistra; $\vec V_B$ verso l'alto a sinistra richiede $\vec\omega_2 = -\omega_2\hat k$ (orario); allora $\vec V_C = \vec\omega_2\wedge(C-K)$ con C−K verso il basso dà $\vec V_C$ verso sinistra, come in figura. Il verso orario vale nella configurazione della figura; in generale, con ω₁ antioraria, ω₂ è oraria per |θ| < 90°, nulla a θ = ±90° (CIR all'infinito) e antioraria oltre (correzione del 13/10, NF-101).]
 
 Si noti che la posizione del centro di istantanea rotazione della biella $K$ dipende dall'angolo di manovella $\theta$:
 - $\theta = 0$: significa che il pistone si trova nel punto morto superiore e manovella, biella e pistone risultano allineati. Il centro di istantanea rotazione coincide con $C$:

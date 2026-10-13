@@ -1,0 +1,18 @@
+# Note nuove sulle fonti — C5 parte a (ruote dentate a denti dritti, rotismi ordinari, PDF pp. 155–173)
+
+Intervallo riservato NF-181…199. Verifiche con SymPy in `tools/verifica/c5a.py` e numeriche in `tests/meccanismi-c5a.test.ts`.
+Le note già esistenti usate dal capitolo sono NF-07, NF-09, NF-11, NF-23, NF-24, NF-25, NF-26 (in `NOTE_FONTI.md`).
+
+| ID | Dove | Cosa | Lettura adottata | Docente? |
+|---|---|---|---|---|
+| NF-181 | p. 159 triangoli simili | D scrive O₁H₁/O₂H₂ = O₁C₁/O₂C₂ = τ = −R₁/R₂: un rapporto di lunghezze (positivo) uguagliato a τ negativo; i segmenti sono chiamati anche «O₁C₁», «O₂C₂» | \|τ\| = O₁H₁/O₂H₂ = O₁C/O₂C; τ = −O₁C/O₂C per ruote esterne (C fra i centri). Nell'app: passo d073.6 con correzione | |
+| NF-182 | pp. 167–168 interferenza | convenzione di τ incoerente: a p. 167 \|τ\| = R₁/R₂ = z₁/z₂ ≥ 1 (1 grande, 2 piccola, dentiera per \|τ\| → ∞); a p. 168 il testo scrive «τ = z₂/z₁» e il grafico z₂^min(τ) mette la dentiera in τ = 0 (rapporto piccola/grande con segno) | formula con \|τ\| = z₁/z₂ (grande/piccola) come a p. 167; il grafico va letto con τ' = z₂/z₁ col segno (τ' < 0 esterne, τ' = 0 dentiera, τ' > 0 interne) | |
+| NF-183 | p. 168 limite | «z₂^min = f(\|τ\|, θ) ≥ lim f»: f è crescente in \|τ\| (lo mostra il grafico della stessa pagina), quindi f ≤ 2/sin²θ | la formula della dentiera è un **maggiorante** (conservativa) per le ruote esterne, come dice la tabella di p. 168 | |
+| NF-184 | p. 173 «ruota oziosa con ingranaggio interno» | il titolo non corrisponde allo schema: 2 e 3 sono solidali allo stesso albero, quindi non c'è una ruota oziosa; nella stessa pagina ω₄/ω₁ è scritto sia τ_{4,1} sia τ_{1,4} | è un rotismo composto con l'ultimo ingranaggio interno (τ = −z₁z₃/(z₂z₄), C₄ = −C₁/τ, verificato); nell'app τ_{a,b} = ω_b/ω_a sempre (NF-24) | |
+| NF-185 | p. 163 geometria del dente | «non si può avere l'evolvente dentro la primitiva» | l'evolvente non esiste dentro la **fondamentale**; il fianco del dente a evolvente prosegue sotto la primitiva (dedendum). Se il fondo è sotto la fondamentale (z < 5/(2(1−cos θ)) ≈ 41 con 20°), quel tratto non è evolvente (p. 165) | |
+| NF-186 | p. 165 modulo | m = 2R/z è chiamato «passo diametrale» | nella nomenclatura usuale il passo diametrale è P_d = z/D = 1/m (sistema in pollici); nell'app si parla solo di modulo m = p/π | |
+| NF-187 | p. 159 profili cicloidali | «col taglio cicloidale la normale non era sempre uguale a sé stessa» | anche i profili cicloidali rispettano la legge dell'ingranamento (τ costante); cambia l'inclinazione della normale, quindi la direzione della forza. L'evolvente ha in più la normale fissa | |
+| NF-188 | p. 169 velocità nel contatto | «V₁\|_{P∈2} = ω₂∧(P − O₂)» (velocità di P come punto della ruota 2 chiamata V₁) | V₂\|_{P∈2}; refuso di notazione, nessun effetto sui risultati | |
+| NF-189 | q48 (fonte derivata) | chiama z₁ la ruota piccola e z₂ la grande, con τ = z₂/z₁; nella dispensa la piccola è la ruota 2 e \|τ\| = z₁/z₂ | pedici della dispensa (z₂ ≥ f(\|τ\|, θ)); il valore numerico di \|τ\| (grande/piccola) è lo stesso | |
+| NF-190 | d088, q14 (fonti derivate) | «la ruota oziosa serve a cambiare il verso **o l'interasse**»: la dispensa (p. 173) parla solo del cambio di segno | vero come osservazione pratica (i_{a,c} = R_a + 2R_b + R_c con le ruote in fila): nell'app come deduzione, non come contenuto della dispensa | |
+| NF-191 | q25, d083 (fonti derivate) | F_r = F_N sin θ, F_r = F_t tg θ e «con attrito la risultante è inclinata dell'angolo d'attrito» non sono scritti nella dispensa (che ha Q = F cos θ a p. 162 e «R₂,₁ radiale a momento nullo» a p. 172) | scomposizione come **deduzione** dalla p. 162; l'angolo d'attrito non usato negli equilibri (la dispensa lavora con F_N e F_T = f F_N) | |
