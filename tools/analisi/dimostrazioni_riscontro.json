@@ -1,0 +1,996 @@
+{
+"1": {
+"f": "cap1",
+"dich": "5–7",
+"reali": "— (a p. 6 c'è solo $(P-O)=r\\cos\\theta\\,\\hat i + r\\sin\\theta\\",
+"pres": "no",
+"coincide": "— (formula $v=\\dot r e_r + r\\dot\\varepsi"
+},
+"2": {
+"f": "cap1",
+"dich": "7–9",
+"reali": "7–8",
+"pres": "sì",
+"coincide": "sì: $a_t=\\dot V$, $a_n=V^2/R$"
+},
+"3": {
+"f": "cap1",
+"dich": "9–10",
+"reali": "—",
+"pres": "no",
+"coincide": "— (formula $(\\ddot r - r\\dot\\varepsilon^"
+},
+"4": {
+"f": "cap1",
+"dich": "10–11",
+"reali": "10",
+"pres": "parziale (solo enunciato)",
+"coincide": "sì: $d\\hat e/dt = \\vec\\omega\\wedge\\hat e"
+},
+"5": {
+"f": "cap1",
+"dich": "11–13",
+"reali": "10–11 (figura p. 12)",
+"pres": "sì",
+"coincide": "sì: $\\vec V_B = \\vec V_A + \\vec\\omega\\we"
+},
+"6": {
+"f": "cap1",
+"dich": "14–16",
+"reali": "12 (figura p. 13; casi particolari pp. 13–16)",
+"pres": "sì",
+"coincide": "sì nel piano. La dispensa scrive $\\vec a"
+},
+"7": {
+"f": "cap1",
+"dich": "16–18",
+"reali": "17–18 (ripreso alle pp. 21–23, 25–26, 29)",
+"pres": "sì",
+"coincide": "sì: $\\vec V_P = \\vec\\omega\\wedge(P-K)$, "
+},
+"8": {
+"f": "cap1",
+"dich": "21–24",
+"reali": "—",
+"pres": "no",
+"coincide": "—"
+},
+"9": {
+"f": "cap1",
+"dich": "22–24",
+"reali": "—",
+"pres": "no",
+"coincide": "—"
+},
+"10": {
+"f": "cap1",
+"dich": "23–25",
+"reali": "31 (§1.4)",
+"pres": "sì",
+"coincide": "sì: $x_C = r\\cos\\theta + l\\cos\\gamma$, $"
+},
+"11": {
+"f": "cap1",
+"dich": "24–25",
+"reali": "32",
+"pres": "sì (solo forma approssima",
+"coincide": "sì: $V_C = -r\\omega_1[\\sin\\omega_1t + \\f"
+},
+"12": {
+"f": "cap1",
+"dich": "24–25",
+"reali": "32 (accelerazioni grafiche pp. 26–27)",
+"pres": "sì",
+"coincide": "sì: $a_C=-r\\omega_1^2[\\cos\\omega_1t+\\lam"
+},
+"13": {
+"f": "cap1",
+"dich": "31–32",
+"reali": "31–32",
+"pres": "sì",
+"coincide": "sì: $l(1-\\frac{\\lambda^2}{2}\\sin^2\\theta"
+},
+"14": {
+"f": "cap1",
+"dich": "33–35",
+"reali": "33–34",
+"pres": "sì",
+"coincide": "sì: $\\vec V_P = \\vec V_{O'} + \\vec\\omega"
+},
+"15": {
+"f": "cap1",
+"dich": "35–38",
+"reali": "34–35",
+"pres": "sì",
+"coincide": "sì: $\\vec a_P = \\vec a_{O'} + \\vec{\\dot\\"
+},
+"16": {
+"f": "cap1",
+"dich": "39–44",
+"reali": "40–44 (§1.7, 1.7.1, 1.7.2); p. 39 è §1.6 (accelerazione del ",
+"pres": "sì",
+"coincide": "sì: $\\sum V_j\\cos\\varphi_j=0$, $\\sum V_j"
+},
+"17": {
+"f": "cap1",
+"dich": "45–47",
+"reali": "45–47 (§1.8.1); corpi isolati: 47–54",
+"pres": "sì",
+"coincide": "sì, ma la dispensa ha anche le coppie: $"
+},
+"18": {
+"f": "cap1",
+"dich": "47–54",
+"reali": "47–54 (§1.8.3–1.8.5)",
+"pres": "parziale (usato, non dimo",
+"coincide": "sì: $\\vec F_{3,2}=-\\vec F_{2,3}$ (p. 48)"
+},
+"19": {
+"f": "cap1",
+"dich": "55–61",
+"reali": "55–56 (§1.8.6); applicazione 56–60 (§1.8.8)",
+"pres": "parziale (contenuto sì, n",
+"coincide": "sì: $\\vec F_{ine}=-M\\vec a_G$, $\\vec C_{"
+},
+"20": {
+"f": "cap1",
+"dich": "57–61",
+"reali": "56 (definizioni) e 61 (§1.8.9, polo fisso); 57–60 sono l'App",
+"pres": "sì",
+"coincide": "sì"
+},
+"21": {
+"f": "cap1",
+"dich": "62–64",
+"reali": "61–62 (§1.9.1)",
+"pres": "sì",
+"coincide": "sì: $dL=\\vec F\\cdot d\\vec P$, $Pot=\\vec "
+},
+"22": {
+"f": "cap1",
+"dich": "63–66",
+"reali": "62–64 (§1.9.2); applicazioni 64–66 (§1.9.3)",
+"pres": "parziale (enunciato sì, d",
+"coincide": "sì nella sostanza, forma diversa"
+},
+"23": {
+"f": "cap1",
+"dich": "65–66",
+"reali": "64 (una riga)",
+"pres": "parziale (formula sì, dim",
+"coincide": "sì: $E_{cine}=\\tfrac12MV_G^2+\\tfrac12I_G"
+},
+"24": {
+"f": "cap",
+"dich": "67–71",
+"reali": "69 (aderenza/attrito), 73–74 (angolo e cono)",
+"pres": "sì",
+"coincide": "sì"
+},
+"25": {
+"f": "cap",
+"dich": "72–74",
+"reali": "81–83 (§2.2.5)",
+"pres": "sì",
+"coincide": "parziale"
+},
+"26": {
+"f": "cap",
+"dich": "75–79",
+"reali": "79–81 (§2.2.4)",
+"pres": "parziale",
+"coincide": "no"
+},
+"27": {
+"f": "cap",
+"dich": "75–79",
+"reali": "— (solo spunto a p. 68; ribaltamento del veicolo a p. 94–95,",
+"pres": "no",
+"coincide": "—"
+},
+"28": {
+"f": "cap",
+"dich": "82–89",
+"reali": "83–88 (§2.3)",
+"pres": "sì",
+"coincide": "sì (con riserva)"
+},
+"29": {
+"f": "cap",
+"dich": "84–85",
+"reali": "90 (e 100)",
+"pres": "parziale",
+"coincide": "sì"
+},
+"30": {
+"f": "cap",
+"dich": "90–92",
+"reali": "89–91 (LaTeX), 100–101 (manoscritto)",
+"pres": "sì",
+"coincide": "sì"
+},
+"31": {
+"f": "cap",
+"dich": "91–92",
+"reali": "89–90, 100",
+"pres": "sì",
+"coincide": "sì (ma incompleto)"
+},
+"32": {
+"f": "cap",
+"dich": "91–92",
+"reali": "91, 101",
+"pres": "sì",
+"coincide": "la fonte è incoerente"
+},
+"33": {
+"f": "cap",
+"dich": "92–96",
+"reali": "93–95, 102",
+"pres": "parziale",
+"coincide": "sì nei valori, convenzione diversa"
+},
+"34": {
+"f": "cap",
+"dich": "94–96",
+"reali": "94–95, 102",
+"pres": "sì",
+"coincide": "sì"
+},
+"35": {
+"f": "cap",
+"dich": "96",
+"reali": "94 (auto), 96 (moto), 102",
+"pres": "sì",
+"coincide": "sì"
+},
+"36": {
+"f": "cap",
+"dich": "97–99",
+"reali": "98",
+"pres": "sì",
+"coincide": "parziale"
+},
+"37": {
+"f": "cap",
+"dich": "99",
+"reali": "98–99",
+"pres": "sì",
+"coincide": "parziale + notazione invertita"
+},
+"136": {
+"f": "cap",
+"dich": "100–102",
+"reali": "92 (LaTeX), 101 (manoscritto)",
+"pres": "parziale",
+"coincide": "sì sul risultato"
+},
+"38": {
+"f": "cap",
+"dich": "103–107",
+"reali": "106 (anche 107 per il punto m)",
+"pres": "sì",
+"coincide": "sì, in forma generale"
+},
+"39": {
+"f": "cap",
+"dich": "107",
+"reali": "107",
+"pres": "sì",
+"coincide": "sì per il tamburo"
+},
+"40": {
+"f": "cap",
+"dich": "108–109",
+"reali": "108–109 (anche 114, 116)",
+"pres": "sì",
+"coincide": "sì nella sostanza"
+},
+"41": {
+"f": "cap",
+"dich": "109",
+"reali": "116 (freno a disco), 120 (5.85)",
+"pres": "sì",
+"coincide": "sì"
+},
+"42": {
+"f": "cap",
+"dich": "110–113",
+"reali": "103, 109–110",
+"pres": "sì",
+"coincide": "no (nomi invertiti)"
+},
+"43": {
+"f": "cap",
+"dich": "110–113",
+"reali": "110 (anche 115, 125 per il pattino)",
+"pres": "sì",
+"coincide": "formula sì (f_lim = OO'/R = b_N/b_T), at"
+},
+"44": {
+"f": "cap",
+"dich": "114–115",
+"reali": "114–115, 124–125",
+"pres": "sì",
+"coincide": "no"
+},
+"45": {
+"f": "cap",
+"dich": "113–115",
+"reali": "103, 112–113, 125",
+"pres": "parziale",
+"coincide": "parziale"
+},
+"46": {
+"f": "cap",
+"dich": "123–125",
+"reali": "114–115 (pattino), 125, 128 (disco)",
+"pres": "sì",
+"coincide": "sì (principio)"
+},
+"47": {
+"f": "cap",
+"dich": "116–128",
+"reali": "— (solo cenno qualitativo p. 108, Fig. 5-62a)",
+"pres": "no",
+"coincide": "—"
+},
+"48": {
+"f": "cap",
+"dich": "126–128",
+"reali": "116 (formule), 126–127 (spiegazione), 120 (5.84)",
+"pres": "sì",
+"coincide": "sì"
+},
+"49": {
+"f": "cap",
+"dich": "126–128",
+"reali": "116, 127",
+"pres": "parziale",
+"coincide": "sì per usura uniforme"
+},
+"50": {
+"f": "cap",
+"dich": "124–128",
+"reali": "114 («R → +∞»), 124, 125",
+"pres": "sì",
+"coincide": "sì"
+},
+"51": {
+"f": "cap",
+"dich": "103–128",
+"reali": "—",
+"pres": "no",
+"coincide": "—"
+},
+"52": {
+"f": "cap",
+"dich": "116–128",
+"reali": "119–120 (libro 5.84–5.86), 116",
+"pres": "sì",
+"coincide": "sì (usura uniforme)"
+},
+"53": {
+"f": "cap",
+"dich": "116–128",
+"reali": "121–122 (libro 5.87–5.88)",
+"pres": "sì",
+"coincide": "no"
+},
+"54": {
+"f": "cap",
+"dich": "116–128",
+"reali": "—",
+"pres": "no",
+"coincide": "—"
+},
+"142": {
+"f": "cap",
+"dich": "108–128",
+"reali": "108, 112, 123",
+"pres": "parziale",
+"coincide": "parziale"
+},
+"55": {
+"f": "cap",
+"dich": "131–133",
+"reali": "132 (e 134 righe m), c); 135)",
+"pres": "sì",
+"coincide": "sì: $\\omega_1/\\omega_2=R_2/R_1$ equivale"
+},
+"56": {
+"f": "cap",
+"dich": "133–134",
+"reali": "133–134",
+"pres": "parziale",
+"coincide": "sì ($F=mv^2/r$)"
+},
+"57": {
+"f": "cap",
+"dich": "133–135",
+"reali": "141 (termine $dm\\,V^2/R$ nell'equilibrio normale), 140 (qual",
+"pres": "parziale",
+"coincide": "sì nel valore ($\\rho V^2$)"
+},
+"58": {
+"f": "cap",
+"dich": "135–136",
+"reali": "135 (anche 139, 150)",
+"pres": "parziale",
+"coincide": "in parte"
+},
+"59": {
+"f": "cap",
+"dich": "136–145",
+"reali": "135–138 (cuore a p. 138)",
+"pres": "sì",
+"coincide": "sì: $V=V_0(1+T/EA)$, $V_{max}/V_{min}=(1"
+},
+"60": {
+"f": "cap",
+"dich": "143–146",
+"reali": "138 (anche 139)",
+"pres": "sì",
+"coincide": "sì ma d060 è solo qualitativa"
+},
+"61": {
+"f": "cap",
+"dich": "145–146",
+"reali": "135, 139",
+"pres": "sì",
+"coincide": "sì ($\\eta=P_u/P_m<1$; $\\eta=1+P_d/P_m$ e"
+},
+"62": {
+"f": "cap",
+"dich": "151–154",
+"reali": "140–141",
+"pres": "sì",
+"coincide": "sì: $dT=dF_T^{ATTR}$, $dF_N/d\\theta=T-\\r"
+},
+"63": {
+"f": "cap",
+"dich": "154–156",
+"reali": "141–142 (uso con $\\theta^*=\\beta$: 143)",
+"pres": "sì",
+"coincide": "sì: $\\dfrac{T-\\rho V^2}{T_2-\\rho V^2}=e^"
+},
+"64": {
+"f": "cap",
+"dich": "155–157",
+"reali": "142",
+"pres": "sì",
+"coincide": "sì (SymPy: $T(\\theta)=\\rho V^2+(T_2-\\rho"
+},
+"65": {
+"f": "cap",
+"dich": "155–157",
+"reali": "142 (definizione), 143, 151 (formula inversa)",
+"pres": "parziale",
+"coincide": "sì"
+},
+"66": {
+"f": "cap",
+"dich": "157–160",
+"reali": "143 (anche 152, 154)",
+"pres": "sì",
+"coincide": "in parte"
+},
+"67": {
+"f": "cap",
+"dich": "157–160",
+"reali": "143 (estensione a 3 pulegge: 150–151)",
+"pres": "sì",
+"coincide": "sì"
+},
+"68": {
+"f": "cap",
+"dich": "160–165",
+"reali": "— (la sezione «TENSIONE MASSIMA» di p. 143 tratta un'altra c",
+"pres": "no",
+"coincide": "—"
+},
+"69": {
+"f": "cap",
+"dich": "165–170",
+"reali": "143 ($C_{MAX}\\omega_1=\\dots R\\omega_1$, $R\\omega_1=V_1\\simeq",
+"pres": "sì",
+"coincide": "sì"
+},
+"70": {
+"f": "cap",
+"dich": "165–170",
+"reali": "152",
+"pres": "sì, con ipotesi diversa",
+"coincide": "no"
+},
+"71": {
+"f": "cap",
+"dich": "171–176",
+"reali": "153",
+"pres": "sì",
+"coincide": "sì (rotazione oraria): $C_f=(T_1-T_2)R$,"
+},
+"137": {
+"f": "cap",
+"dich": "130–131",
+"reali": "—",
+"pres": "no",
+"coincide": "—"
+},
+"72": {
+"f": "cap5",
+"dich": "157–160",
+"reali": "156–157",
+"pres": "sì",
+"coincide": "sì, a meno della definizione: d072 dà i "
+},
+"73": {
+"f": "cap5",
+"dich": "158–160",
+"reali": "158–159",
+"pres": "sì",
+"coincide": "sì in modulo (ω₁/ω₂ = R₂/R₁ ⇔ \\"
+},
+"74": {
+"f": "cap5",
+"dich": "160–163",
+"reali": "158–160",
+"pres": "sì",
+"coincide": "sì: la normale comune deve tagliare l'in"
+},
+"75": {
+"f": "cap5",
+"dich": "161–163",
+"reali": "158, 159, 161, 162",
+"pres": "sì",
+"coincide": "sì"
+},
+"76": {
+"f": "cap5",
+"dich": "163–165",
+"reali": "163, 165",
+"pres": "sì",
+"coincide": "sì (pz = 2πR, m = p/π ⇒ mz = 2R)"
+},
+"77": {
+"f": "cap5",
+"dich": "163–165",
+"reali": "167 (solo O₁O₂ = i = R₁ + R₂)",
+"pres": "parziale",
+"coincide": "sì: m(z₁+z₂)/2 segue da R = mz/2, ma que"
+},
+"78": {
+"f": "cap5",
+"dich": "163–165",
+"reali": "163, 166, 171",
+"pres": "sì",
+"coincide": "sì in modulo (\\"
+},
+"79": {
+"f": "cap5",
+"dich": "166–168",
+"reali": "166",
+"pres": "sì",
+"coincide": "sì nella sostanza: z_p = ℓ/p = AB/(p cos"
+},
+"80": {
+"f": "cap5",
+"dich": "166–168",
+"reali": "166",
+"pres": "sì",
+"coincide": "sì (SymPy: √(R_{t1}²−R_{f1}²) + √(R_{t2}"
+},
+"81": {
+"f": "cap5",
+"dich": "167–169",
+"reali": "165, 167",
+"pres": "parziale",
+"coincide": "sì nella sostanza"
+},
+"82": {
+"f": "cap5",
+"dich": "167–169",
+"reali": "167–168",
+"pres": "sì",
+"coincide": "sì nella forma generale (la dispensa a p"
+},
+"83": {
+"f": "cap5",
+"dich": "169–170",
+"reali": "162 (e 172)",
+"pres": "parziale",
+"coincide": "in parte"
+},
+"84": {
+"f": "cap5",
+"dich": "169–170",
+"reali": "169",
+"pres": "parziale",
+"coincide": "sì per \\"
+},
+"85": {
+"f": "cap5",
+"dich": "169–170",
+"reali": "160, 169, 170",
+"pres": "sì",
+"coincide": "sì"
+},
+"86": {
+"f": "cap5",
+"dich": "170",
+"reali": "170",
+"pres": "sì",
+"coincide": "sì: W^DISS = F_T^{2,1}·V^rel_{1,2} < 0, "
+},
+"87": {
+"f": "cap5",
+"dich": "171–174",
+"reali": "171–173",
+"pres": "sì",
+"coincide": "sì (prodotto dei rapporti, con definizio"
+},
+"88": {
+"f": "cap5",
+"dich": "171–174",
+"reali": "173",
+"pres": "sì",
+"coincide": "sì: τ = τ_{a,b}τ_{b,c} = ω_c/ω_a = z_a/z"
+},
+"138": {
+"f": "cap5",
+"dich": "166–168",
+"reali": "166 (solo implicito)",
+"pres": "no (implicito)",
+"coincide": "—"
+},
+"89": {
+"f": "cap5",
+"dich": "174–179",
+"reali": "174 (applicazioni 175, 176, 180)",
+"pres": "sì",
+"coincide": "sì, ma con convenzione invertita: la dis"
+},
+"90": {
+"f": "cap5",
+"dich": "174–179",
+"reali": "174 (composizione), 175 (calcolo via CIR)",
+"pres": "parziale",
+"coincide": "sì (concettualmente)"
+},
+"91": {
+"f": "cap5",
+"dich": "179–180",
+"reali": "179 (e 177 per il differenziale)",
+"pres": "sì",
+"coincide": "sì: $C_1/C_2 = -\\tau_W$, $C_p/C_1 = (1-\\"
+},
+"92": {
+"f": "cap5",
+"dich": "179–180",
+"reali": "184 (singolo ingranaggio 181–182)",
+"pres": "sì",
+"coincide": "sì: $\\eta_{TOT} = \\eta^I\\eta^{II}\\eta^{I"
+},
+"93": {
+"f": "cap5",
+"dich": "179–180",
+"reali": "assente in pp. 174–192",
+"pres": "no",
+"coincide": "—"
+},
+"94": {
+"f": "cap5",
+"dich": "180–185",
+"reali": "180",
+"pres": "parziale",
+"coincide": "parziale"
+},
+"95": {
+"f": "cap5",
+"dich": "185–189",
+"reali": "186",
+"pres": "sì",
+"coincide": "sì, con notazione diversa"
+},
+"96": {
+"f": "cap5",
+"dich": "185–189",
+"reali": "187–188",
+"pres": "sì",
+"coincide": "sì: $z_{fitt} = z/\\cos^3\\alpha$ (d096: $"
+},
+"97": {
+"f": "cap5",
+"dich": "188–189",
+"reali": "188",
+"pres": "sì",
+"coincide": "sì: $z_{min} = z^*_{min}\\cos^3\\alpha$"
+},
+"98": {
+"f": "cap5",
+"dich": "189",
+"reali": "189 (con 186 per θm)",
+"pres": "sì",
+"coincide": "sì (equivalente)"
+},
+"99": {
+"f": "cap5",
+"dich": "190–191",
+"reali": "190",
+"pres": "sì",
+"coincide": "sì in sostanza, definizione invertita: d"
+},
+"100": {
+"f": "cap5",
+"dich": "191",
+"reali": "191",
+"pres": "sì",
+"coincide": "sì: $R = \\frac{C_1}{r_1}\\operatorname{tg"
+},
+"139": {
+"f": "cap5",
+"dich": "185–189",
+"reali": "186–187",
+"pres": "parziale",
+"coincide": "sì nella sostanza, notazione assente"
+},
+"141": {
+"f": "cap5",
+"dich": "174–180",
+"reali": "176–178",
+"pres": "sì",
+"coincide": "sì: $\\Omega = (\\omega_1+\\omega_2)/2$"
+},
+"101": {
+"f": "cap",
+"dich": "193–199",
+"reali": "197",
+"pres": "sì",
+"coincide": "sì: $J_{eq}\\dot\\omega = C_m - C_u$ ≡ $\\d"
+},
+"102": {
+"f": "cap",
+"dich": "197–199",
+"reali": "197 (ripreso 198, 199)",
+"pres": "sì",
+"coincide": "sì: $C_m(\\omega_R) = C_u(\\omega_R)$"
+},
+"103": {
+"f": "cap",
+"dich": "198–200",
+"reali": "197 (qualitativa), 198–199 (analitica)",
+"pres": "sì",
+"coincide": "sì: stabile se $K_m - K_u < 0$"
+},
+"104": {
+"f": "cap",
+"dich": "199–201",
+"reali": "198 (soluzione), 199 (grafico Ω(t))",
+"pres": "sì",
+"coincide": "sì: $\\Delta\\omega(t) = \\Delta\\omega(0)e^"
+},
+"105": {
+"f": "cap",
+"dich": "201",
+"reali": "196 (metodo energetico, esempio ascensore); 201 (risultato $",
+"pres": "parziale",
+"coincide": "sì: $J_{u,rif} = J_u/i^2$ ≡ $I_u\\tau^2$ "
+},
+"106": {
+"f": "cap",
+"dich": "201",
+"reali": "201",
+"pres": "sì",
+"coincide": "sì: $C_u/(\\eta i)$ ≡ $C_u\\tau/\\eta$"
+},
+"107": {
+"f": "cap",
+"dich": "201",
+"reali": "—",
+"pres": "no",
+"coincide": "—"
+},
+"108": {
+"f": "cap",
+"dich": "202–203",
+"reali": "203 (lato motore), 204 (lato utilizzatore)",
+"pres": "parziale",
+"coincide": "sì per il lato motore ($I_m\\dot\\omega_m "
+},
+"109": {
+"f": "cap",
+"dich": "202–203",
+"reali": "205 (punto Q, istante $t_Q$ solo grafico)",
+"pres": "parziale",
+"coincide": "no"
+},
+"110": {
+"f": "cap",
+"dich": "202–203",
+"reali": "—",
+"pres": "no",
+"coincide": "—"
+},
+"140": {
+"f": "cap",
+"dich": "201",
+"reali": "201 (regime: $C_m = C_u\\tau$; con η dall'equazione dinamica)",
+"pres": "parziale",
+"coincide": "sì: $C_{out} = \\eta i C_{in}$ ≡ $C_u = \\"
+},
+"111": {
+"f": "cap",
+"dich": "208–210",
+"reali": "209",
+"pres": "sì",
+"coincide": "sì (m ẍ_G + K x_G = 0)"
+},
+"112": {
+"f": "cap",
+"dich": "209–210",
+"reali": "209",
+"pres": "sì",
+"coincide": "sì (ω_m = √(K/m))"
+},
+"113": {
+"f": "cap",
+"dich": "209–210",
+"reali": "209–210",
+"pres": "parziale",
+"coincide": "solo per v₀ = 0"
+},
+"114": {
+"f": "cap",
+"dich": "209–210",
+"reali": "209",
+"pres": "parziale",
+"coincide": "sì"
+},
+"115": {
+"f": "cap",
+"dich": "211–213",
+"reali": "211",
+"pres": "sì",
+"coincide": "sì per mλ²+cλ+K=0; no per le radici"
+},
+"116": {
+"f": "cap",
+"dich": "211–213",
+"reali": "211",
+"pres": "sì",
+"coincide": "sì"
+},
+"117": {
+"f": "cap",
+"dich": "211–213",
+"reali": "212",
+"pres": "sì",
+"coincide": "sì (ω_d = ω_m√(1−ξ²))"
+},
+"118": {
+"f": "cap",
+"dich": "211–213",
+"reali": "212",
+"pres": "sì",
+"coincide": "sì"
+},
+"119": {
+"f": "cap",
+"dich": "211–213",
+"reali": "212",
+"pres": "sì",
+"coincide": "sì (δ = 2πξ/√(1−ξ²))"
+},
+"120": {
+"f": "cap",
+"dich": "211–213",
+"reali": "213",
+"pres": "sì",
+"coincide": "no"
+},
+"121": {
+"f": "cap",
+"dich": "211–213",
+"reali": "213",
+"pres": "sì",
+"coincide": "sì"
+},
+"122": {
+"f": "cap",
+"dich": "214–216",
+"reali": "214–215",
+"pres": "sì",
+"coincide": "sì"
+},
+"123": {
+"f": "cap",
+"dich": "215–218",
+"reali": "214–215, 217",
+"pres": "sì",
+"coincide": "sì"
+},
+"124": {
+"f": "cap",
+"dich": "216",
+"reali": "215",
+"pres": "sì",
+"coincide": "sì"
+},
+"125": {
+"f": "cap",
+"dich": "216",
+"reali": "216",
+"pres": "sì",
+"coincide": "sì (ρ_R = √(1−2ξ²); niente picco per ξ >"
+},
+"126": {
+"f": "cap",
+"dich": "216–218",
+"reali": "215, 216, 218",
+"pres": "sì",
+"coincide": "sì"
+},
+"127": {
+"f": "cap",
+"dich": "217–218",
+"reali": "217–218",
+"pres": "sì",
+"coincide": "sì"
+},
+"128": {
+"f": "cap",
+"dich": "217–218",
+"reali": "217",
+"pres": "parziale",
+"coincide": "sì nel valore, diversa la giustificazion"
+},
+"129": {
+"f": "cap",
+"dich": "219–221",
+"reali": "219",
+"pres": "sì",
+"coincide": "sì"
+},
+"130": {
+"f": "cap",
+"dich": "219–221",
+"reali": "219–220",
+"pres": "sì",
+"coincide": "sì"
+},
+"131": {
+"f": "cap",
+"dich": "221–222",
+"reali": "221",
+"pres": "sì",
+"coincide": "sì"
+},
+"132": {
+"f": "cap",
+"dich": "222",
+"reali": "221–222",
+"pres": "sì",
+"coincide": "sì"
+},
+"133": {
+"f": "cap",
+"dich": "220–222",
+"reali": "220, 222",
+"pres": "parziale",
+"coincide": "sì (ρ > √2)"
+},
+"134": {
+"f": "cap",
+"dich": "223",
+"reali": "223",
+"pres": "sì",
+"coincide": "sì (F₀ = M_R ω² R)"
+},
+"135": {
+"f": "cap",
+"dich": "223",
+"reali": "223",
+"pres": "sì",
+"coincide": "sì, con precisazione"
+}
+}
