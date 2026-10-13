@@ -252,7 +252,7 @@ export const d015: Dimostrazione = {
     {
       id: 'd015.8',
       latex: L`|\vec a_{cc}| = 2\,\omega_1 V_{rel},\qquad \vec a_{cc}\perp \text{asse del cilindro}`,
-      perche: 'Nel piano $\\vec\\omega_1$ è normale a $\\vec V_{rel}$: Coriolis ha modulo $2\\omega_1 V_{rel}$ ed è $\\vec V_{rel}$ ruotata di $90^\\circ$ nel verso di $\\omega_1$. Raddoppiando la portata raddoppiano sia $V_{rel}$ sia $\\omega_1$: Coriolis quadruplica.',
+      perche: 'Nel piano $\\vec\\omega_1$ è normale a $\\vec V_{rel}$: Coriolis ha modulo $2\\omega_1 V_{rel}$ ed è $\\vec V_{rel}$ ruotata di $90^\\circ$ nel verso di $\\omega_1$. Raddoppiando la portata raddoppiano sia $V_{rel}$ sia $\\omega_1$: Coriolis quadruplica (osservazione aggiunta: la dispensa non la scrive).',
       fonte: D(39),
       distrattori: [
         { latex: L`|\vec a_{cc}| = \omega_1 V_{rel}`, errore: 'fattore', spiega: 'Il fattore 2 resta anche nel modulo.', num: (v) => [2 * Math.abs(v.w1) * v.VrelB, Math.abs(v.w1) * v.VrelB] },

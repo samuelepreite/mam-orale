@@ -438,7 +438,7 @@ export const d007: Dimostrazione = {
     {
       id: 'd007.9',
       latex: L`\text{quadrilatero: } K = AB\cap DC:\quad \vec V_B = \vec\omega_2\wedge(B-K),\quad \vec V_C = \vec\omega_2\wedge(C-K) = \vec\omega_3\wedge(C-D)`,
-      perche: '$\vec V_B\perp AB$ (manovella attorno ad $A$) e $\vec V_C\perp CD$ (bilanciere attorno a $D$): il CIR della biella 2 è l\'incrocio dei prolungamenti di $AB$ e $DC$. Con $\omega_1$ antioraria, nella figura $\omega_2$ è oraria e $\omega_3$ antioraria. La dispensa scrive per errore $\vec V_C = \vec\omega_3\wedge(B-K)$: con il CIR della biella serve la velocità angolare della biella e il braccio $(C-K)$.',
+      perche: L`$\vec V_B\perp AB$ (manovella attorno ad $A$) e $\vec V_C\perp CD$ (bilanciere attorno a $D$): il CIR della biella 2 è l'incrocio dei prolungamenti di $AB$ e $DC$. Con $\omega_1$ antioraria, nella figura $\omega_2$ è oraria e $\omega_3$ antioraria. La dispensa scrive per errore $\vec V_C = \vec\omega_3\wedge(B-K)$: con il CIR della biella serve la velocità angolare della biella e il braccio $(C-K)$.`,
       fonte: D([28, 29]),
       chiave: true,
       correzione: { nf: 'NF-14', dispensaScrive: L`\vec V_C = \vec\omega_3\wedge(B-K)` },

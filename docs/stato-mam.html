@@ -76,21 +76,21 @@ footer{font-size:12.5px;color:var(--muted)}
   <header class="cartiglio">
     <div class="t"><span class="lab">Progetto</span><h1>MAM I · app per l'orale</h1>
       <div class="sub">Meccanica Applicata alle Macchine I — allenamento a ricostruire e spiegare le dimostrazioni</div></div>
-    <div><span class="lab">Aggiornato</span><span class="val mono">13/10/2026 21:10</span></div>
+    <div><span class="lab">Aggiornato</span><span class="val mono">13/10/2026 23:30</span></div>
     <div><span class="lab">Repository</span><span class="val mono">mam-orale · main</span></div>
-    <div><span class="lab">Fase</span><span class="val">Passi 1–2 fatti</span></div>
-    <div><span class="lab">In attesa di</span><span class="val">tua conferma</span></div>
+    <div><span class="lab">Fase</span><span class="val">App pubblicata, tutti i capitoli</span></div>
+    <div><span class="lab">Prossimo</span><span class="val">i tuoi riscontri</span></div>
   </header>
 
   <section aria-labelledby="h-fasi" style="display:grid;gap:10px">
     <h2 id="h-fasi">Fasi</h2>
     <div class="fasi">
       <div class="fase fatto"><b>1 · Analisi</b><span>dispensa trascritta, mappa, note</span><br><span class="pill ok">fatto</span></div>
-      <div class="fase ora"><b>2 · Architettura</b><span>riuso SEIMAFI, dati, fasi</span><br><span class="pill wait">da confermare</span></div>
-      <div class="fase"><b>a · Pilota C4</b><span>impianto + cinghie</span><br><span class="pill todo">da fare</span></div>
-      <div class="fase"><b>b · Capitoli</b><span>C5, C3, C7, C2, C6, C1</span><br><span class="pill todo">da fare</span></div>
-      <div class="fase"><b>c · Simulazione</b><span>orale con domande a catena</span><br><span class="pill todo">da fare</span></div>
-      <div class="fase"><b>d · Rifinitura</b><span>sui tuoi riscontri</span><br><span class="pill todo">da fare</span></div>
+      <div class="fase fatto"><b>2 · Architettura</b><span>confermata, senza pilota</span><br><span class="pill ok">fatto</span></div>
+      <div class="fase fatto"><b>3 · App</b><span>lezioni, allenatore, lavagna</span><br><span class="pill ok">fatto</span></div>
+      <div class="fase fatto"><b>4 · Capitoli</b><span>tutti e 7, in parallelo</span><br><span class="pill ok">fatto</span></div>
+      <div class="fase fatto"><b>5 · Verifica</b><span>SymPy, test, revisione</span><br><span class="pill ok">fatto</span></div>
+      <div class="fase ora"><b>6 · Rifinitura</b><span>sui tuoi riscontri</span><br><span class="pill wait">ora</span></div>
     </div>
   </section>
 
@@ -98,7 +98,7 @@ footer{font-size:12.5px;color:var(--muted)}
     <div class="num"><div class="big mono">223/223</div><p>pagine della dispensa trascritte (una lettura)</p></div>
     <div class="num"><div class="big mono">52 → 45</div><p>domande raggruppate in argomenti d'orale (+4 di complemento)</p></div>
     <div class="num"><div class="big mono">97·31·14</div><p>dimostrazioni presenti · parziali · assenti nella dispensa</p></div>
-    <div class="num"><div class="big mono">0/142</div><p>catene verificate in SymPy nell'app (dalla fase a)</p></div>
+    <div class="num"><div class="big mono">142/142</div><p>dimostrazioni verificate in SymPy (978 passi, 826 uguaglianze) · 2450 test verdi</p></div>
   </section>
 
   <section aria-labelledby="h-cap" style="display:grid;gap:10px">
@@ -121,11 +121,7 @@ footer{font-size:12.5px;color:var(--muted)}
         <li><span class="nf">NF-19</span> Frizione conica: vuole la (5.88) del libro, con sin α + f cos α, o la forma con solo sin α?</li>
         <li><span class="nf">NF-22</span> Velocità ottima della cinghia: tensione del ramo lasco fissata (dispensa) o tensione massima fissata (domande)?</li>
       </ol>
-      <h2>Da chiedere a te</h2>
-      <ul>
-        <li>Data dell'orale (serve al piano di studio).</li>
-        <li>Hai <span class="mono">Orale MAM.pdf</span> con le frequenze e la dispensa del docente <span class="mono">dispense_MAM1_2025_01.pdf</span>?</li>
-      </ul>
+      <p style="margin:0;color:var(--muted);font-size:13px">Altri punti minori segnati «docente» in NOTE_FONTI.md (NF-101…257), p. es. NF-106 (dimostrazioni di Poisson e forze vive), NF-108 (attrito nel manovellismo).</p>
     </section>
     <section class="box" aria-labelledby="h-err">
       <h2 id="h-err">Errori della dispensa più pesanti (verificati)</h2>
@@ -143,7 +139,7 @@ footer{font-size:12.5px;color:var(--muted)}
 
   <section class="prossimo" aria-labelledby="h-next">
     <h2 id="h-next">Prossimo passo</h2>
-    <p>Con la tua conferma: fase a. Impianto copiato da SEIMAFI, allenatore di dimostrazioni a tre livelli, lavagna, prova della correzione con Claude e capitolo pilota <b>C4 cinghie</b> (4 argomenti, 6 domande, 18 dimostrazioni, 3 animazioni).</p>
+    <p>Usa l'app e lascia i riscontri sui passi («non ho capito»): la prossima sessione corregge prima quelli. Da provare sulla pagina pubblicata: correzione con Claude, dettatura, sincronizzazione tra telefono e computer.</p>
   </section>
 
   <footer>Codice e trascrizioni: GitHub <span class="mono">samuelepreite/mam-orale</span>; copia nel progetto <span class="mono">claude/codice-mam.tar.gz.b64</span> e qui come file <span class="mono">backup/codice-mam.txt</span>.</footer>
@@ -165,7 +161,7 @@ for(const [id,t,p,q,a,s,pa,no,fuori,col] of C){
   tr.innerHTML=`<td><div class="cap"><span class="sw" style="background:var(${col})"></span><span><b>${id}</b> ${t}</span></div></td>
   <td class="mono">${p}</td><td class="n">${q}</td><td class="n">${a}</td>
   <td><div style="display:flex;gap:8px;align-items:center"><div class="bar" style="background:transparent">${seg(s,'--ok')}${seg(pa,'--part')}${seg(no,'--no')}</div><span class="mono" style="font-size:12.5px">${s}·${pa}·${no}</span></div></td>
-  <td>${fuori==='—'?'—':`<span class="warn">${fuori}</span>`}</td><td><span class="pill todo">trascritto</span></td>`;
+  <td>${fuori==='—'?'—':`<span class="warn">${fuori}</span>`}</td><td><span class="pill ok">pronto</span></td>`;
   tb.appendChild(tr);
 }
 </script>

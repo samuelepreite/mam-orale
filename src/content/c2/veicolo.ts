@@ -308,7 +308,7 @@ export const d032: Dimostrazione = {
     {
       id: 'd032.6',
       latex: '\\dfrac{a_{max,post}}{a_{max,ant}} = \\dfrac{l_1\\,(L + f_{ad}h)}{l_2\\,(L - f_{ad}h)} \\;\\Rightarrow\\; l_1 = l_2:\\ a_{max,post} > a_{max,ant}',
-      perche: 'A pari ripartizione statica la posteriore vince sempre, per il segno di $f_{ad}h$: accelerando il carico va dietro. In generale serve $l_1(L + fh) > l_2(L - fh)$: con molto peso sull\'anteriore le due possono anche coincidere.',
+      perche: 'A pari ripartizione statica la posteriore vince sempre, per il segno di $f_{ad}h$: accelerando il carico va dietro. In generale serve $l_1(L + fh) > l_2(L - fh)$: con molto peso sull\'anteriore ($l_1$ piccolo) la disuguaglianza si inverte e la trazione anteriore dà di più (p. es. $l_1 = 1$, $l_2 = 2$, $h = 0{,}5$ m, $f_{ad} = 1$: rapporto 0,7).',
       fonte: { tipo: 'deduzione', da: 'pp. 91, 101', spiegazione: 'rapporto delle due formule corrette; la dispensa afferma il confronto senza condizione (NF-16)' },
       aggiunto: true,
       distrattori: [],

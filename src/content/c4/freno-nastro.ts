@@ -79,7 +79,7 @@ export const d071: Dimostrazione = {
     {
       id: 'd071.2',
       latex: '\\dfrac{T_1}{T_2} = e^{f\\beta} \\;\\Rightarrow\\; T_1 = T_2\\,e^{f\\beta}',
-      perche: 'Equazione di Eulero (pp. 141–142) con $\\rho V^2 = 0$ perché il nastro è fermo, e con $\\theta^* = \\beta$ perché tutto l\'arco è in strisciamento. Il capo teso $T_1$ è quello verso cui l\'attrito trascina il nastro: con $\\omega$ oraria è il capo al fulcro.',
+      perche: 'Equazione di Eulero (pp. 141–142) con $\\rho V^2 = 0$ perché il nastro è fermo, e con $\\theta^* = \\beta$ perché tutto l\'arco è in strisciamento. Il capo teso $T_1$ è quello che trattiene il nastro contro il trascinamento del tamburo (l\'attrito trascina il nastro verso l\'altro capo, che è il lasco): con $\\omega$ oraria è il capo al fulcro.',
       fonte: P,
       chiave: true,
       distrattori: [
