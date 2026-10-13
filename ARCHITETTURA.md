@@ -1,6 +1,7 @@
 # MAM I orale — Architettura e piano per fasi (Passo 2)
 
-Data: 13/10/2026 · Stato: **proposta, in attesa di conferma**. Si basa su `ANALISI.md` (45 + 4 argomenti, mappa
+Data: 13/10/2026 · Stato: **confermata** con due modifiche dello studente: niente capitolo pilota (tutti i capitoli
+in parallelo, `WORKFLOW.md`) e piano di studio parametrico senza data obbligatoria. Si basa su `ANALISI.md` (45 + 4 argomenti, mappa
 domande → dimostrazioni → pagine) e `NOTE_FONTI.md` (NF-01…NF-45).
 
 ## 1. Cosa riuso di SEIMAFI e come
