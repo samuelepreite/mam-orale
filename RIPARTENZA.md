@@ -18,12 +18,12 @@ progetto (`claude/RIPARTENZA.md`): se è più recente, applicarla prima.
 - Codice: GitHub `samuelepreite/mam-orale` (ramo `main`); copia nel progetto `claude/codice-mam.tar.gz.b64`
   (`base64 -d | tar xz`).
 - SEIMAFI (sola lettura): `samuelepreite/seimafi`.
-- Infografica di stato: vedi link nella sezione 2 (aggiornarla a ogni avanzamento).
+- Infografica di stato: https://claude.ai/artifact/UUvve8npgioQTwu9isVTUN (aggiornarla a ogni avanzamento).
 - Fonti: file del progetto. **Non** rasterizzare di nuovo la dispensa: usare `tools/testi/`. Se serve un dettaglio,
   `tools/pagina.sh N 150` (percorso dei PDF in `MAM_PDF_DIR`).
 
 ## 2. Link pubblicati
-- Infografica: (al primo publish)
+- Infografica: https://claude.ai/artifact/UUvve8npgioQTwu9isVTUN — sorgente `docs/stato-mam.html`, file `backup/codice-mam.txt` (codice in base64)
 - App: (dalla fase a)
 
 ## 3. Regole dello studente

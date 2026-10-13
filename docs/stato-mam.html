@@ -1,0 +1,171 @@
+<title>Stato MAM I orale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: cartiglio da disegno tecnico in testa, poi binario delle fasi, tabella dei capitoli, due colonne di punti aperti. */
+:root{
+  --bg:#f5f6f4; --paper:#ffffff; --ink:#1d2430; --muted:#5b6472; --line:#c9cfd6; --quota:#c2412d;
+  --ok:#2f7d4f; --part:#b7791f; --no:#b23a3a; --todo:#8a93a0;
+  --c1:#5b4bb7; --c2:#2f63b0; --c3:#1f8a9a; --c4:#2e8b57; --c5:#6b8e23; --c6:#d07a1f; --c7:#c2412d;
+  --f-disp:"Archivo","Arial Narrow",system-ui,sans-serif; --f-body:"Archivo",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14181e; --paper:#1b2028; --ink:#e7ebf0; --muted:#9aa4b2; --line:#36404c; --quota:#ef7a63;
+  --ok:#5fbf86; --part:#e0a84a; --no:#e57373; --todo:#77818e;
+  --c1:#9d8fef; --c2:#6f9fe6; --c3:#4fc2d0; --c4:#5fc28a; --c5:#a3c45a; --c6:#f0a050; --c7:#ef7a63; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14181e; --paper:#1b2028; --ink:#e7ebf0; --muted:#9aa4b2; --line:#36404c; --quota:#ef7a63;
+  --ok:#5fbf86; --part:#e0a84a; --no:#e57373; --todo:#77818e;
+  --c1:#9d8fef; --c2:#6f9fe6; --c3:#4fc2d0; --c4:#5fc28a; --c5:#a3c45a; --c6:#f0a050; --c7:#ef7a63; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:20px 40px;display:grid;gap:22px}
+h1,h2{font-family:var(--f-disp);text-wrap:balance;margin:0}
+h2{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+/* cartiglio */
+.cartiglio{background:var(--paper);border:2px solid var(--ink);display:grid;grid-template-columns:2.2fr 1fr 1fr;}
+.cartiglio>div{border:1px solid var(--line);padding:10px 12px;min-width:0}
+.cartiglio .t{grid-row:span 2;border-right:2px solid var(--ink)}
+.cartiglio h1{font-size:clamp(22px,4vw,32px);font-stretch:112%;font-weight:800;line-height:1.1}
+.lab{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);display:block}
+.val{font-weight:600}
+.cartiglio .sub{color:var(--muted);margin-top:4px}
+@media (max-width:640px){.cartiglio{grid-template-columns:1fr 1fr}.cartiglio .t{grid-column:span 2;grid-row:auto;border-right:0;border-bottom:2px solid var(--ink)}}
+/* fasi */
+.fasi{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;position:relative}
+.fase{padding:10px 8px 0;border-top:3px solid var(--line);min-width:0}
+.fase.fatto{border-color:var(--ok)} .fase.ora{border-color:var(--quota)}
+.fase b{display:block;font-family:var(--f-disp);font-size:14px}
+.fase span{font-size:12.5px;color:var(--muted)}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:99px;border:1px solid currentColor;margin-top:4px}
+.pill.ok{color:var(--ok)} .pill.wait{color:var(--quota)} .pill.todo{color:var(--todo)}
+@media (max-width:720px){.fasi{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:12px}}
+/* numeri */
+.numeri{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.num{background:var(--paper);border:1px solid var(--line);padding:12px;min-width:0}
+.num .big{font-family:var(--f-disp);font-size:28px;font-weight:800;font-stretch:110%;line-height:1}
+.num p{margin:6px 0 0;font-size:13px;color:var(--muted)}
+@media (max-width:720px){.numeri{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* tabella capitoli */
+.tab{overflow-x:auto;background:var(--paper);border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:700}
+td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+.cap{display:flex;gap:8px;align-items:center}
+.sw{width:10px;height:22px;flex:none}
+.bar{display:flex;height:10px;width:160px;background:var(--line)}
+.bar i{display:block;height:100%}
+.leg{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);padding:8px 10px}
+.leg i{display:inline-block;width:10px;height:10px;margin-right:5px;vertical-align:-1px}
+.warn{color:var(--no);font-size:12.5px}
+/* due colonne */
+.due{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.due{grid-template-columns:1fr}}
+.box{background:var(--paper);border:1px solid var(--line);padding:14px 16px;min-width:0;display:grid;gap:8px;align-content:start}
+.box ol,.box ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.box li{max-width:62ch}
+.nf{font-family:var(--f-mono);font-size:12px;color:var(--quota);font-weight:500}
+.prossimo{border-left:4px solid var(--quota);background:var(--paper);padding:12px 16px}
+.prossimo p{margin:4px 0 0;max-width:75ch}
+footer{font-size:12.5px;color:var(--muted)}
+</style>
+
+<div class="wrap">
+  <header class="cartiglio">
+    <div class="t"><span class="lab">Progetto</span><h1>MAM I · app per l'orale</h1>
+      <div class="sub">Meccanica Applicata alle Macchine I — allenamento a ricostruire e spiegare le dimostrazioni</div></div>
+    <div><span class="lab">Aggiornato</span><span class="val mono">13/10/2026 21:10</span></div>
+    <div><span class="lab">Repository</span><span class="val mono">mam-orale · main</span></div>
+    <div><span class="lab">Fase</span><span class="val">Passi 1–2 fatti</span></div>
+    <div><span class="lab">In attesa di</span><span class="val">tua conferma</span></div>
+  </header>
+
+  <section aria-labelledby="h-fasi" style="display:grid;gap:10px">
+    <h2 id="h-fasi">Fasi</h2>
+    <div class="fasi">
+      <div class="fase fatto"><b>1 · Analisi</b><span>dispensa trascritta, mappa, note</span><br><span class="pill ok">fatto</span></div>
+      <div class="fase ora"><b>2 · Architettura</b><span>riuso SEIMAFI, dati, fasi</span><br><span class="pill wait">da confermare</span></div>
+      <div class="fase"><b>a · Pilota C4</b><span>impianto + cinghie</span><br><span class="pill todo">da fare</span></div>
+      <div class="fase"><b>b · Capitoli</b><span>C5, C3, C7, C2, C6, C1</span><br><span class="pill todo">da fare</span></div>
+      <div class="fase"><b>c · Simulazione</b><span>orale con domande a catena</span><br><span class="pill todo">da fare</span></div>
+      <div class="fase"><b>d · Rifinitura</b><span>sui tuoi riscontri</span><br><span class="pill todo">da fare</span></div>
+    </div>
+  </section>
+
+  <section class="numeri" aria-label="Numeri">
+    <div class="num"><div class="big mono">223/223</div><p>pagine della dispensa trascritte (una lettura)</p></div>
+    <div class="num"><div class="big mono">52 → 45</div><p>domande raggruppate in argomenti d'orale (+4 di complemento)</p></div>
+    <div class="num"><div class="big mono">97·31·14</div><p>dimostrazioni presenti · parziali · assenti nella dispensa</p></div>
+    <div class="num"><div class="big mono">0/142</div><p>catene verificate in SymPy nell'app (dalla fase a)</p></div>
+  </section>
+
+  <section aria-labelledby="h-cap" style="display:grid;gap:10px">
+    <h2 id="h-cap">Capitoli della dispensa</h2>
+    <div class="tab">
+      <table>
+        <thead><tr><th>Capitolo</th><th>Pagine PDF</th><th style="text-align:right">Domande</th><th style="text-align:right">Argomenti</th><th>Dimostrazioni</th><th>Argomenti fuori dispensa</th><th>Nell'app</th></tr></thead>
+        <tbody id="righe"></tbody>
+      </table>
+      <div class="leg"><span><i style="background:var(--ok)"></i>presente</span><span><i style="background:var(--part)"></i>parziale</span><span><i style="background:var(--no)"></i>assente</span><span>lunghezza della barra = numero di dimostrazioni (scala comune, 33 = barra piena)</span></div>
+    </div>
+  </section>
+
+  <div class="due">
+    <section class="box" aria-labelledby="h-doc">
+      <h2 id="h-doc">Da chiedere al docente</h2>
+      <ol>
+        <li><span class="nf">NF-07</span> Partitore di frenata, frizione centrifuga, rendimento epicicloidale, rapido ritorno del glifo: sono chiesti ma non sono nella dispensa. Vanno studiati?</li>
+        <li><span class="nf">NF-18</span> Ceppo avvolgente e svolgente: la dispensa li chiama al contrario per i ceppi esterni. Quale nomenclatura usa?</li>
+        <li><span class="nf">NF-19</span> Frizione conica: vuole la (5.88) del libro, con sin α + f cos α, o la forma con solo sin α?</li>
+        <li><span class="nf">NF-22</span> Velocità ottima della cinghia: tensione del ramo lasco fissata (dispensa) o tensione massima fissata (domande)?</li>
+      </ol>
+      <h2>Da chiedere a te</h2>
+      <ul>
+        <li>Data dell'orale (serve al piano di studio).</li>
+        <li>Hai <span class="mono">Orale MAM.pdf</span> con le frequenze e la dispensa del docente <span class="mono">dispense_MAM1_2025_01.pdf</span>?</li>
+      </ul>
+    </section>
+    <section class="box" aria-labelledby="h-err">
+      <h2 id="h-err">Errori della dispensa più pesanti (verificati)</h2>
+      <ul>
+        <li><span class="nf">NF-23</span> Interferenza, p. 168: sin θ al posto di sin²θ. Denti minimi 15 e 18, non 5,13 e 5,84.</li>
+        <li><span class="nf">NF-32</span> Caso criticamente smorzato, p. 213: manca il termine t·e<sup>−ω t</sup>.</li>
+        <li><span class="nf">NF-33</span> Trasmissibilità, pp. 220–222: zona di isolamento e effetto dello smorzamento invertiti.</li>
+        <li><span class="nf">NF-16</span> Trazione posteriore, p. 91: l₂ al posto di l₁ (giusta a p. 101).</li>
+        <li><span class="nf">NF-21</span> Freno a nastro antiorario, p. 153: e<sup>fβ</sup> al posto di e<sup>−fβ</sup>.</li>
+        <li><span class="nf">NF-19</span> Le domande sbagliano la frizione conica (coppia ×2,1 con f = 0,3, α = 15°).</li>
+      </ul>
+      <p style="margin:0;color:var(--muted);font-size:13px">L'app insegnerà la forma corretta e mostrerà accanto la riga della dispensa. Elenco completo: NOTE_FONTI.md (NF-01…NF-45).</p>
+    </section>
+  </div>
+
+  <section class="prossimo" aria-labelledby="h-next">
+    <h2 id="h-next">Prossimo passo</h2>
+    <p>Con la tua conferma: fase a. Impianto copiato da SEIMAFI, allenatore di dimostrazioni a tre livelli, lavagna, prova della correzione con Claude e capitolo pilota <b>C4 cinghie</b> (4 argomenti, 6 domande, 18 dimostrazioni, 3 animazioni).</p>
+  </section>
+
+  <footer>Codice e trascrizioni: GitHub <span class="mono">samuelepreite/mam-orale</span>; copia nel progetto <span class="mono">claude/codice-mam.tar.gz.b64</span> e qui come file <span class="mono">backup/codice-mam.txt</span>.</footer>
+</div>
+
+<script>
+const C=[
+ ["C1","Cinematica e dinamica","5–66",4,"3 + 4",14,5,4,"glifo (rapido ritorno), coordinate polari","--c1"],
+ ["C2","Attrito e aderenza","67–102",7,"7",10,4,1,"ribaltamento del blocco","--c2"],
+ ["C3","Freni e frizioni","103–128",9,"8",12,3,3,"partitore, frizione centrifuga, pressione uniforme","--c3"],
+ ["C4","Trasmissioni a cinghia","129–154",6,"4",12,4,2,"—","--c4"],
+ ["C5","Ingranaggi e rotismi","155–192",16,"13",23,8,2,"rendimento epicicloidale","--c5"],
+ ["C6","Accoppiamento motore–carico","193–206",3,"3",5,3,2,"energia dissipata nella frizione (solo libro)","--c6"],
+ ["C7","Vibrazioni","207–223",7,"7",21,4,0,"—","--c7"]];
+const tb=document.getElementById('righe'), MAX=33, W=160;
+for(const [id,t,p,q,a,s,pa,no,fuori,col] of C){
+  const tot=s+pa+no, tr=document.createElement('tr');
+  const seg=(n,v)=>`<i style="width:${n/MAX*W}px;background:var(${v})" title="${n}"></i>`;
+  tr.innerHTML=`<td><div class="cap"><span class="sw" style="background:var(${col})"></span><span><b>${id}</b> ${t}</span></div></td>
+  <td class="mono">${p}</td><td class="n">${q}</td><td class="n">${a}</td>
+  <td><div style="display:flex;gap:8px;align-items:center"><div class="bar" style="background:transparent">${seg(s,'--ok')}${seg(pa,'--part')}${seg(no,'--no')}</div><span class="mono" style="font-size:12.5px">${s}·${pa}·${no}</span></div></td>
+  <td>${fuori==='—'?'—':`<span class="warn">${fuori}</span>`}</td><td><span class="pill todo">trascritto</span></td>`;
+  tb.appendChild(tr);
+}
+</script>
