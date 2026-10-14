@@ -23,4 +23,5 @@ export function indicePassi(cat: Catalogo) {
   return m;
 }
 /** peso d'orale di un argomento: numero di formulazioni (almeno 0,5), dimezzato se non è nella dispensa */
-export const pesoOrale = (a: Argomento) => Math.max(0.5, a.formulazioni.length) * (a.fonte === 'no' ? 0.5 : 1);
+/** peso d'orale = numero di formulazioni (gli argomenti integrati fuori dispensa pesano come gli altri: sono chiesti, decisione del 14/10) */
+export const pesoOrale = (a: Argomento) => Math.max(0.5, a.formulazioni.length);

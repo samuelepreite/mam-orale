@@ -1,12 +1,8 @@
 /**
- * Accesso alle capability della pagina pubblicata su claude.ai (`sample`, `downloads`).
- * Fuori da claude.ai `window.claude` non c'è: tutto risolve `null` e l'app usa le alternative
- * (autovalutazione guidata, download diretto del browser).
+ * Accesso alla capability `downloads` della pagina pubblicata su claude.ai (salvataggio dell'esportazione).
+ * Fuori da claude.ai `window.claude` non c'è: si usa il download diretto del browser.
+ * L'app non usa servizi di intelligenza artificiale: nessuna chiamata consuma il piano dello studente.
  */
-export interface SampleLike {
-  json<T = unknown>(input: string, options?: { images?: Blob[]; modelTier?: 'default' | 'complex' | 'quick'; signal?: AbortSignal; cache?: boolean }): Promise<T>;
-  limits(): Promise<{ maxPromptBytes: number; images?: { maxCount: number; maxInputBytes: number; mediaTypes: string[] } }>;
-}
 interface DownloadsLike {
   save(r: { filename: string; data: string | Blob }): Promise<{ status: string }>;
 }
@@ -15,25 +11,6 @@ interface ClaudeLike {
 }
 
 const claude = () => (typeof window !== 'undefined' ? (window as unknown as { claude?: ClaudeLike }).claude : undefined);
-
-let cache: { c: ClaudeLike | undefined; p: Promise<SampleLike | null> } | null = null;
-/** la funzione `sample` (null se la pagina non può chiedere a Claude); `use()` è memorizzato dalla piattaforma */
-export function getSample(): Promise<SampleLike | null> {
-  const c = claude();
-  if (!cache || cache.c !== c) cache = { c, p: c?.use ? c.use('sample').then((x) => (x as SampleLike | null) ?? null).catch(() => null) : Promise.resolve(null) };
-  return cache.p;
-}
-
-/** la pagina può inviare immagini a Claude? */
-export async function canSendImages(s: SampleLike | null): Promise<boolean> {
-  if (!s) return false;
-  try {
-    const l = await s.limits();
-    return !!l?.images && l.images.mediaTypes.includes('image/png');
-  } catch {
-    return false;
-  }
-}
 
 /** Salva un file: con la capability `downloads` (in claude.ai) o con un link di download del browser. */
 export async function salvaFile(filename: string, data: string, mime = 'application/json'): Promise<'salvato' | 'rifiutato' | 'errore'> {

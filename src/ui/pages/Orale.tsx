@@ -33,7 +33,7 @@ export function Registro({ argId }: { argId?: string }) {
               </td>
               <td className="num">{fmtDurata(x.durataS)}</td>
               <td className="num">{pct(x.punteggio)}</td>
-              <td>{x.correttore === 'claude' ? 'Claude' : 'autovalutazione'}</td>
+              <td>autovalutazione</td>
             </tr>
           ))}
         </tbody>

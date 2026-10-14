@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 /**
  * Interfaccia (smoke) con il contenuto C4 del freno a nastro: ogni pagina si apre senza NaN/undefined; lezione fino in
- * fondo; allenatore livello 2 e 3; simulazione con autovalutazione e con Claude finto (risposta valida ed errore);
+ * fondo; allenatore livello 2 e 3; simulazione con autovalutazione e suggerimento locale;
  * lavagna (tratto, annulla, esportazione).
  */
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
@@ -17,7 +17,7 @@ vi.mock('../src/diagrams/registry', () => ({
     </figure>
   ),
 }));
-import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { StateProvider, useApp } from '../src/ui/state';
 import { Shell } from '../src/ui/App';
 import { OralSim } from '../src/ui/components/OralSim';
@@ -242,15 +242,17 @@ describe('simulazione', () => {
     );
     expect(screen.getByText(FN.formulazioni[0].testo)).toBeTruthy();
     rispondi();
-    expect(qbtn('Correggi con Claude')).toBeNull(); // fuori da claude.ai
-    fireEvent.click(btn('Autovalutazione guidata'));
+    expect(qbtn('Correggi con Claude')).toBeNull();
     const rub = rubricaDi(FN);
-    expect((btn('Dai i punti a tutte le voci') as HTMLButtonElement).disabled).toBe(true);
     for (const v of rub) {
       const g = screen.getByRole('group', { name: v.testo });
       fireEvent.click(Array.from(g.querySelectorAll('button')).find((b) => b.textContent === (v.id === 'chiave' ? 'in parte' : 'sì'))!);
     }
-    fireEvent.click(screen.getByRole('checkbox', { name: FN.contenuto!.daNonDire[0].frase }));
+    // il suggerimento locale può aver già segnato delle frasi: si lascia segnata solo la prima
+    FN.contenuto!.daNonDire.forEach((d, i) => {
+      const cb = screen.getByRole('checkbox', { name: d.frase }) as HTMLInputElement;
+      if (cb.checked !== (i === 0)) fireEvent.click(cb);
+    });
     fireEvent.change(screen.getByLabelText(/primo passo che hai saltato/), { target: { value: 'd071.4' } });
     fireEvent.click(btn('Conferma la correzione'));
     const sim = probe!.simulazioni[0];
@@ -271,36 +273,9 @@ describe('simulazione', () => {
     testoPulito();
   });
 
-  it('con Claude: richiesta con la trascrizione, voci proposte, domande a catena dagli approfondimenti', async () => {
-    const rub = rubricaDi(FN);
-    const json = vi.fn(async (prompt: string, _opts?: unknown) => {
-      expect(prompt).toContain('T1 = T2 e^{f beta}');
-      return { voci: rub.map((v) => ({ id: v.id, punti: v.id === 'disegno' ? 0 : 1, motivo: `motivo ${v.id}` })), daNonDireDetti: [], passoMancante: null, commento: 'Manca il disegno.', domandeACatena: [{ id: 'a2', domanda: 'Come ricavi Eulero?' }] };
-    });
-    (window as unknown as { claude: unknown }).claude = { use: async (n: string) => (n === 'sample' ? { json, limits: async () => ({ maxPromptBytes: 262144 }) } : null) };
-    render(
-      <StateProvider initial={defaultState()}>
-        <OralSim argId={ARG} />
-        <Probe />
-      </StateProvider>,
-    );
-    await act(async () => {});
-    rispondi();
-    fireEvent.click(await screen.findByRole('button', { name: 'Correggi con Claude' }));
-    await waitFor(() => expect(screen.getByText(/Manca il disegno/)).toBeTruthy());
-    expect(json).toHaveBeenCalledTimes(1);
-    expect(json.mock.calls[0][1]).toMatchObject({ modelTier: 'default' });
-    expect(screen.getByText('motivo disegno')).toBeTruthy();
-    fireEvent.click(btn('Conferma la correzione'));
-    expect(probe!.simulazioni[0]).toMatchObject({ correttore: 'claude', voci: expect.objectContaining({ disegno: 0, partenza: 1 }) });
-    expect(screen.getByText('Come ricavi Eulero?')).toBeTruthy();
-    fireEvent.click(btn('Salta le domande a catena'));
-    expect(screen.getByText(/corretta con Claude/)).toBeTruthy();
-  });
-
-  it('Claude non disponibile (rate_limited) o non consentito: messaggio chiaro e autovalutazione', async () => {
-    const json = vi.fn(async () => Promise.reject({ code: 'rate_limited', message: 'x' }));
-    (window as unknown as { claude: unknown }).claude = { use: async () => ({ json, limits: async () => ({ maxPromptBytes: 1 }) }) };
+  it('nessun servizio esterno: niente pulsante di Claude anche se la piattaforma offrisse sample', async () => {
+    const use = vi.fn(async () => null);
+    (window as unknown as { claude: unknown }).claude = { use };
     render(
       <StateProvider initial={defaultState()}>
         <OralSim argId={ARG} />
@@ -308,9 +283,11 @@ describe('simulazione', () => {
     );
     await act(async () => {});
     rispondi();
-    fireEvent.click(await screen.findByRole('button', { name: 'Correggi con Claude' }));
-    await waitFor(() => expect(screen.getByText(/troppe richieste a Claude/)).toBeTruthy());
-    expect(screen.getByText('Dai i punti a tutte le voci')).toBeTruthy();
+    expect(qbtn('Correggi con Claude')).toBeNull();
+    expect(use.mock.calls.some((c) => (c as unknown[])[0] === 'sample')).toBe(false);
+    // il suggerimento per parole chiave ha già segnato qualche voce dalla trascrizione
+    expect(screen.getAllByText(/suggerito:/).length).toBeGreaterThan(0);
+    delete (window as unknown as { claude?: unknown }).claude;
   });
 });
 

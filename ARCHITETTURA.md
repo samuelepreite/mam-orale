@@ -86,28 +86,21 @@ dimostrazione dichiarata nella mappa abbia il suo contenuto quando il capitolo �
 - Sicurezza 1–5 prima di vedere la soluzione e calibrazione nella dashboard, come in SEIMAFI.
 
 ## 4. Simulazione dell'orale
-- **Estrazione**: peso = formulazioni × (1 − padronanza) × urgenza (giorni all'orale, scadenze FSRS); argomenti «non
-  nella dispensa» con peso ridotto (NF-07). Il professore virtuale legge la domanda (una delle formulazioni), avvia il tempo.
-- **Risposta ad alta voce**: dettatura con Web Speech API (`it-IT`) se il browser la offre **e** la pagina pubblicata
-  la consente (da verificare nell'iframe di claude.ai: il microfono non è tra le capability dichiarabili); in
-  alternativa la **dettatura della tastiera** del telefono nel campo di testo (funziona sempre), oppure solo voce senza
-  registrazione + autovalutazione. Più la **foto/immagine della lavagna**.
-- **Correzione con Claude** — verificato nella skill `artifact-capabilities`: la pagina pubblicata può chiedere a
-  Claude con la capability **`sample`** (anche con immagini: `sample: {images: true}`). Richiesta strutturata
-  (`sample.json`): rubrica dell'argomento + catena corretta con pagine + «da non dire» + trascrizione (e immagine della
-  lavagna) → `{voci: {id, punti, motivo}[], daNonDireDetti[], passoMancante?, domandeACatena: string[]}`. Le domande a
-  catena sono scelte da Claude **tra gli approfondimenti curati** dell'argomento (o adattate alla risposta), così
-  restano dentro la dispensa. Limiti dichiarati: una chiamata per risposta, solo su gesto esplicito («Correggi»), usa
-  il piano Claude dello studente, consenso alla prima chiamata, `rate_limited` → autovalutazione guidata; la correzione
-  è un aiuto, non un voto. Fuori da claude.ai (sviluppo, file singolo): solo autovalutazione guidata sulla rubrica.
-- **Registro** delle simulazioni nella storia sincronizzata; ogni voce di rubrica mancata alimenta FSRS
-  (`rubrica:<arg>:<voce>`) e il passo mancante segnalato alimenta la sua scheda.
+- **Estrazione**: peso = formulazioni × (1 − padronanza) × urgenza (scadenze FSRS); niente ripetizioni ravvicinate.
+- **Risposta ad alta voce**: dettatura del browser (`it-IT`) se disponibile, altrimenti la dettatura della tastiera
+  del telefono nel campo di testo, oppure solo voce; lavagna facoltativa, confrontata con il disegno di riferimento.
+- **Correzione**: autovalutazione guidata sulla rubrica dell'argomento, con un **suggerimento locale per parole
+  chiave** calcolato nel browser (`learning/oral.ts` `suggerisciPunti`, `sospettiDaNonDire`) che lo studente conferma.
+  **Nessun servizio di intelligenza artificiale** (decisione dello studente del 14/10: la capability `sample` è stata
+  tolta, l'app non consuma il suo piano).
+- **Domande a catena** scelte tra gli approfondimenti curati, con la risposta attesa mostrata dopo la risposta.
+- **Registro** delle simulazioni nella storia sincronizzata; voci di rubrica mancate e passo mancante vanno in FSRS.
 
 ## 5. Lavagna
 - Componente `Lavagna` (da `DrawCanvas`): tratto a mano libera con pointer events (dito, penna con pressione, mouse),
   colori, gomma, annulla, fogli multipli, esporta PNG; funziona anche in orizzontale sul telefono.
 - **Confronto**: affiancata al disegno di riferimento (SVG ridisegnato dalla dispensa) + checklist degli elementi che
-  lo studente spunta (o che Claude valuta dall'immagine, se `sample` con immagini è disponibile).
+  lo studente spunta.
 - **Costruzione controllata** (dove si presta: triangolo delle velocità del manovellismo, poligono delle forze del
   ceppo, cerchio d'attrito, CIR, retta d'azione degli ingranaggi): modalità punti/rette con tolleranza riusando
   `engine/draw.ts` di SEIMAFI.
@@ -132,9 +125,9 @@ W(V) con la velocità ottima, freno a nastro nei due versi; poi la lista del pro
 ## 8. Piano per fasi (ognuna chiusa con test verdi, app e infografica pubblicate, copie nel progetto)
 | Fase | Contenuto | Fatto quando |
 |---|---|---|
-| **a** | Impianto da SEIMAFI (storage, sync, FSRS, sessione, dashboard, piano, grafica), modello dati, allenatore 3 livelli, lavagna, prototipo della correzione con `sample`; **capitolo pilota C4** completo: 4 argomenti, 6 formulazioni, 18 dimostrazioni, 3 animazioni, disegni | test verdi; le 18 catene verificate in SymPy; percorso Playwright pulito; Samuele prova il formato |
+| **a** | Impianto da SEIMAFI (storage, sync, FSRS, sessione, dashboard, piano, grafica), modello dati, allenatore 3 livelli, lavagna; **capitolo pilota C4** completo: 4 argomenti, 6 formulazioni, 18 dimostrazioni, 3 animazioni, disegni | test verdi; le 18 catene verificate in SymPy; percorso Playwright pulito; Samuele prova il formato |
 | **b** | Gli altri capitoli, uno per sessione (C5 in due): C5, C3, C7, C2, C6, C1 (ordine per peso d'orale) | stesso criterio per capitolo; la mappa segna il capitolo «pronto» |
-| **c** | Simulazione completa: estrazione pesata, domande a catena, registro, risultati nella ripetizione | una simulazione intera da telefono, con e senza Claude |
+| **c** | Simulazione completa: estrazione pesata, domande a catena, registro, risultati nella ripetizione | una simulazione intera da telefono |
 | **d** | Rifinitura sui riscontri (passi «non ho capito», simulazioni) | riscontri chiusi |
 
 Continuità come in SEIMAFI: `RIPARTENZA.md` («IN CORSO/FINITA»), copie dei documenti e del codice
@@ -144,7 +137,6 @@ Continuità come in SEIMAFI: `RIPARTENZA.md` («IN CORSO/FINITA»), copie dei do
 | Rischio | Mitigazione |
 |---|---|
 | Dettatura vocale bloccata nell'iframe | dettatura della tastiera del telefono; registrazione non necessaria |
-| `sample` non disponibile o esaurito | autovalutazione guidata sulla rubrica (sempre presente) |
-| Contenuti chiesti ma assenti dalla dispensa | badge, peso ridotto, voce «da chiedere al docente» (NF-07) |
-| Errori della dispensa | correzione con riga originale accanto (NF-02); il docente decide nei 4 punti aperti |
+| Contenuti chiesti ma assenti dalla dispensa | contenuto completo con fonte dichiarata, badge «integrato» (NF-07, deciso) |
+| Errori della dispensa | correzione con riga originale accanto (NF-02); punti dubbi decisi il 14/10 (NOTE_FONTI, § Decisioni finali) |
 | Volume (49 argomenti, 142 catene) | contenuti come dati, test generati dai dati, una sessione per capitolo |

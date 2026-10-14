@@ -13,7 +13,7 @@ ogni passo; commit e push su `main` a ogni passo.
 | 5 | Integrazione: NF nuove in NOTE_FONTI, suite completa, `tsc`, verifica SymPy completa, controllo a campione dei contenuti (un passo per dimostrazione contro la trascrizione), Playwright | coordinatore | tutto verde, 49/49 argomenti, 142/142 dimostrazioni verificate |
 | 6 | Pubblicazione dell'app (capability `db`, `user`, `downloads`, `sample` con immagini), prova della correzione con Claude, infografica, copie nel progetto | coordinatore | app raggiungibile, sincronizzazione letta una volta |
 | 7 | Revisione indipendente: un agente che non ha scritto i contenuti ricontrolla un campione di dimostrazioni contro la dispensa | agente revisore | difetti corretti |
-| 8 | Rifinitura sui riscontri dello studente (passi «non ho capito», simulazioni) | sessioni successive | riscontri chiusi |
+| 8 | Chiusura (14/10): tolta la correzione con IA, decisi tutti i dubbi, peso pieno agli argomenti integrati, app ripubblicata | coordinatore | ✓ 14/10, nessun punto aperto |
 
 Regole di sessione: `RIPARTENZA.md` («IN CORSO/FINITA»), una sessione non rilegge i PDF (usa `tools/testi/`), test
 filtrati, pubblicazione a fine passo.

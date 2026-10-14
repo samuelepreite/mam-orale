@@ -1,14 +1,13 @@
 # Ripartenza — dove siamo e come continuare
 
 ## 0. Stato dell'ultima sessione
-- **Stato:** FINITA alle 23:30 del 13/10/2026 (iniziata alle 19:45).
-- **Fatto:** Passi 1–7 di `WORKFLOW.md`. Dispensa trascritta; app completa (`src/ui`, `src/learning`, `src/storage`);
-  49 argomenti e 142 dimostrazioni (978 passi) scritti da 8 agenti, tutte verificate in SymPy (`npm run verifica`);
-  2450 test verdi; NF-101…257 unite in NOTE_FONTI; revisione indipendente su 31 dimostrazioni (`docs/REVISIONE.md`,
-  4 difetti corretti); app pubblicata con `db`, `user`, `downloads`, `sample` (immagini).
-- **Non ancora provato dal vivo:** correzione con Claude (`sample`), dettatura nell'iframe, sincronizzazione reale.
-- **Prossimo:** passo 8. Leggere i riscontri dello studente (`ArtifactData` sull'app, `data/users/me/…`: lezioni con
-  «confuso», simulazioni) e correggere prima quei passi; poi i punti «docente» quando arrivano le risposte.
+- **Stato:** FINITA alle 02:00 del 14/10/2026. **Progetto completo, nessun punto aperto.**
+- **Ultima sessione (richiesta dello studente):** tolta la correzione con Claude (capability `sample`): la simulazione
+  usa l'autovalutazione guidata con suggerimento locale per parole chiave; l'app non consuma il piano. Decisi tutti i
+  dubbi «da chiedere al docente» (NOTE_FONTI, § Decisioni finali) e applicati nei contenuti; argomenti integrati oltre la
+  dispensa con peso pieno. 2444 test verdi, 142/142 dimostrazioni verificate in SymPy, app ripubblicata con `db`,
+  `user`, `downloads`.
+- **Se lo studente chiede altro:** riscontri sui passi (lezioni con «confuso») esportati da «Altro»; correggere quei passi.
 
 Protocollo (come SEIMAFI): all'inizio, se qui c'è «IN CORSO» da meno di 5 ore e su GitHub c'è un commit nell'ultima
 ora, un'altra sessione sta lavorando: non toccare nulla. Altrimenti scrivere «IN CORSO dalle HH:MM», commit e push,
@@ -25,7 +24,7 @@ progetto (`claude/RIPARTENZA.md`): se è più recente, applicarla prima.
 
 ## 2. Link pubblicati
 - Infografica: https://claude.ai/artifact/UUvve8npgioQTwu9isVTUN — sorgente `docs/stato-mam.html`, file `backup/codice-mam.txt` (codice in base64)
-- App: https://claude.ai/artifact/6isjZaRnzG8Nks5vC8R5Xz — publish di `dist-artifact/mam-orale-pagina.html` (`npm run build:artifact`) passando `url` e **senza** `capabilities` (restano db, user, downloads, sample)
+- App: https://claude.ai/artifact/6isjZaRnzG8Nks5vC8R5Xz — publish di `dist-artifact/mam-orale-pagina.html` (`npm run build:artifact`) passando `url` e **senza** `capabilities` (restano db, user, downloads; `sample` NON va mai rimesso: decisione dello studente)
 
 ## 3. Regole dello studente
 Fonte di verità: la dispensa (NF-02 per gli errori verificati). Niente «corretto» senza verifica (SymPy in `tools/`,

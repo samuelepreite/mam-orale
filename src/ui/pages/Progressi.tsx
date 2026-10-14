@@ -176,8 +176,8 @@ export function Progressi() {
             </tbody>
           </table>
         </div>
-        <p className="small muted">{d.argomenti.filter((r) => r.stato === 'in-preparazione').length} argomenti ancora in preparazione.</p>
-        {d.riscontriConfusi > 0 && <p className="small">Hai segnato «non ho capito» su {d.riscontriConfusi} passi delle lezioni: restano salvati con le note: esportali da «Altro» per farli correggere.</p>}
+        {d.argomenti.some((r) => r.stato === 'in-preparazione') && <p className="small muted">{d.argomenti.filter((r) => r.stato === 'in-preparazione').length} argomenti ancora in preparazione.</p>}
+        {d.riscontriConfusi > 0 && <p className="small">Hai segnato «non ho capito» su {d.riscontriConfusi} passi delle lezioni: li trovi con le tue note nel ripasso, e puoi esportarli da «Altro».</p>}
       </section>
 
       <section className="card">

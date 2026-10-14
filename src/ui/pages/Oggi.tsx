@@ -150,7 +150,7 @@ export function Oggi() {
             <section className="card" aria-label="simulazione">
               <p className="kicker">Simulazione d&apos;orale</p>
               <h2>Il professore ti fa una domanda</h2>
-              <p className="small muted">Domanda estratta tra gli argomenti che hai studiato, pesata su quanto li ricordi. Rispondi a voce, poi correggi con Claude o con la rubrica.</p>
+              <p className="small muted">Domanda estratta tra gli argomenti che hai studiato, pesata su quanto li ricordi. Rispondi a voce, poi correggi con la rubrica.</p>
               <div className="row">
                 <a className="button primary" href="#/orale">
                   Vai alla simulazione

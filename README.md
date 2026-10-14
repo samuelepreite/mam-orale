@@ -4,12 +4,12 @@ Web app per preparare l'orale di **Meccanica Applicata alle Macchine I**: ricost
 spiegarla ad alta voce (partenza, ipotesi, disegno, equazione, passaggio chiave, significato fisico, domande a catena).
 Stesso impianto di SEIMAFI (`samuelepreite/seimafi`), repository separato.
 
-Stato (13/10/2026): **app completa e pubblicata**: 49 argomenti (52 domande), 142 dimostrazioni verificate in SymPy, lezioni guidate, allenatore a tre livelli, lavagna, simulazione dell'orale con correzione di Claude, ripetizione distanziata per passo, piano parametrico. `npm ci && npx vitest run && npm run verifica && npm run build:artifact`. Flusso: `WORKFLOW.md`; brief degli agenti in `docs/`.
+Stato (13/10/2026): **app completa e pubblicata**: 49 argomenti (52 domande), 142 dimostrazioni verificate in SymPy, lezioni guidate, allenatore a tre livelli, lavagna, simulazione dell'orale con autovalutazione guidata (nessun servizio di IA: non consuma il piano Claude), ripetizione distanziata per passo, piano parametrico. `npm ci && npx vitest run && npm run verifica && npm run build:artifact`. Flusso: `WORKFLOW.md`; brief degli agenti in `docs/`.
 
 | File | Contenuto |
 |---|---|
 | `ANALISI.md` | fonti, indice della dispensa, 45 argomenti d'orale (+4 di complemento), mappa domande → dimostrazioni → pagine |
-| `NOTE_FONTI.md` | incongruenze ed errori verificati (NF-01…NF-45), letture adottate, punti da chiedere al docente |
+| `NOTE_FONTI.md` | incongruenze ed errori verificati (NF-01…NF-257), letture adottate e decisioni finali (nessun punto aperto) |
 | `ARCHITETTURA.md` | riuso di SEIMAFI, modello dei dati, allenatore, lavagna, simulazione con Claude, verifiche, fasi |
 | `RIPARTENZA.md` | stato della sessione e prossimo passo |
 | `tools/testi/cap*.md` | **trascrizione integrale della dispensa** (223 pagine PDF, lette una volta come immagine) |

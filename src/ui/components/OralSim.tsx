@@ -1,16 +1,15 @@
 /**
  * Simulazione dell'orale: il professore virtuale estrae una domanda (learning/oral.ts), si risponde ad alta voce
  * (dettatura del browser se c'è, altrimenti quella della tastiera, oppure «ho risposto a voce»), lavagna facoltativa;
- * poi «Correggi con Claude» (capability `sample`, solo su gesto esplicito) o autovalutazione guidata sulla rubrica;
- * poi 1–2 domande a catena; poi esito, voci mancate, passo mancante e collegamenti alla lezione.
+ * poi autovalutazione guidata sulla rubrica (con un suggerimento locale per parole chiave, senza servizi esterni);
+ * poi 1–2 domande a catena con la risposta attesa; poi esito, voci mancate, passo mancante e collegamenti alla lezione.
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Argomento } from '../../content/types';
 import { addSimulazione, updateSimulazione } from '../../learning/actions';
 import { CATALOGO, argDi, dimsDi } from '../../learning/catalogo';
-import { approfondimentiDi, costruisciRichiesta, costruisciRichiestaCatena, estraiDomanda, leggiCatena, leggiValutazione, messaggioErroreClaude, scegliCatena, type Estratta, type Punti } from '../../learning/oral';
+import { estraiDomanda, scegliCatena, sospettiDaNonDire, suggerisciPunti, type Estratta, type Punti } from '../../learning/oral';
 import { punteggio, rubricaDi, vociMancate } from '../../learning/rubrica';
-import { canSendImages, getSample, type SampleLike } from '../claude';
 import { useDettatura } from '../dettatura';
 import { useApp } from '../state';
 import { fmtDurata, pct } from './bits';
@@ -22,23 +21,6 @@ interface DomCatena {
   id: string | null;
   domanda: string;
   attesa?: string;
-}
-
-function useSample() {
-  const [s, setS] = useState<SampleLike | null>(null);
-  const [img, setImg] = useState(false);
-  useEffect(() => {
-    let alive = true;
-    void getSample().then(async (x) => {
-      if (!alive) return;
-      setS(x);
-      setImg(await canSendImages(x));
-    });
-    return () => {
-      alive = false;
-    };
-  }, []);
-  return { sample: s, immagini: img };
 }
 
 function Timer({ t0, stop }: { t0: number; stop?: number }) {
@@ -96,8 +78,6 @@ function PuntiBtns({ v, onChange, label }: { v?: Punti; onChange: (p: Punti) => 
 
 export function OralSim({ argId }: { argId?: string }) {
   const { state, update } = useApp();
-  const { sample, immagini } = useSample();
-  const [nascondiClaude, setNascondiClaude] = useState(false);
   const [fase, setFase] = useState<Fase>('estrai');
   const [dom, setDom] = useState<Estratta | null>(() => estraiDomanda(state, Math.random, new Date(), CATALOGO, argId));
   const a: Argomento | undefined = dom ? argDi(CATALOGO, dom.argId) : undefined;
@@ -108,23 +88,14 @@ export function OralSim({ argId }: { argId?: string }) {
   const [conLavagna, setConLavagna] = useState(false);
   const lav = useRef<LavagnaApi | null>(null);
   const [voci, setVoci] = useState<Record<string, Punti>>({});
-  const [motivi, setMotivi] = useState<Record<string, string>>({});
-  const [daClaude, setDaClaude] = useState<Set<string>>(new Set());
   const [detti, setDetti] = useState<string[]>([]);
   const [mancante, setMancante] = useState<string>('');
-  const [commento, setCommento] = useState('');
-  const [correttore, setCorrettore] = useState<'claude' | 'auto'>('auto');
-  const [modo, setModo] = useState<'scegli' | 'auto' | 'claude'>('scegli');
-  const [attesa, setAttesa] = useState(false);
-  const [errore, setErrore] = useState<string | null>(null);
-  const ctl = useRef<AbortController | null>(null);
   const [catena, setCatena] = useState<DomCatena[]>([]);
   const [risposte, setRisposte] = useState<string[]>([]);
   const [voti, setVoti] = useState<(Punti | undefined)[]>([]);
-  const [commentiCatena, setCommentiCatena] = useState<string[]>([]);
   const [mostraAttese, setMostraAttese] = useState(false);
+  const [suggeriti, setSuggeriti] = useState<ReturnType<typeof suggerisciPunti>>({});
   const [simId, setSimId] = useState<string | null>(null);
-  useEffect(() => () => ctl.current?.abort(), []);
 
   if (!dom || !a?.contenuto) {
     return (
@@ -136,11 +107,9 @@ export function OralSim({ argId }: { argId?: string }) {
   const c = a.contenuto;
   const durataS = t0 ? ((t1 || Date.now()) - t0) / 1000 : 0;
   const passi = dimsDi(CATALOGO, a).flatMap((d) => d.passi.map((p) => ({ d, p })));
-  const puoClaude = !!sample && !nascondiClaude && (testo.trim().length >= 20 || (conLavagna && !!lav.current && !lav.current.vuota()));
   const tutteDate = rub.every((v) => voci[v.id] !== undefined);
 
   const nuova = () => {
-    ctl.current?.abort();
     setDom(estraiDomanda(state, Math.random, new Date(), CATALOGO, argId));
     setFase('estrai');
     setT0(0);
@@ -148,60 +117,23 @@ export function OralSim({ argId }: { argId?: string }) {
     setTesto('');
     setConLavagna(false);
     setVoci({});
-    setMotivi({});
-    setDaClaude(new Set());
     setDetti([]);
     setMancante('');
-    setCommento('');
-    setCorrettore('auto');
-    setModo('scegli');
-    setErrore(null);
     setCatena([]);
     setRisposte([]);
     setVoti([]);
-    setCommentiCatena([]);
     setMostraAttese(false);
+    setSuggeriti({});
     setSimId(null);
   };
 
-  const correggiConClaude = async () => {
-    if (!sample) return;
-    setModo('claude');
-    setAttesa(true);
-    setErrore(null);
-    const ac = new AbortController();
-    ctl.current = ac;
-    try {
-      const blob = conLavagna && immagini && lav.current ? await lav.current.toBlob() : null;
-      const prompt = costruisciRichiesta(a, dom.testo, testo, { immagine: !!blob, durataS });
-      const raw = await sample.json(prompt, { modelTier: 'default', signal: ac.signal, ...(blob ? { images: [blob] } : {}) });
-      const r = leggiValutazione(raw, a);
-      if (!r.ok) {
-        setErrore(`${r.errore} Correggi con l'autovalutazione qui sotto.`);
-        setModo('auto');
-        return;
-      }
-      const v = r.v;
-      setVoci(Object.fromEntries(Object.entries(v.voci).map(([k, x]) => [k, x.punti])));
-      setMotivi(Object.fromEntries(Object.entries(v.voci).map(([k, x]) => [k, x.motivo])));
-      setDaClaude(new Set(Object.keys(v.voci)));
-      setDetti(v.daNonDireDetti);
-      setMancante(v.passoMancante ?? '');
-      setCommento(v.commento);
-      setCorrettore('claude');
-      const ap = approfondimentiDi(a);
-      const dc = v.domandeACatena.map((q) => ({ id: q.id, domanda: q.domanda, attesa: ap.find((x) => x.id === q.id)?.attesa }));
-      setCatena(dc.length ? dc : scegliCatena(a, Math.random).map((x) => ({ id: x.id, domanda: x.domanda, attesa: x.attesa })));
-    } catch (e) {
-      const code = (e as { code?: string })?.code;
-      const m = messaggioErroreClaude(code);
-      if (code !== 'cancelled') setErrore(m.testo);
-      if (m.nascondi) setNascondiClaude(true);
-      setModo('auto');
-    } finally {
-      setAttesa(false);
-      ctl.current = null;
-    }
+  const vaiACorrezione = () => {
+    setT1(Date.now());
+    const sug = testo.trim() ? suggerisciPunti(testo, rub) : {};
+    setSuggeriti(sug);
+    setVoci(Object.fromEntries(Object.entries(sug).map(([k, x]) => [k, x.punti])));
+    setDetti(testo.trim() ? sospettiDaNonDire(testo, c.daNonDire.map((d) => d.frase)) : []);
+    setFase('correzione');
   };
 
   const conferma = () => {
@@ -218,43 +150,15 @@ export function OralSim({ argId }: { argId?: string }) {
         durataS: Math.round(durataS),
         testo: testo.trim() || undefined,
         conLavagna,
-        correttore,
+        correttore: 'auto',
         voci,
         daNonDire: detti,
         passoMancante: mancante || undefined,
         catena: cat.map((x) => ({ domanda: x.domanda })),
-        nota: commento.trim() || undefined,
       }),
     );
     setSimId(id);
     setFase('catena');
-  };
-
-  const valutaCatenaClaude = async () => {
-    if (!sample) return;
-    setAttesa(true);
-    setErrore(null);
-    const ac = new AbortController();
-    ctl.current = ac;
-    try {
-      const raw = await sample.json(costruisciRichiestaCatena(a, dom.testo, catena.map((x, i) => ({ domanda: x.domanda, attesa: x.attesa, risposta: risposte[i] ?? '' }))), { modelTier: 'default', signal: ac.signal });
-      const r = leggiCatena(raw, catena.length);
-      if (!r.ok) setErrore(`${r.errore} Valuta tu confrontando con la risposta attesa.`);
-      else {
-        setVoti((vs) => r.v.map((x, i) => x?.voto ?? vs[i]));
-        setCommentiCatena(r.v.map((x) => x?.commento ?? ''));
-      }
-      setMostraAttese(true);
-    } catch (e) {
-      const code = (e as { code?: string })?.code;
-      const m = messaggioErroreClaude(code);
-      if (code !== 'cancelled') setErrore(m.testo);
-      if (m.nascondi) setNascondiClaude(true);
-      setMostraAttese(true);
-    } finally {
-      setAttesa(false);
-      ctl.current = null;
-    }
   };
 
   const chiudiCatena = (salta = false) => {
@@ -306,14 +210,14 @@ export function OralSim({ argId }: { argId?: string }) {
           </p>
           <Risposta value={testo} onChange={setTesto} label="La tua risposta (trascrizione)" />
           <label className="check">
-            <input type="checkbox" checked={conLavagna} onChange={() => setConLavagna((x) => !x)} /> Uso la lavagna{immagini ? ' (l\'immagine può andare a Claude con la correzione)' : ''}
+            <input type="checkbox" checked={conLavagna} onChange={() => setConLavagna((x) => !x)} /> Uso la lavagna (poi la confronti con il disegno di riferimento)
           </label>
           {conLavagna && <Lavagna titolo="Lavagna dell'orale" onApi={(x) => (lav.current = x)} />}
           <div className="row">
-            <button type="button" className="primary" disabled={!testo.trim() && !conLavagna} onClick={() => { setT1(Date.now()); setFase('correzione'); }}>
+            <button type="button" className="primary" disabled={!testo.trim() && !conLavagna} onClick={vaiACorrezione}>
               Ho finito
             </button>
-            <button type="button" onClick={() => { setT1(Date.now()); setFase('correzione'); setModo('auto'); }}>
+            <button type="button" onClick={vaiACorrezione}>
               Ho risposto a voce (senza testo)
             </button>
           </div>
@@ -323,58 +227,35 @@ export function OralSim({ argId }: { argId?: string }) {
       {fase === 'correzione' && (
         <div className="card">
           <h3>Correzione</h3>
-          {errore && <p className="verdict warn">{errore}</p>}
-          {modo === 'scegli' && (
-            <>
-              {puoClaude ? (
-                <p className="small muted">Claude legge la tua risposta e la confronta con la rubrica e la catena della dispensa. Usa il tuo piano Claude; la prima volta chiede il consenso. È un aiuto allo studio, non un voto.</p>
-              ) : (
-                <p className="small muted">
-                  {!sample || nascondiClaude
-                    ? 'La correzione con Claude è disponibile solo nella pagina pubblicata su claude.ai: qui si usa l\'autovalutazione guidata sulla rubrica.'
-                    : 'Per la correzione con Claude serve la trascrizione (almeno qualche frase) o la lavagna: altrimenti autovalutazione.'}
-                </p>
-              )}
-              <div className="row">
-                {puoClaude && (
-                  <button type="button" className="primary" onClick={() => void correggiConClaude()}>
-                    Correggi con Claude
-                  </button>
-                )}
-                <button type="button" className={puoClaude ? '' : 'primary'} onClick={() => setModo('auto')}>
-                  Autovalutazione guidata
-                </button>
-              </div>
-            </>
+          {conLavagna && (
+            <details className="attese" open>
+              <summary>Il disegno di riferimento: confrontalo con la tua lavagna</summary>
+              <div className="disegno" dangerouslySetInnerHTML={{ __html: c.disegno.svg }} />
+              <ul>
+                {c.disegno.elementi.map((el) => (
+                  <li key={el.id}>
+                    <Inline text={el.testo} />
+                    {el.obbligatorio ? '' : ' (facoltativo)'}
+                  </li>
+                ))}
+              </ul>
+            </details>
           )}
-          {attesa && (
-            <div className="row">
-              <span className="thinking">Claude sta leggendo la tua risposta…</span>
-              <button type="button" onClick={() => ctl.current?.abort()}>
-                Ferma
-              </button>
-            </div>
-          )}
-          {(modo === 'auto' || (modo === 'claude' && !attesa)) && (
+          {fase === "correzione" && (
             <>
-              {correttore === 'claude' && commento && (
-                <div className="verdict info">
-                  <p>
-                    <b>Il commento di Claude:</b> {commento}
-                  </p>
-                </div>
-              )}
-              <p className="small muted">{correttore === 'claude' ? 'Punti proposti da Claude: puoi cambiarli. Le voci senza punti le valuti tu.' : 'Confronta la tua risposta con ciò che doveva esserci e dai i punti a ogni voce.'}</p>
+              <p className="small muted">
+                Confronta la tua risposta con ciò che doveva esserci e dai i punti a ogni voce.
+                {Object.keys(suggeriti).length > 0 && ' I punti già segnati sono un suggerimento automatico per parole chiave sulla tua trascrizione: controllali, il giudizio è tuo.'}
+              </p>
               {rub.map((v) => (
                 <div key={v.id} className="voce-row">
                   <div className="row">
                     <b>{v.testo}</b>
                     {v.peso !== 1 && <span className="badge">peso {v.peso}</span>}
-                    {daClaude.has(v.id) && <span className="badge accent">Claude</span>}
+                    {suggeriti[v.id] && <span className="badge">suggerito: {suggeriti[v.id].trovate}/{suggeriti[v.id].totali} attese</span>}
                     <span className="spacer" />
                     <PuntiBtns v={voci[v.id]} label={v.testo} onChange={(p) => setVoci((x) => ({ ...x, [v.id]: p }))} />
                   </div>
-                  {motivi[v.id] && <span className="small">{motivi[v.id]}</span>}
                   <details className="attese">
                     <summary className="small">che cosa doveva esserci</summary>
                     <ul>
@@ -387,7 +268,7 @@ export function OralSim({ argId }: { argId?: string }) {
                   </details>
                 </div>
               ))}
-              <h4>Da non dire: ne hai detta qualcuna?</h4>
+              <h4>Da non dire: ne hai detta qualcuna?{detti.length > 0 && Object.keys(suggeriti).length > 0 ? ' (segnate quelle che la trascrizione sembra contenere)' : ''}</h4>
               {c.daNonDire.map((d) => (
                 <label key={d.frase} className="check">
                   <input type="checkbox" checked={detti.includes(d.frase)} onChange={() => setDetti((x) => (x.includes(d.frase) ? x.filter((y) => y !== d.frase) : [...x, d.frase]))} />
@@ -420,8 +301,7 @@ export function OralSim({ argId }: { argId?: string }) {
       {fase === 'catena' && (
         <div className="card">
           <h3>Domande a catena</h3>
-          <p className="small muted">Il professore continua. Rispondi a voce o per scritto.</p>
-          {errore && <p className="verdict warn">{errore}</p>}
+          <p className="small muted">Il professore continua. Rispondi a voce o per scritto, poi confronta con la risposta attesa.</p>
           {catena.map((q, i) => (
             <div key={i} className="voce-row">
               <p className="prof-q" style={{ fontSize: '1.05rem' }}>
@@ -435,7 +315,6 @@ export function OralSim({ argId }: { argId?: string }) {
                       <b>Risposta attesa:</b> <Inline text={q.attesa} />
                     </p>
                   )}
-                  {commentiCatena[i] && <p className="small">Claude: {commentiCatena[i]}</p>}
                   <div className="row">
                     <span className="small muted">Com&apos;è andata?</span>
                     <PuntiBtns v={voti[i]} label={`voto della domanda ${i + 1}`} onChange={(p) => setVoti((vs) => vs.map((x, j) => (j === i ? p : x)))} />
@@ -444,21 +323,8 @@ export function OralSim({ argId }: { argId?: string }) {
               )}
             </div>
           ))}
-          {attesa && (
-            <div className="row">
-              <span className="thinking">Claude sta valutando…</span>
-              <button type="button" onClick={() => ctl.current?.abort()}>
-                Ferma
-              </button>
-            </div>
-          )}
           {!mostraAttese ? (
             <div className="row">
-              {sample && !nascondiClaude && risposte.some((r) => r.trim().length >= 10) && (
-                <button type="button" className="primary" disabled={attesa} onClick={() => void valutaCatenaClaude()}>
-                  Valuta con Claude
-                </button>
-              )}
               <button type="button" onClick={() => setMostraAttese(true)}>
                 Mostra le risposte attese
               </button>
@@ -467,7 +333,7 @@ export function OralSim({ argId }: { argId?: string }) {
               </button>
             </div>
           ) : (
-            <button type="button" className="primary" disabled={attesa || voti.some((v) => v === undefined)} onClick={() => chiudiCatena()}>
+            <button type="button" className="primary" disabled={voti.some((v) => v === undefined)} onClick={() => chiudiCatena()}>
               Vedi l&apos;esito
             </button>
           )}
@@ -478,7 +344,7 @@ export function OralSim({ argId }: { argId?: string }) {
         <div className="card">
           <h3>Esito della simulazione</h3>
           <p>
-            <span className="score">{pct(score)}</span> <span className="muted">della rubrica · {fmtDurata(durataS)} · {correttore === 'claude' ? 'corretta con Claude' : 'autovalutazione'}</span>
+            <span className="score">{pct(score)}</span> <span className="muted">della rubrica · {fmtDurata(durataS)} · autovalutazione</span>
           </p>
           {mancate.length > 0 ? (
             <>

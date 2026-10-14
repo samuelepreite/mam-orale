@@ -13,7 +13,7 @@ const D = (pag: number | [number, number]): Fonte => ({ tipo: 'dispensa', pag })
 const VARIANTE: Fonte = {
   tipo: 'esterna',
   ref: 'trattazione classica della velocità ottima della cinghia con tensione massima ammissibile fissata (domande 15 e 46, dimostrazione 70)',
-  nota: 'La dispensa fissa T₂ (p. 152). Fissando invece T₁ = T_max si ottiene ρV² = T_max/3: risultato corretto in quel modello ma assente dalla dispensa (NF-22, da chiedere al docente).',
+  nota: 'La dispensa fissa T₂ (p. 152). Fissando invece T₁ = T_max si ottiene ρV² = T_max/3: risultato corretto in quel modello ma assente dalla dispensa (NF-22: all\'orale si espongono entrambi i vincoli, decisione del 14/10).',
 };
 const RESISTENZA: Fonte = {
   tipo: 'esterna',

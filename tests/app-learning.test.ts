@@ -186,9 +186,9 @@ describe('piano di studio', () => {
     expect(p.argomenti).toBe(CAT.argomenti.filter((a) => !a.complemento).length);
     const ord = p.ordine.map((v) => v.argId);
     for (const id of ord) for (const pr of CAT.argomenti.find((a) => a.id === id)!.prerequisiti) if (ord.includes(pr)) expect(ord.indexOf(pr)).toBeLessThan(ord.indexOf(id));
-    // la priorità dimezza per gli argomenti «non nella dispensa»
+    // gli argomenti integrati oltre la dispensa pesano come gli altri (decisione del 14/10, NF-07)
     const no = CAT.argomenti.find((a) => a.fonte === 'no' && a.formulazioni.length);
-    if (no) expect(p.ordine.find((v) => v.argId === no.id)!.priorita).toBeCloseTo(no.formulazioni.length * 0.5);
+    if (no) expect(p.ordine.find((v) => v.argId === no.id)!.priorita).toBeCloseTo(no.formulazioni.length);
   });
   it('con ritmo e data: giorni stimati, in tempo o no, argomenti a rischio', () => {
     let s = lessonStep(defaultState(), ARG, 9, true);

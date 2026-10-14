@@ -1,5 +1,5 @@
 // Percorso automatico dell'app (Playwright): per ogni argomento con contenuto percorre la lezione fino alla fine,
-// l'allenatore (livello 2 e 3) e una simulazione senza Claude (autovalutazione), in tema chiaro e scuro, su telefono e
+// l'allenatore (livello 2 e 3) e una simulazione (autovalutazione guidata), in tema chiaro e scuro, su telefono e
 // computer. Segnala NaN/undefined nel testo, scroll orizzontale, errori della console, passi bloccati.
 // uso: node tools/percorri.mjs [file.html] [cartella screenshot]
 //   default: dist-single/index.html (npm run build:single), screenshot in /home/claude/work/screen
@@ -109,7 +109,6 @@ async function orale(page, id, tag) {
   await page.locator('button', { hasText: 'Inizia a rispondere' }).click();
   await page.locator('textarea').first().fill('Risposta di prova dettata: partenza, ipotesi, disegno, equazione, passaggio chiave, significato.');
   await page.locator('button', { hasText: 'Ho finito' }).click();
-  await page.locator('button', { hasText: 'Autovalutazione guidata' }).click();
   const gruppi = page.locator('.voce-row .seg');
   const n = await gruppi.count();
   for (let i = 0; i < n; i++) await gruppi.nth(i).locator('button', { hasText: 'in parte' }).click();

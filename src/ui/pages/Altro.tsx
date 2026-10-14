@@ -159,7 +159,7 @@ export function Altro() {
             <b>Oggi</b>: recupero attivo di passi scaduti o deboli da capitoli diversi, un ripasso dal primo passo scaduto, un argomento nuovo nell&apos;ordine dei prerequisiti e una simulazione ogni {GIORNI_TRA_SIMULAZIONI} giorni (ogni giorno nell&apos;ultima settimana prima dell&apos;orale). Tempi stimati: {MIN.recupero} min per passo di recupero, {MIN.simulazione} min per simulazione.
           </li>
           <li>
-            <b>Orale</b>: domanda estratta in base a quante volte è chiesta e a quanto la ricordi; risposta a voce (dettatura del browser o della tastiera); correzione con Claude sulla rubrica e sulla catena della dispensa (solo nella pagina su claude.ai, con il tuo piano) oppure autovalutazione guidata; poi domande a catena.
+            <b>Orale</b>: domanda estratta in base a quante volte è chiesta e a quanto la ricordi; risposta a voce (dettatura del browser o della tastiera); autovalutazione guidata sulla rubrica e sulla catena della dispensa (con un suggerimento automatico per parole chiave, calcolato nel browser); poi domande a catena con la risposta attesa. L'app non usa servizi di intelligenza artificiale e non consuma il tuo piano.
           </li>
           <li>
             <b>Padronanza</b>: media della ritenibilità dei passi (i chiave contano doppio) e delle voci della rubrica. Un argomento è padroneggiato con padronanza ≥ {SOGLIA_PADRONANZA * 100} % e i ripassi dell&apos;obiettivo. Un ripasso è riuscito con almeno il {SOGLIA_GIRO * 100} % dei passi giusti e nessun passo chiave sbagliato, o una simulazione ≥ {SOGLIA_SIM * 100} %. Il livello 3 si suggerisce quando i passi chiave hanno ritenibilità ≥ {SOGLIA_FADING}.

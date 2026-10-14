@@ -8,8 +8,8 @@ import { useApp, useNow } from '../state';
 import { Bar, CapChip, pct } from '../components/bits';
 
 export function FonteBadge({ a }: { a: Argomento }) {
-  if (a.fonte === 'no') return <span className="badge warn" title={a.nota}>non nella dispensa</span>;
-  if (a.fonte === 'parziale') return <span className="badge warn" title={a.nota}>in parte non nella dispensa</span>;
+  if (a.fonte === 'no') return <span className="badge" title={a.nota}>integrato oltre la dispensa</span>;
+  if (a.fonte === 'parziale') return <span className="badge" title={a.nota}>in parte integrato</span>;
   return null;
 }
 

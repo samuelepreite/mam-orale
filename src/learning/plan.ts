@@ -10,7 +10,7 @@
  *    mancano meno di due settimane); in tempo se i giorni stimati non li superano; a rischio gli argomenti che, nell'ordine
  *    di priorità, non entrano nei ripassi che il ritmo permette, e quelli già padroneggiati il cui ricordo previsto
  *    all'orale scende sotto 0,8;
- *  - ordine: priorità = peso (formulazioni, metà se «non nella dispensa») × (1 − padronanza), con i prerequisiti
+ *  - ordine: priorità = peso (numero di formulazioni) × (1 − padronanza), con i prerequisiti
  *    non ancora fatti messi prima dell'argomento che li richiede.
  */
 import type { Argomento } from '../content/types';

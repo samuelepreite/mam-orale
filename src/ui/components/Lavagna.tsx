@@ -1,7 +1,7 @@
 /**
  * Lavagna: tratto a mano libera con pointer events (dito, penna con pressione, mouse), tre colori, gomma (cancella i
  * tratti toccati), annulla/ripeti, cancella foglio, più fogli, schermo intero (in orizzontale sul telefono),
- * esportazione PNG per Claude. Accanto (o sotto): disegno di riferimento a scomparsa e checklist da spuntare.
+ * esportazione PNG. Accanto (o sotto): disegno di riferimento a scomparsa e checklist da spuntare.
  * I tratti sono in coordinate logiche 1000 × 700 (il foglio si ridisegna a ogni dimensione e tema).
  * Con una penna attiva i tocchi del dito vengono ignorati (appoggio del palmo).
  */
@@ -20,7 +20,7 @@ export interface Tratto {
 }
 type Foglio = { tratti: Tratto[]; past: Tratto[][]; future: Tratto[][] };
 const VAR: Record<Colore, string> = { ink: '--pen-ink', a: '--pen-a', r: '--pen-r' };
-/** colori fissi dell'immagine esportata (fondo bianco, leggibile da Claude in ogni tema) */
+/** colori fissi dell'immagine esportata (fondo bianco, leggibile in ogni tema) */
 const EXPORT: Record<Colore, string> = { ink: '#10202e', a: '#2346d8', r: '#c0392b' };
 
 export interface LavagnaApi {

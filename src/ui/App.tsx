@@ -146,7 +146,7 @@ export function Shell() {
       <MobileBar />
       <main key={r.join('/')} className={`route ${wide ? 'wide' : ''}`}>
         <Router />
-        <footer className="small muted">MAM I orale · dalla dispensa di Meccanica Applicata alle Macchine I. Le correzioni con Claude sono un aiuto allo studio, non un voto.</footer>
+        <footer className="small muted">MAM I orale · dalla dispensa di Meccanica Applicata alle Macchine I.</footer>
       </main>
       <TabBar />
     </div>
