@@ -1,4 +1,6 @@
-/** Lezioni discorsive del capitolo C1 (docs/BRIEF_LEZIONI.md): argomento → testo della lezione. */
+/** Lezioni discorsive del capitolo C1 (due parti). */
 import type { LezioneArgomento } from '../types';
+import { LEZIONI as A } from './lezioni-a';
+import { LEZIONI as B } from './lezioni-b';
 
-export const LEZIONI: Record<string, LezioneArgomento> = {};
+export const LEZIONI: Record<string, LezioneArgomento> = { ...A, ...B };
