@@ -80,7 +80,7 @@ export const d054: Dimostrazione = {
     {
       id: 'd054.3',
       latex: 'm r_G \\omega_m^2 - F_m + R_v = 0,\\quad R_v = 0 \\;\\Rightarrow\\; \\omega^* = \\sqrt{\\dfrac{F_m}{m\\,r_G}}',
-      perche: 'Equilibrio radiale del ceppo prima del contatto: centrifuga, molla e reazione $R_v$ dell\'arresto sul mozzo. Alla velocità d\'innesto il ceppo sta per lasciare l\'arresto ($R_v = 0$) e tocca il tamburo.',
+      perche: 'Equilibrio radiale del ceppo prima del contatto: forza centrifuga (verso l\'esterno), molla (verso il centro) e reazione $R_v$ dell\'arresto interno sul mozzo, che spinge il ceppo verso l\'esterno. Alla velocità d\'innesto il ceppo sta per lasciare l\'arresto ($R_v = 0$) e tocca il tamburo.',
       fonte: ESTC,
       chiave: true,
       distrattori: [

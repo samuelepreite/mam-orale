@@ -4,7 +4,7 @@ Web app per preparare l'orale di **Meccanica Applicata alle Macchine I**: ricost
 spiegarla ad alta voce (partenza, ipotesi, disegno, equazione, passaggio chiave, significato fisico, domande a catena).
 Stesso impianto di SEIMAFI (`samuelepreite/seimafi`), repository separato.
 
-Stato (13/10/2026): **app completa e pubblicata**: 49 argomenti (52 domande), 142 dimostrazioni verificate in SymPy, lezioni guidate, allenatore a tre livelli, lavagna, simulazione dell'orale con autovalutazione guidata (nessun servizio di IA: non consuma il piano Claude), ripetizione distanziata per passo, piano parametrico. `npm ci && npx vitest run && npm run verifica && npm run build:artifact`. Flusso: `WORKFLOW.md`; brief degli agenti in `docs/`.
+Stato (17/10/2026): **app completa e pubblicata**, lezioni discorsive per tutti gli argomenti: 49 argomenti (52 domande), 142 dimostrazioni verificate in SymPy, lezioni guidate, allenatore a tre livelli, lavagna, simulazione dell'orale con autovalutazione guidata (nessun servizio di IA: non consuma il piano Claude), ripetizione distanziata per passo, piano parametrico. `npm ci && npx vitest run && npm run verifica && npm run build:artifact`. Flusso: `WORKFLOW.md`; brief degli agenti in `docs/`.
 
 | File | Contenuto |
 |---|---|

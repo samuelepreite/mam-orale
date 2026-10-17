@@ -1,13 +1,14 @@
 # Ripartenza — dove siamo e come continuare
 
 ## 0. Stato dell'ultima sessione
-- **Stato:** FINITA alle 02:00 del 14/10/2026. **Progetto completo, nessun punto aperto.**
-- **Ultima sessione (richiesta dello studente):** tolta la correzione con Claude (capability `sample`): la simulazione
-  usa l'autovalutazione guidata con suggerimento locale per parole chiave; l'app non consuma il piano. Decisi tutti i
-  dubbi «da chiedere al docente» (NOTE_FONTI, § Decisioni finali) e applicati nei contenuti; argomenti integrati oltre la
-  dispensa con peso pieno. 2444 test verdi, 142/142 dimostrazioni verificate in SymPy, app ripubblicata con `db`,
-  `user`, `downloads`.
-- **Se lo studente chiede altro:** riscontri sui passi (lezioni con «confuso») esportati da «Altro»; correggere quei passi.
+- **Stato:** FINITA alle 12:30 del 17/10/2026. **Progetto completo, nessun punto aperto.**
+- **Ultima sessione (richiesta dello studente):** lezioni riscritte in forma discorsiva per tutti i 49 argomenti
+  (`src/content/cX/lezioni*.ts`, tipo `LezioneArgomento`, brief `docs/BRIEF_LEZIONI.md`): perché, idea fisica,
+  richiami, perché delle ipotesi, guida al disegno, mappa delle tappe, `prima`/`dopo` per ogni passo, riepilogo,
+  racconto per l'orale. Tolti i pulsanti «poco chiaro/non ho capito». `tests/lezioni.test.ts` controlla completezza,
+  lunghezze e KaTeX. Ritoccati i «perché» di d016.6, d016.7, d054.3, d081.3, d109.2. 2641 test verdi, 142/142 SymPy,
+  app ripubblicata (db, user, downloads; mai `sample`).
+- **Se lo studente chiede altro:** se un passo resta oscuro, riscrivere `prima`/`dopo` nel file lezioni del capitolo.
 
 Protocollo (come SEIMAFI): all'inizio, se qui c'è «IN CORSO» da meno di 5 ore e su GitHub c'è un commit nell'ultima
 ora, un'altra sessione sta lavorando: non toccare nulla. Altrimenti scrivere «IN CORSO dalle HH:MM», commit e push,

@@ -106,7 +106,7 @@ export const d016: Dimostrazione = {
     {
       id: 'd016.6',
       latex: L`\dot\varphi_2 = -\dfrac{V_1\,\dot\varphi_1\sin(\varphi_1-\varphi_3)}{V_2\sin(\varphi_2-\varphi_3)},\qquad \dot\varphi_3 = -\dfrac{V_1\,\dot\varphi_1\sin(\varphi_1-\varphi_2)}{V_3\sin(\varphi_3-\varphi_2)}`,
-      perche: 'Il sistema lineare si risolve, per esempio con Cramer o moltiplicando la forma complessa $i\\sum V_j\\dot\\varphi_j e^{i\\varphi_j} = 0$ per $e^{-i\\varphi_3}$ (o $e^{-i\\varphi_2}$) e prendendo la parte immaginaria. Il denominatore si annulla quando biella e bilanciere sono allineati.',
+      perche: 'Il sistema è lineare in $\\dot\\varphi_2, \\dot\\varphi_3$. Il modo più rapido è dalla forma complessa $i\\sum_{j=1}^{3} V_j\\dot\\varphi_j e^{i\\varphi_j} = 0$: si divide per $i$, si moltiplica per $e^{-i\\varphi_3}$ e si prende la parte immaginaria; il termine di $\\varphi_3$ diventa reale ($e^{0}=1$) e sparisce, resta $V_1\\dot\\varphi_1\\sin(\\varphi_1-\\varphi_3) + V_2\\dot\\varphi_2\\sin(\\varphi_2-\\varphi_3) = 0$. Con $e^{-i\\varphi_2}$ si trova $\\dot\\varphi_3$ allo stesso modo (va bene anche Cramer). Il denominatore si annulla quando biella e bilanciere sono allineati.',
       fonte: DED('p. 43 (sistema delle velocità)', 'soluzione esplicita del sistema lineare, che la dispensa non scrive'),
       distrattori: [],
       num: (v) => [v.p2d + v.p3d, (-v.V1 * v.p1d * Math.sin(v.p1 - v.p3)) / (v.V2 * Math.sin(v.p2 - v.p3)) - (v.V1 * v.p1d * Math.sin(v.p1 - v.p2)) / (v.V3 * Math.sin(v.p3 - v.p2))],
@@ -114,7 +114,7 @@ export const d016: Dimostrazione = {
     {
       id: 'd016.7',
       latex: L`-V_1\cos\varphi_1\dot\varphi_1^2 - V_1\sin\varphi_1\ddot\varphi_1 - V_2\cos\varphi_2\dot\varphi_2^2 - V_2\sin\varphi_2\ddot\varphi_2 - V_3\cos\varphi_3\dot\varphi_3^2 - V_3\sin\varphi_3\ddot\varphi_3 = 0\ \ (\text{e l'analoga in } \sin)`,
-      perche: 'Derivando ancora ogni termine dà due pezzi: uno con $\\dot\\varphi^2$ (centripeto, noto dalle velocità) e uno con $\\ddot\\varphi$. Noto $\\ddot\\varphi_1$, il sistema è di nuovo lineare in $\\ddot\\varphi_2, \\ddot\\varphi_3$.',
+      perche: 'Si deriva una seconda volta la prima equazione delle velocità. Ogni termine $-V_j\\sin\\varphi_j\\dot\\varphi_j$ è un prodotto di due funzioni del tempo: derivando il seno esce $-V_j\\cos\\varphi_j\\dot\\varphi_j^2$ (termine centripeto, già noto dalle velocità), derivando $\\dot\\varphi_j$ esce $-V_j\\sin\\varphi_j\\ddot\\varphi_j$. La seconda equazione si deriva allo stesso modo (con $\\cos\\to\\sin$ e segni conseguenti). Noto $\\ddot\\varphi_1$, il sistema è di nuovo lineare in $\\ddot\\varphi_2, \\ddot\\varphi_3$.',
       fonte: D(43),
       distrattori: [
         { latex: L`-V_1\sin\varphi_1\ddot\varphi_1 - V_2\sin\varphi_2\ddot\varphi_2 - V_3\sin\varphi_3\ddot\varphi_3 = 0`, errore: 'termine-perso', spiega: 'Derivando −sin φ φ̇ anche il seno va derivato: compare −cos φ φ̇², il termine centripeto.', num: (v) => [-v.V1 * Math.sin(v.p1) * v.p1dd - v.V2 * Math.sin(v.p2) * v.p2dd, v.V3 * Math.sin(v.p3) * v.p3dd] },

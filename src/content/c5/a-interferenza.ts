@@ -61,7 +61,7 @@ export const d081: Dimostrazione = {
     {
       id: 'd081.3',
       latex: 'z_1 > z_2 \\;\\Rightarrow\\; \\text{caso critico } A \\equiv H_2 \\;\\Rightarrow\\; \\overline{O_1A} \\le \\overline{O_1H_2}',
-      perche: 'La testa della ruota grande arriva sulla retta molto più vicino a $H_2$ di quanto la testa della piccola arrivi a $H_1$: se A resta prima di $H_2$, anche B resta prima di $H_1$. Si impone allora che la circonferenza di testa della 1 non superi $H_2$, cioè $\\overline{O_1A} \\le \\overline{O_1H_2}$.',
+      perche: 'Qui la ruota 1 è la grande ($z_1 > z_2$). La testa della ruota grande arriva sulla retta molto più vicino a $H_2$ di quanto la testa della piccola arrivi a $H_1$: se A resta prima di $H_2$, anche B resta prima di $H_1$. Si impone allora che la circonferenza di testa della 1 non superi $H_2$, cioè $\\overline{O_1A} \\le \\overline{O_1H_2}$.',
       fonte: { tipo: 'dispensa', pag: 167 },
       chiave: true,
       distrattori: [

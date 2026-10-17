@@ -128,7 +128,7 @@ W(V) con la velocità ottima, freno a nastro nei due versi; poi la lista del pro
 | **a** | Impianto da SEIMAFI (storage, sync, FSRS, sessione, dashboard, piano, grafica), modello dati, allenatore 3 livelli, lavagna; **capitolo pilota C4** completo: 4 argomenti, 6 formulazioni, 18 dimostrazioni, 3 animazioni, disegni | test verdi; le 18 catene verificate in SymPy; percorso Playwright pulito; Samuele prova il formato |
 | **b** | Gli altri capitoli, uno per sessione (C5 in due): C5, C3, C7, C2, C6, C1 (ordine per peso d'orale) | stesso criterio per capitolo; la mappa segna il capitolo «pronto» |
 | **c** | Simulazione completa: estrazione pesata, domande a catena, registro, risultati nella ripetizione | una simulazione intera da telefono |
-| **d** | Rifinitura sui riscontri (passi «non ho capito», simulazioni) | riscontri chiusi |
+| **d** | Lezioni discorsive (`LezioneArgomento`: perché, idea, richiami, mappa, prima/dopo per passo, riepilogo, racconto); pulsanti di riscontro tolti | fatto 17/10 |
 
 Continuità come in SEIMAFI: `RIPARTENZA.md` («IN CORSO/FINITA»), copie dei documenti e del codice
 (`claude/codice-mam.tar.gz.b64`) nel progetto, app e infografica sempre allo stesso URL.

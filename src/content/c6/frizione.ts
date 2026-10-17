@@ -193,7 +193,7 @@ export const d109: Dimostrazione = {
     {
       id: 'd109.2',
       latex: '\\dfrac{1}{K_m}\\Big[(C_{m,0} - C_{fr}) - (C_{m,0} - C_{fr} - K_m\\omega_m^{I})\\,e^{-\\frac{K_m t_Q}{I_m}}\\Big] = \\dfrac{C_{fr} - \\tau C_{u,0}}{\\tau^2 I_u}\\,t_Q',
-      perche: 'Si eguagliano le due leggi della d108. È un\'equazione **trascendente** (esponenziale contro retta): $t_Q$ non ha forma chiusa e si trova graficamente, come fa la dispensa, o numericamente. La soluzione è unica perché $\\Delta\\omega$ parte da $\\omega_m^I > 0$ ed è concava o decrescente, mentre $\\omega_c$ cresce senza limite.',
+      perche: 'Si eguagliano le due leggi della d108. È un\'equazione **trascendente** (esponenziale contro retta): $t_Q$ non ha forma chiusa e si trova graficamente, come fa la dispensa, o numericamente. La soluzione è unica: la differenza $\\omega_m - \\omega_c$ parte positiva ($\\omega_m^I > 0$, $\\omega_c(0) = 0$), è concava o decrescente (un esponenziale limitato meno una retta crescente) e tende a $-\\infty$, quindi si annulla una sola volta.',
       fonte: P205,
       chiave: true,
       distrattori: [
