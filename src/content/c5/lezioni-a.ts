@@ -790,9 +790,131 @@ const forzeDritti: LezioneArgomento = {
     "All'orale parti dal caso liscio: la forza fra i denti è lungo la retta di pressione, con braccio $R_{f1}$, quindi $C_1 = F R_{f1} = Q R_1$, con la tangenziale $Q = F\\cos\\theta$ che trasmette la coppia e la radiale $F\\sin\\theta$ che carica i supporti. Poi l'attrito: la velocità relativa è una rotazione attorno a C, di modulo $(|\\omega_1| + |\\omega_2|)x$, perpendicolare alla retta; l'attrito è opposto e cambia verso in C. Negli equilibri ha braccio $R\\sin\\theta \\mp x$, e il rendimento istantaneo vale 1 in C e cala in accesso e in recesso. Chiudi con la potenza dissipata, $Kx$, con il diagramma a V lungo AB.",
 };
 
+// ------------------------------------------------------------------ c5-rotismi-ordinari
+const rotismiOrdinari: LezioneArgomento = {
+  perche:
+    "Con una sola coppia di ruote non si può ridurre la velocità di molto: per avere un rapporto 1/50 servirebbe una ruota cinquanta volte più grande del pignone, enorme. La soluzione, che trovi nel cambio di un'auto o nel riduttore di un tergicristallo, è mettere più ingranaggi in fila: ogni coppia riduce un po', e le riduzioni si accumulano. La domanda della lezione è: **quanto vale il rapporto di trasmissione di una catena di ingranaggi, con che segno, e quanta coppia arriva all'albero d'uscita?** E una curiosità: a che cosa serve una ruota messa in mezzo che non cambia il rapporto?",
+  idea:
+    "Un rotismo è ordinario quando tutte le ruote girano attorno ad assi fissi, montati sul telaio. L'idea chiave è semplicissima: due ruote calettate sullo stesso albero girano insieme, con la stessa velocità angolare. Così l'uscita del primo ingranaggio diventa l'ingresso del secondo, e i rapporti si **moltiplicano**, come quando fai uno sconto del 50% e poi un altro del 50%: alla fine paghi un quarto.\n\nIl segno conta: se scegli un verso positivo comune per tutte le ω, ogni ingranaggio esterno inverte il verso (rapporto negativo) e ogni ingranaggio interno lo conserva (positivo). Il segno del prodotto ti dice subito come gira l'uscita rispetto all'ingresso. Per le coppie basta il bilancio delle potenze: senza perdite la potenza che entra esce tutta, quindi se la velocità cala la coppia cresce nella stessa proporzione. Una ruota «oziosa», che ingrana con due ruote insieme, si semplifica nel prodotto: non cambia il valore del rapporto, cambia solo il verso.",
+  richiami: [
+    { titolo: 'Rapporto di trasmissione di un ingranaggio', testo: "Per due ruote in presa il rapporto è velocità d'uscita su velocità d'entrata, $\\tau = \\omega_2/\\omega_1 = -z_1/z_2$ per ruote esterne, che girano in versi opposti, e $+z_1/z_2$ per una ruota che ingrana con una corona interna, che gira nello stesso verso." },
+    { titolo: 'Teorema delle forze vive in regime', testo: "In regime l'energia cinetica è costante, quindi la somma delle potenze di tutte le forze e coppie è zero. Le forze fra i denti sono interne al rotismo e, senza perdite, non dissipano. Restano solo la coppia motrice e quella d'uscita: $C_1\\omega_1 + C_u\\omega_u = 0$." },
+    { titolo: 'Equilibrio alla rotazione di un albero', testo: "Un albero che gira a velocità costante ha somma dei momenti nulla attorno al suo asse. Le forze dei denti si scompongono in tangenziale e radiale: la radiale passa per l'asse e non fa momento; la tangenziale ha braccio uguale al raggio primitivo." },
+    { titolo: 'Schema unifilare', testo: "È il modo di disegnare i rotismi «di profilo»: ogni albero è una linea, ogni ruota un segmento perpendicolare all'albero, lungo quanto il suo diametro, e i supporti sono piccoli simboli sul telaio. Si vede a colpo d'occhio quali ruote stanno sullo stesso albero e quali ingranano." },
+  ],
+  ipotesiPerche: [
+    "Assi fissi è la definizione di rotismo ordinario: se un asse si muovesse saremmo in un rotismo epicicloidale. Il verso positivo comune permette di dare un segno a ogni rapporto e quindi al prodotto.",
+    "È la struttura che permette di concatenare i rapporti: le ruote sullo stesso albero hanno la stessa ω, e l'uscita di un ingranaggio diventa l'ingresso del successivo.",
+    "Senza accelerazioni e senza perdite la potenza entra ed esce intera, e la coppia d'uscita si ricava subito dal rapporto di trasmissione.",
+  ],
+  disegnoGuida:
+    "Disegna quattro ruote con gli assi fissi: la ruota 1 sull'albero d'ingresso, che ingrana con la 2; la 3 sullo stesso albero della 2, e ingrana con la 4, sull'albero d'uscita. Segna che 2 e 3 sono solidali, per esempio con un unico albero che le attraversa, e scrivi $\\omega_2 = \\omega_3$. Metti le frecce dei versi: a ogni ingranaggio esterno il verso si inverte, quindi 1 e 4 girano nello stesso verso. Disegna la coppia motrice $C_1$ sull'albero d'ingresso e la coppia $C_4$ sull'albero d'uscita, con verso opposto a $C_1$. Sotto, rifai lo stesso rotismo come schema unifilare: alberi orizzontali, ruote come segmenti verticali, supporti. Nei contatti segna le forze tangenziali Q, uguali e opposte sulle due ruote.",
+  mappa: [
+    'Scelgo un verso positivo comune e do un segno a ogni rapporto.',
+    'Le ruote sullo stesso albero hanno la stessa ω: i rapporti si moltiplicano.',
+    'Trovo la coppia d\'uscita con il bilancio delle potenze.',
+    'Lo verifico con l\'equilibrio di ogni albero.',
+    'Casi speciali: la corona interna e la ruota oziosa.',
+  ],
+  dims: {
+    d087: {
+      introduzione:
+        "Abbiamo due ingranaggi in serie con un albero intermedio che porta le ruote 2 e 3. La strategia è: dare un segno a ogni rapporto, scrivere i due rapporti, usare il fatto che 2 e 3 hanno la stessa ω per concatenarli, e poi trovare la coppia d'uscita in due modi, con il bilancio delle potenze e con l'equilibrio dei singoli alberi. Alla fine vediamo cosa cambia con una corona interna.",
+      riepilogo:
+        "Ogni ingranaggio ha il suo rapporto con segno: negativo se esterno, positivo se interno. Siccome 2 e 3 girano insieme, moltiplicando i due rapporti la velocità intermedia si semplifica: il rapporto globale è il prodotto. Due ingranaggi esterni danno un segno positivo. Il bilancio delle potenze dà la coppia d'uscita $-C_1/\\tau$, e l'equilibrio dei tre alberi conferma lo stesso risultato. Con una corona interna il segno globale cambia, ma $C_4 = -C_1/\\tau$ resta vera.",
+    },
+    d088: {
+      introduzione:
+        "Una ruota b ingrana contemporaneamente con a e con c, ma non porta nessuna coppia esterna: è una ruota oziosa. La strategia è applicare la regola del prodotto ai due ingranaggi in serie, vedere che i denti di b si semplificano, e poi trovare la coppia su c con il bilancio delle potenze. Infine confrontiamo con il caso senza ruota oziosa.",
+      riepilogo:
+        "La ruota oziosa forma due ingranaggi esterni in serie. Nel prodotto dei rapporti i suoi denti compaiono una volta sopra e una volta sotto e si semplificano: il rapporto dipende solo da a e c, ed è positivo. Senza oziosa sarebbe negativo, con lo stesso modulo: la ruota oziosa serve a invertire il verso dell'uscita e, scegliendo il suo raggio, a collegare alberi distanti. La coppia su c segue la solita regola $-C_1/\\tau$.",
+    },
+  },
+  passi: {
+    'd087.1': {
+      tappa: 0,
+      prima: "In un rotismo con tante ruote è facile perdersi con i versi. Il modo sicuro è scegliere una volta per tutte un verso positivo comune per tutte le velocità angolari, per esempio antiorario visto da un lato. Allora ogni rapporto ha un segno. Chiediti: quando è negativo e quando positivo?",
+      dopo: "Negativo per un ingranaggio esterno, dove le ruote girano in versi opposti; positivo per un ingranaggio interno, con la corona, dove girano nello stesso verso. Il segno è un'informazione in più: dice il verso, non solo quanto si riduce.",
+    },
+    'd087.2': {
+      tappa: 0,
+      prima: "Scrivi il rapporto del primo ingranaggio, fra la ruota 1 e la ruota 2. Sono ruote esterne, quindi ricorda il segno. Usa sia i raggi sia i denti: hanno lo stesso modulo, quindi stanno nello stesso rapporto.",
+      dopo: "Il primo rapporto è $-z_1/z_2$: la ruota 2 gira al contrario della 1, più piano se ha più denti. È la formula dell'ingranaggio singolo, niente di nuovo.",
+    },
+    'd087.3': {
+      tappa: 1,
+      prima: "Ora guarda le ruote 2 e 3 nel disegno. Sono calettate sullo stesso albero, cioè fissate rigidamente a esso. Se l'albero fa un giro, quanti giri fanno la 2 e la 3? E nello stesso verso o in versi opposti?",
+      dopo: "Girano insieme: stessa velocità angolare, in modulo e in verso. È la riga che «aggancia» i due ingranaggi: l'uscita del primo è l'ingresso del secondo.",
+    },
+    'd087.4': {
+      tappa: 1,
+      prima: "Scrivi il rapporto del secondo ingranaggio, fra la 3 e la 4, anche questo esterno. Poi sfrutta la riga precedente: al posto di $\\omega_3$ puoi scrivere $\\omega_2$.",
+      dopo: "Il secondo rapporto è $-z_3/z_4$, e si può leggere come $\\omega_4/\\omega_2$. Ora abbiamo due rapporti che condividono la velocità intermedia: il passo successivo li unisce.",
+    },
+    'd087.5': {
+      tappa: 1,
+      prima: "Vogliamo il rapporto globale, $\\omega_4/\\omega_1$. Il trucco è moltiplicare e dividere per la velocità intermedia $\\omega_2 = \\omega_3$: così la frazione si spezza in due frazioni che conosci. Poi moltiplica i due rapporti, segni compresi.",
+      dopo: "Il rapporto globale è il prodotto dei rapporti dei singoli ingranaggi: $z_1z_3/(z_2z_4)$, positivo. Controllo: due inversioni di verso si annullano, quindi la 4 gira come la 1. Le ruote motrici (1 e 3) stanno al numeratore, le condotte (2 e 4) al denominatore.",
+    },
+    'd087.6': {
+      tappa: 2,
+      prima: "Ora la coppia d'uscita. In regime, senza perdite, che cosa dice il bilancio delle potenze? La potenza entra dall'albero 1 ed esce dall'albero 4. Le forze fra i denti e l'albero intermedio sono interni al rotismo e non compaiono. Scrivi la somma delle due potenze e ricava $C_4$.",
+      dopo: "La coppia d'uscita è $-C_1/\\tau$. Con τ positivo ha verso opposto a $C_1$, perché è resistente su un albero che gira come l'1. In modulo, se il rotismo riduce la velocità di 10 volte, moltiplica la coppia di 10 volte.",
+    },
+    'd087.7': {
+      tappa: 3,
+      prima: "Verifichiamo con le forze, albero per albero, nello schema unifilare. Per ogni albero scrivi l'equilibrio alla rotazione: quali forze fanno momento? Solo le componenti tangenziali Q, con braccio uguale al raggio primitivo; le radiali passano per l'asse. Sull'albero intermedio non c'è coppia esterna. E le Q di due ruote in presa come sono legate?",
+      dopo: "Abbiamo tre equazioni di equilibrio, una per albero, più due relazioni di azione e reazione. Sull'albero intermedio le due forze tangenziali si bilanciano da sole. Sono cinque equazioni lineari, facili da risolvere in catena.",
+    },
+    'd087.8': {
+      tappa: 3,
+      prima: "Risolvi in catena partendo dall'ingresso: dalla prima equazione ricavi $Q^{2,1}$; con azione e reazione passi alla ruota 2; l'albero intermedio ti dà la forza sulla 3; di nuovo azione e reazione, e l'ultima equazione ti dà $C_4$.",
+      dopo: "Si ritrova $C_4 = -C_1/\\tau$, lo stesso risultato del bilancio delle potenze. Attenzione a un errore comune: il fattore $R_2R_4/(R_1R_3)$ è $1/\\tau$, non τ. Controllo: se il rotismo riduce, la coppia d'uscita deve essere più grande.",
+    },
+    'd087.9': {
+      tappa: 4,
+      prima: "Che cosa cambia se la ruota 4 è una corona con dentatura interna? Il secondo ingranaggio è ora interno: che segno ha il suo rapporto? Rifai il prodotto dei due rapporti e poi applica la stessa formula per la coppia.",
+      dopo: "Il secondo rapporto diventa positivo e il globale negativo: la 4 gira al contrario della 1. La coppia d'uscita ha ora lo stesso verso di $C_1$. Ma la regola $C_4 = -C_1/\\tau$ resta vera: basta usare τ con il suo segno.",
+    },
+    'd088.1': {
+      tappa: 4,
+      prima: "La ruota b ingrana con a da una parte e con c dall'altra. Pensala come due ingranaggi esterni in serie che condividono la ruota b, la quale fa da condotta nel primo e da motrice nel secondo. Scrivi i due rapporti con il loro segno.",
+      dopo: "I due rapporti sono $-z_a/z_b$ e $-z_b/z_c$. Nota che $z_b$ compare al denominatore del primo e al numeratore del secondo: è il segnale che sta per semplificarsi.",
+    },
+    'd088.2': {
+      tappa: 4,
+      prima: "Applica la regola del prodotto: il rapporto fra c e a è il prodotto dei due rapporti. Moltiplica, facendo attenzione ai due segni meno, e guarda che cosa succede a $z_b$.",
+      dopo: "Il rapporto globale è $z_a/z_c$, positivo: c gira come a. I denti della ruota oziosa sono spariti. Controllo: è come se a e c ingranassero direttamente, ma con il verso invertito.",
+    },
+    'd088.3': {
+      tappa: 4,
+      prima: "Prova a cambiare la ruota oziosa con una più grande o più piccola, cioè con un altro numero di denti. Che cosa succede al rapporto fra a e c, visto che $z_b$ si è semplificato?",
+      dopo: "Il rapporto non cambia: la ruota oziosa non altera il valore del rapporto, solo il suo segno. Per questo si chiama «oziosa»: non lavora sul rapporto.",
+    },
+    'd088.4': {
+      tappa: 4,
+      prima: "Troviamo la coppia sulla ruota c. La ruota oziosa gira folle sul suo albero, senza coppie esterne: non prende né dà potenza. Scrivi il bilancio delle potenze in regime con le sole coppie su a e su c, e ricava il loro rapporto.",
+      dopo: "La coppia su c è $-C_1/\\tau$: con τ positivo ha verso opposto a $C_1$, e in modulo vale $|C_1| z_c/z_a$. Lo stesso risultato si ottiene con l'equilibrio delle tre ruote e le forze tangenziali.",
+    },
+    'd088.5': {
+      tappa: 4,
+      prima: "A che cosa serve, allora, la ruota oziosa? Confronta con il caso in cui a ingrana direttamente con c, senza b in mezzo. Che rapporto avresti, e con che segno?",
+      dopo: "Senza oziosa il rapporto sarebbe $-z_a/z_c$: stesso modulo, segno opposto. Quindi la ruota oziosa serve a invertire il verso dell'uscita. È il principio della retromarcia in molti cambi.",
+    },
+    'd088.6': {
+      tappa: 4,
+      prima: "C'è anche un uso geometrico. Con le tre ruote in fila, quanto distano i centri di a e c? Somma i tratti: dal centro di a al contatto con b, poi tutto il diametro di b, poi dal contatto al centro di c.",
+      dopo: "L'interasse fra a e c è $R_a + 2R_b + R_c$: dipende da $R_b$. Scegliendo i denti della ruota oziosa puoi collegare due alberi lontani senza cambiare il modulo del rapporto. Questo lo dicono le fonti derivate; la dispensa parla solo del verso.",
+    },
+  },
+  racconto:
+    "All'orale definisci il rotismo ordinario: tutti gli assi fissi. Scegli un verso positivo comune e dai un segno a ogni rapporto, negativo per gli ingranaggi esterni e positivo per quelli interni. Poi l'idea chiave: le ruote sullo stesso albero hanno la stessa ω, quindi moltiplicando e dividendo per la velocità intermedia il rapporto globale è il prodotto, $\\tau = \\omega_u/\\omega_1 = \\prod \\tau_J$. Con la T.F.V. in regime ricavi $C_u = -C_1/\\tau$ e lo confermi con l'equilibrio degli alberi, usando solo le forze tangenziali. Chiudi con la ruota oziosa: i suoi denti si semplificano, il rapporto resta $z_a/z_c$ ma cambia segno, quindi serve a invertire il verso.",
+};
+
 export const LEZIONI: Record<string, LezioneArgomento> = {
   'c5-ruote-dentate': ruoteDentate,
   'c5-denti-presa': dentiPresa,
   'c5-interferenza': interferenza,
   'c5-forze-dritti': forzeDritti,
+  'c5-rotismi-ordinari': rotismiOrdinari,
 };

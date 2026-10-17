@@ -2,6 +2,7 @@
 import type { LezioneArgomento } from '../types';
 import { attrito, impuntamento, perno, ribaltamento } from './lezioni-a';
 import { cuscinetti, volvente } from './lezioni-b';
+import { veicolo } from './lezioni-c';
 
 export const LEZIONI: Record<string, LezioneArgomento> = {
   'c2-attrito': attrito,
@@ -10,4 +11,5 @@ export const LEZIONI: Record<string, LezioneArgomento> = {
   'c2-perno': perno,
   'c2-volvente': volvente,
   'c2-cuscinetti': cuscinetti,
+  'c2-veicolo': veicolo,
 };
