@@ -1,15 +1,15 @@
 /**
- * Lezione guidata (formato SEIMAFI approvato), generata dal contenuto dell'argomento, un passo per volta:
- * cosa dire subito → sistema e ipotesi → disegno (SVG + checklist) → equazione di partenza → dimostrazioni riga per riga
- * (sui passi chiave prima «qual è il prossimo passaggio?») → prova sul modello («prevedi, poi verifica») → significato e
- * frase da ricordare → da non dire → riassunto con le domande a catena. Voce italiana e riscontro per passo.
+ * Lezione guidata, discorsiva (docs/BRIEF_LEZIONI.md), un passo per volta e una idea alla volta:
+ * perché ci interessa → l'idea a parole → cosa ti serve sapere → sistema e ipotesi (con il perché) → disegno guidato →
+ * mappa del ragionamento ed equazioni di partenza → dimostrazioni (per ogni riga: cosa vogliamo ottenere, la riga, come
+ * si legge; sui passi chiave prima «qual è il prossimo passaggio?»; riepilogo finale) → prova sul modello → significato
+ * → come raccontarlo all'orale → da non dire → domande a catena. Voce italiana.
  * Computer: lezione a sinistra, disegno fisso a destra; telefono: tutto in colonna.
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Argomento, Dimostrazione, Previsione, Visual } from '../../content/types';
-import { addPasso, addRichiamo, lessonFeedback, lessonStep } from '../../learning/actions';
+import { addPasso, addRichiamo, lessonStep } from '../../learning/actions';
 import { dimsDi, CATALOGO } from '../../learning/catalogo';
-import type { Riscontro } from '../../storage/store';
 import { VisualHost } from '../../diagrams/registry';
 import { useApp } from '../state';
 import { Checklist, FonteTag, SpeakButton, Svg } from './bits';
@@ -17,7 +17,7 @@ import { PassoLine, ProssimoPassaggio } from './Passo';
 import { Inline, RichText, Tex } from './Tex';
 
 export type LessonStepDef =
-  | { id: string; kind: 'subito' | 'ipotesi' | 'disegno' | 'equazione' | 'prova' | 'significato' | 'nondire' | 'riassunto'; title: string }
+  | { id: string; kind: 'perche' | 'idea' | 'richiami' | 'subito' | 'ipotesi' | 'disegno' | 'equazione' | 'prova' | 'significato' | 'racconto' | 'nondire' | 'riassunto'; title: string }
   | { id: string; kind: 'dim'; title: string; dim: Dimostrazione };
 
 /** passi della lezione per un argomento con contenuto */
@@ -26,6 +26,21 @@ export function lessonSteps(a: Argomento): LessonStepDef[] {
   if (!c) return [];
   const dims = dimsDi(CATALOGO, a);
   const prova = (c.previsioni?.length ?? 0) > 0 || (c.visuali?.length ?? 0) > 0;
+  if (c.lezione)
+    return [
+      { id: 'perche', kind: 'perche', title: 'Perché ci interessa' },
+      { id: 'idea', kind: 'idea', title: 'L\'idea, a parole' },
+      { id: 'richiami', kind: 'richiami', title: 'Cosa ti serve sapere' },
+      { id: 'ipotesi', kind: 'ipotesi', title: 'Il sistema e le ipotesi' },
+      { id: 'disegno', kind: 'disegno', title: 'Il disegno, pezzo per pezzo' },
+      { id: 'equazione', kind: 'equazione', title: 'Dove andiamo: la mappa e le equazioni di partenza' },
+      ...dims.map((d) => ({ id: `dim-${d.id}`, kind: 'dim' as const, title: d.titolo, dim: d })),
+      ...(prova ? [{ id: 'prova', kind: 'prova' as const, title: 'Prova sul modello' }] : []),
+      { id: 'significato', kind: 'significato', title: 'Che cosa significa' },
+      { id: 'racconto', kind: 'racconto', title: 'Come lo racconti all\'orale' },
+      { id: 'nondire', kind: 'nondire', title: 'Da non dire' },
+      { id: 'riassunto', kind: 'riassunto', title: 'Il professore può continuare con…' },
+    ];
   return [
     { id: 'subito', kind: 'subito', title: 'Cosa dire subito' },
     { id: 'ipotesi', kind: 'ipotesi', title: 'Sistema e ipotesi' },
@@ -39,11 +54,20 @@ export function lessonSteps(a: Argomento): LessonStepDef[] {
   ];
 }
 
-const KICKER: Record<LessonStepDef['kind'], string> = { subito: 'Partenza', ipotesi: 'Ipotesi', disegno: 'Disegno', equazione: 'Equazione', dim: 'Dimostrazione', prova: 'Prevedi, poi verifica', significato: 'Significato', nondire: 'Attenzione', riassunto: 'Per chiudere' };
+const KICKER: Record<LessonStepDef['kind'], string> = { perche: 'Il problema', idea: 'Intuizione', richiami: 'Richiami', racconto: 'All\'orale', subito: 'Partenza', ipotesi: 'Ipotesi', disegno: 'Disegno', equazione: 'Equazione', dim: 'Dimostrazione', prova: 'Prevedi, poi verifica', significato: 'Significato', nondire: 'Attenzione', riassunto: 'Per chiudere' };
 
 function speechOf(a: Argomento, s: LessonStepDef): string {
   const c = a.contenuto!;
+  const L = c.lezione;
   switch (s.kind) {
+    case 'perche':
+      return L?.perche ?? '';
+    case 'idea':
+      return L?.idea ?? '';
+    case 'richiami':
+      return (L?.richiami ?? []).map((r) => `${r.titolo}. ${r.testo}`).join(' ');
+    case 'racconto':
+      return `${L?.racconto ?? ''} Le prime frasi: ${c.cosaDireSubito}`;
     case 'subito':
       return c.cosaDireSubito;
     case 'ipotesi':
@@ -53,7 +77,7 @@ function speechOf(a: Argomento, s: LessonStepDef): string {
     case 'equazione':
       return `$${c.equazioneDiPartenza.latex}$. ${c.equazioneDiPartenza.spiegazione}`;
     case 'dim':
-      return `${s.dim.enunciato} ${s.dim.passi.map((p) => p.perche).join(' ')} ${s.dim.gancio}`;
+      return L ? `${L.dims[s.dim.id]?.introduzione ?? ''} ${s.dim.passi.map((p) => `${L.passi[p.id]?.prima ?? ''} ${L.passi[p.id]?.dopo ?? p.perche}`).join(' ')} ${L.dims[s.dim.id]?.riepilogo ?? ''}` : `${s.dim.enunciato} ${s.dim.passi.map((p) => p.perche).join(' ')} ${s.dim.gancio}`;
     case 'prova':
       return (c.previsioni ?? []).map((p) => p.domanda).join(' ');
     case 'significato':
@@ -65,41 +89,16 @@ function speechOf(a: Argomento, s: LessonStepDef): string {
   }
 }
 
-const FEEDBACK: { v: Riscontro; label: string }[] = [
-  { v: 'chiaro', label: 'chiaro' },
-  { v: 'veloce', label: 'troppo veloce' },
-  { v: 'lento', label: 'troppo lento' },
-  { v: 'confuso', label: 'non ho capito' },
-];
-
-function Feedback({ argId, stepId }: { argId: string; stepId: string }) {
-  const { state, update } = useApp();
-  const cur = state.lezioni[argId]?.feedback[stepId];
-  const [note, setNote] = useState(cur?.note ?? '');
-  return (
-    <div className="lesson-fb">
-      <span className="small muted">Com&apos;era questo passo?</span>
-      {FEEDBACK.map((f) => (
-        <button key={f.v} type="button" className={`chip ${cur?.v === f.v ? 'on' : ''}`} aria-pressed={cur?.v === f.v} onClick={() => update((s) => lessonFeedback(s, argId, stepId, f.v, note))}>
-          {f.label}
-        </button>
-      ))}
-      {cur && cur.v !== 'chiaro' && (
-        <textarea
-          aria-label="nota sul passo"
-          placeholder="Che cosa non va? (facoltativo: serve a correggere la lezione)"
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-          onBlur={() => update((s) => lessonFeedback(s, argId, stepId, cur.v, note))}
-        />
-      )}
-    </div>
-  );
-}
-
 /** Dimostrazione riga per riga; sui passi chiave prima la domanda «qual è il prossimo passaggio?». */
 function DimView({ a, dim, done, onComplete }: { a: Argomento; dim: Dimostrazione; done: boolean; onComplete: () => void }) {
   const { update } = useApp();
+  const L = a.contenuto?.lezione;
+  const sp = (id: string) => L?.passi[id];
+  const tappa = (i: number) => {
+    const tp = sp(dim.passi[i].id)?.tappa;
+    const prev = i > 0 ? sp(dim.passi[i - 1].id)?.tappa : undefined;
+    return L && tp !== undefined && tp !== prev ? <p className="tappa">Tappa {tp + 1} di {L.mappa.length}: <Inline text={L.mappa[tp]} /></p> : null;
+  };
   const [k, setK] = useState(done ? dim.passi.length : 0);
   const [picked, setPicked] = useState(false);
   const finished = k >= dim.passi.length;
@@ -115,8 +114,9 @@ function DimView({ a, dim, done, onComplete }: { a: Argomento; dim: Dimostrazion
   return (
     <>
       <p>
-        <b>Enunciato.</b> <Inline text={dim.enunciato} />
+        <b>Che cosa dimostriamo.</b> <Inline text={dim.enunciato} />
       </p>
+      {L?.dims[dim.id] && <RichText text={L.dims[dim.id].introduzione} className="prof" />}
       {dim.ipotesi.length > 0 && (
         <ul className="small">
           {dim.ipotesi.map((h, i) => (
@@ -127,11 +127,18 @@ function DimView({ a, dim, done, onComplete }: { a: Argomento; dim: Dimostrazion
         </ul>
       )}
       <div className="deriv">
-        {dim.passi.slice(0, k).map((p) => (
-          <PassoLine key={p.id} p={p} />
+        {dim.passi.slice(0, k).map((p, i) => (
+          <div key={p.id} className="deriv-block">
+            {tappa(i)}
+            {sp(p.id) && <RichText text={sp(p.id)!.prima} className="prof prima" />}
+            <PassoLine p={p} />
+            {sp(p.id) && <RichText text={sp(p.id)!.dopo} className="prof dopo" />}
+          </div>
         ))}
         {!finished && next && (
           <div className="deriv-next">
+            {tappa(k)}
+            {sp(next.id) && <RichText text={sp(next.id)!.prima} className="prof prima" />}
             {chiede ? (
               <>
                 <ProssimoPassaggio
@@ -150,12 +157,18 @@ function DimView({ a, dim, done, onComplete }: { a: Argomento; dim: Dimostrazion
               </>
             ) : (
               <button type="button" onClick={reveal}>
-                {k === 0 ? 'Cominciamo' : 'Passaggio successivo'}
+                {sp(next.id) ? 'Scrivi il passaggio' : k === 0 ? 'Cominciamo' : 'Passaggio successivo'}
               </button>
             )}
           </div>
         )}
       </div>
+      {finished && L?.dims[dim.id] && (
+        <div className="riepilogo">
+          <p className="kicker">Ricapitoliamo</p>
+          <RichText text={L.dims[dim.id].riepilogo} className="prof" />
+        </div>
+      )}
       {finished && (
         <div className="verdict info">
           <p>
@@ -268,6 +281,28 @@ function StepView({ a, step, index, active, wasDone, onComplete }: { a: Argoment
         <SpeakButton text={speechOf(a, step)} />
       </div>
       <h3>{step.title}</h3>
+      {step.kind === 'perche' && <RichText text={c.lezione!.perche} className="prof" />}
+      {step.kind === 'idea' && <RichText text={c.lezione!.idea} className="prof" />}
+      {step.kind === 'richiami' && (
+        <div className="richiami">
+          <p className="small muted">Prima di cominciare, rinfreschiamo le cose su cui si appoggia il ragionamento.</p>
+          {c.lezione!.richiami.map((r, i) => (
+            <div key={i} className="richiamo">
+              <b>
+                <Inline text={r.titolo} />
+              </b>
+              <RichText text={r.testo} />
+            </div>
+          ))}
+        </div>
+      )}
+      {step.kind === 'racconto' && (
+        <>
+          <RichText text={c.lezione!.racconto} className="prof" />
+          <p className="kicker">Le prime frasi (circa venti secondi)</p>
+          <RichText text={c.cosaDireSubito} className="prof frase-box" />
+        </>
+      )}
       {step.kind === 'subito' && (
         <>
           <RichText text={c.cosaDireSubito} className="prof" />
@@ -275,10 +310,15 @@ function StepView({ a, step, index, active, wasDone, onComplete }: { a: Argoment
         </>
       )}
       {step.kind === 'ipotesi' && (
-        <ul>
+        <ul className={c.lezione ? 'ipotesi-lista' : undefined}>
           {c.sistemaIpotesi.map((h, i) => (
             <li key={i}>
               <Inline text={h} />
+              {c.lezione?.ipotesiPerche[i] && (
+                <span className="perche-ip">
+                  <Inline text={c.lezione.ipotesiPerche[i]} />
+                </span>
+              )}
             </li>
           ))}
         </ul>
@@ -291,12 +331,26 @@ function StepView({ a, step, index, active, wasDone, onComplete }: { a: Argoment
               <Inline text={c.disegno.didascalia} /> <FonteTag f={c.disegno.fonte} />
             </figcaption>
           </figure>
+          {c.lezione && <RichText text={c.lezione.disegnoGuida} className="prof" />}
           <p className="small muted">Disegnalo su un foglio (o sulla lavagna dell&apos;allenatore) e spunta gli elementi man mano:</p>
           <Checklist elementi={c.disegno.elementi} value={check} onChange={setCheck} />
         </>
       )}
       {step.kind === 'equazione' && (
         <>
+          {c.lezione && (
+            <>
+              <p>Prima di entrare nei conti, ecco le tappe del ragionamento. Tienile a mente: ogni passaggio ti dirà a quale tappa siamo.</p>
+              <ol className="mappa">
+                {c.lezione.mappa.map((m, i) => (
+                  <li key={i}>
+                    <Inline text={m} />
+                  </li>
+                ))}
+              </ol>
+              <p>Le equazioni da cui partiamo sono queste:</p>
+            </>
+          )}
           <Tex tex={c.equazioneDiPartenza.latex} display />
           <p>
             <Inline text={c.equazioneDiPartenza.spiegazione} /> <FonteTag f={c.equazioneDiPartenza.fonte} />
@@ -369,7 +423,6 @@ function StepView({ a, step, index, active, wasDone, onComplete }: { a: Argoment
           </ol>
         </>
       )}
-      {(active || wasDone) && <Feedback argId={a.id} stepId={step.id} />}
     </section>
   );
 }

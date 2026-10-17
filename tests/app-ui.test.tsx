@@ -114,15 +114,11 @@ describe('pagine', () => {
 });
 
 describe('lezione', () => {
-  it('si percorre fino in fondo: domande sui passi chiave, previsione che sblocca il modello, riscontri, fine', () => {
+  it('si percorre fino in fondo: testo discorsivo, domande sui passi chiave, previsione che sblocca il modello, fine', () => {
     const steps = lessonSteps(FN);
-    expect(steps.map((s) => s.kind)).toEqual(['subito', 'ipotesi', 'disegno', 'equazione', 'dim', 'prova', 'significato', 'nondire', 'riassunto']);
+    expect(steps.map((s) => s.kind)).toEqual(['perche', 'idea', 'richiami', 'ipotesi', 'disegno', 'equazione', 'dim', 'prova', 'significato', 'racconto', 'nondire', 'riassunto']);
     app(`#/argomento/${ARG}/lezione`);
-    fireEvent.click(screen.getAllByRole('button', { name: 'non ho capito' })[0]);
-    const nota = screen.getByLabelText('nota sul passo');
-    fireEvent.change(nota, { target: { value: 'troppo in fretta' } });
-    fireEvent.blur(nota);
-    expect(probe!.lezioni[ARG].feedback.subito).toMatchObject({ v: 'confuso', note: 'troppo in fretta' });
+    expect(screen.queryByRole('button', { name: 'non ho capito' })).toBeNull();
     for (let guard = 0; guard < 200; guard++) {
       const active = document.querySelector('.lesson-step.active')!;
       const opt = active.querySelector('.deriv-next .option:not([disabled])') as HTMLButtonElement | null;
@@ -158,6 +154,9 @@ describe('lezione', () => {
     expect(probe!.richiami.some((r) => r.qid === 'previsione:c4-fn-verso')).toBe(true);
     expect(screen.getByText(/Lezione completata/)).toBeTruthy();
     expect(document.querySelectorAll('.nf-box').length).toBeGreaterThan(0); // «la dispensa scrive…» (NF-21)
+    expect(document.querySelectorAll('.prof.prima').length).toBe(D071.passi.length); // ogni riga preceduta dal ragionamento
+    expect(document.querySelectorAll('.prof.dopo').length).toBe(D071.passi.length);
+    expect(document.querySelector('.riepilogo')).toBeTruthy();
     testoPulito();
   });
 });

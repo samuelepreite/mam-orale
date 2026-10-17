@@ -156,6 +156,34 @@ export interface ArgomentoContenuto {
   previsioni?: Previsione[];
   /** note sulle fonti pertinenti */
   nf?: string[];
+  /** testo discorsivo della lezione (agganciato dal registro) */
+  lezione?: LezioneArgomento;
+}
+
+/**
+ * Testo discorsivo della lezione guidata (docs/BRIEF_LEZIONI.md): scritto per chi parte da zero, una idea alla volta.
+ * Sta in un file separato per capitolo (src/content/cX/lezioni.ts) e viene agganciato al contenuto nel registro.
+ */
+export interface LezioneArgomento {
+  /** perché ci interessa: la situazione concreta, il problema da risolvere, la domanda che guida la lezione */
+  perche: string;
+  /** l'idea fisica a parole, senza formule (o quasi): cosa succede e perché; un'analogia se aiuta */
+  idea: string;
+  /** cosa devi già sapere: ogni prerequisito rispiegato da zero in poche righe */
+  richiami: { titolo: string; testo: string }[];
+  /** il perché di ogni ipotesi, nello stesso ordine di `sistemaIpotesi` */
+  ipotesiPerche: string[];
+  /** come costruire il disegno alla lavagna, nell'ordine, dicendo perché ogni elemento serve */
+  disegnoGuida: string;
+  /** le tappe del ragionamento (3–6), da mostrare prima della dimostrazione */
+  mappa: string[];
+  /** per ogni dimostrazione: dove andiamo e con quale strategia; cosa abbiamo ottenuto, a parole */
+  dims: Record<string, { introduzione: string; riepilogo: string }>;
+  /** per ogni passo: `prima` = cosa vogliamo ottenere e il ragionamento che porta alla riga (senza svelarla);
+   *  `dopo` = come si legge la riga ottenuta, che cosa dice, perché è sensata; `tappa` = indice in `mappa` */
+  passi: Record<string, { prima: string; dopo: string; tappa?: number }>;
+  /** come raccontarlo all'orale, dopo aver capito (collega cosaDireSubito a quello che si è visto) */
+  racconto: string;
 }
 
 /** Voce della mappa (tools/analisi/argomenti.json). */

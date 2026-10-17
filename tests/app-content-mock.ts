@@ -6,8 +6,9 @@
 import { CAPITOLI, DOMANDE, MAPPA } from '../src/content/mappa';
 import type { Argomento, ArgomentoContenuto, CapId, Dimostrazione } from '../src/content/types';
 import { d071, frenoNastro } from '../src/content/c4/freno-nastro';
+import { LEZIONI } from '../src/content/c4/lezioni';
 
-export const CONTENUTI: Record<string, ArgomentoContenuto> = { [frenoNastro.id]: frenoNastro };
+export const CONTENUTI: Record<string, ArgomentoContenuto> = { [frenoNastro.id]: { ...frenoNastro, lezione: LEZIONI[frenoNastro.id] } };
 export const DIMOSTRAZIONI: Record<string, Dimostrazione> = { d071 };
 export const ARGOMENTI: Argomento[] = MAPPA.map((m) => ({ ...m, formulazioni: m.domande.map((q) => ({ q, testo: DOMANDE[q] })), contenuto: CONTENUTI[m.id] }));
 export const argomento = (id: string) => ARGOMENTI.find((a) => a.id === id);
