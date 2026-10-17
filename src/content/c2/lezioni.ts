@@ -8,4 +8,6 @@ export const LEZIONI: Record<string, LezioneArgomento> = {
   'c2-ribaltamento': ribaltamento,
   'c2-impuntamento': impuntamento,
   'c2-perno': perno,
+  'c2-volvente': volvente,
+  'c2-cuscinetti': cuscinetti,
 };
