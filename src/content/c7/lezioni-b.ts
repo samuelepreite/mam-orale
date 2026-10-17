@@ -354,7 +354,273 @@ A bassa velocità la forza è piccola e la macchina quasi non si muove. Vicino a
   racconto: r`All'orale parti dal disegno: statore su guida con molla e smorzatore, rotore schematizzato come massa $M_R$ a distanza R che gira a ω costante. Dalla cinematica del rigido scrivi $x_P = x_O + R\cos\omega t$, quindi l'accelerazione di P ha la parte centripeta. Nell'equilibrio lungo x l'inerzia del rotore dà due pezzi: la massa totale M in inerzia e la forzante $M_R\omega^2R\cos\omega t$. È una forzata con forza che cresce come $\omega^2$: il rapporto $M|X_O|/(M_R R)$ vale $\rho^2 A$. Chiudi con l'alta velocità: tende a 1 con fase π, lo statore compensa il rotore e il baricentro resta fermo, autocentramento.`,
 };
 
+// ------------------------------------------------------------------ c7-vincolo
+const vincolo: LezioneArgomento = {
+  perche: r`Un'auto passa su una strada ondulata: nessuno spinge direttamente la carrozzeria, eppure si muove, perché le ruote salgono e scendono e trascinano la cassa attraverso molle e ammortizzatori. Lo stesso per uno strumento appoggiato su un banco che vibra, o per un edificio durante un terremoto: è il terreno a muoversi. La domanda della lezione è: **se è la base a muoversi con una legge assegnata, come si muove la massa che ci è attaccata con molla e smorzatore? Di più o di meno della base, e con quale ritardo?**`,
+  idea: r`Prendi in mano un elastico con un peso appeso e muovi la mano su e giù: la mano è la base. Il peso non sente direttamente la tua mano, sente solo quanto l'elastico si allunga, cioè la **differenza** fra la posizione del peso e quella della mano. Se mano e peso si spostano insieme, l'elastico non cambia e non c'è forza. Lo stesso vale per lo smorzatore, che sente solo la velocità relativa.
+
+Allora muovere la base equivale a spingere la massa con due forze: una attraverso la molla, proporzionale allo spostamento della base, e una attraverso lo smorzatore, proporzionale alla sua velocità. Queste due spinte sono sfasate di un quarto di periodo, e la massa risponde a entrambe. In alternativa si può guardare la massa «dal punto di vista della base»: allora la base sembra ferma e sulla massa compare una sola forza d'inerzia, come quella che ti spinge contro il sedile quando l'auto accelera. Sono due modi equivalenti di leggere lo stesso problema.`,
+  richiami: [
+    { titolo: 'Molla e smorzatore fra due corpi', testo: r`Una molla fra due punti A e A′ esercita una forza proporzionale al suo allungamento, cioè alla differenza degli spostamenti dei due estremi: $-K(x_A - x_{A'})$. Lo smorzatore allo stesso modo sente la differenza delle velocità: $-c(\dot x_B - \dot x_{B'})$. Se gli estremi si muovono insieme, nessuna forza.` },
+    { titolo: 'Sovrapposizione degli effetti', testo: r`In un'equazione lineare, se la forzante è una somma di due termini, la risposta è la somma delle risposte a ciascun termine preso da solo. Permette di spezzare un problema difficile in due problemi già risolti.` },
+    { titolo: 'Risposta a una forzante sfasata', testo: r`Dalla lezione sulle vibrazioni forzate: a una forza $F_0\sin(\omega t + \alpha_F)$ il sistema risponde con ampiezza $A(\xi,\rho)\,F_0/K$ e con la stessa fase della forza meno il ritardo φ del sistema: $\sin(\omega t + \alpha_F - \varphi)$. A e φ dipendono solo da ξ e ρ.` },
+    { titolo: 'Moto relativo per traslazione', testo: r`Se un riferimento trasla senza ruotare, l'accelerazione assoluta di un punto è la sua accelerazione relativa più quella del riferimento: $\ddot x = \ddot x^R + \ddot x_V$. Non ci sono termini centripeti né di Coriolis, che nascono solo quando il riferimento ruota.` },
+  ],
+  ipotesiPerche: [
+    r`Il sistema è fatto di base, sospensione (molla e smorzatore) e massa su guida: la massa può solo traslare lungo x, ed è la sua posizione che vogliamo trovare.`,
+    r`Il moto della base è dato, non è un'incognita: per questo, anche se i corpi sono due, i gradi di libertà sono uno solo e basta l'equilibrio della massa.`,
+    r`In orizzontale il peso non deforma la molla: a riposo la molla è scarica e il termine statico è zero, così l'equazione resta pulita.`,
+    r`Il riferimento della base si sposta senza ruotare: nel moto relativo l'unica forza apparente è l'inerzia di trascinamento $-m\ddot x_V$.`,
+  ],
+  disegnoGuida: r`Comincia dalla base mobile a sinistra: una piastra verticale con il suo asse $x_V$ e la legge $x_V = X_V\sin\omega t$ scritta accanto, perché è il dato del problema. Sulla piastra segna due punti, A′ in alto e B′ in basso: da A′ parte la molla K verso il punto A della massa, da B′ lo smorzatore c verso il punto B. Disegna la massa con il baricentro G fra due guide tratteggiate e il suo asse $x_G$ verso destra. Infine metti le forze $F_{el}$ e $F_c$ sulla massa, entrambe verso +x: il segno lo metterà la formula. Il disegno deve far vedere che molla e smorzatore hanno un estremo che si muove.`,
+  mappa: [
+    'Scrivo molla e smorzatore con il moto relativo massa–base.',
+    'Equilibrio della massa: la base diventa due forzanti in quadratura.',
+    'Risolvo ogni forzante con A e φ già noti e sommo (sovrapposizione).',
+    'Riscrivo nel moto relativo: una sola forzante d’inerzia, ρ²A.',
+    'Calcolo la fase: la massa è sempre in ritardo sulla base.',
+  ],
+  dims: {
+    d129: {
+      introduzione: r`Vogliamo l'equazione del moto della massa e la sua risposta. Strategia: scrivo le forze di molla e smorzatore ricordando che il loro estremo sinistro si muove; faccio l'equilibrio della sola massa; sostituisco la legge della base e ottengo due forzanti sfasate; le risolvo una per volta con A e φ e sommo. Infine riscrivo tutto nel moto relativo, dove la forzante diventa una sola.`,
+      riepilogo: r`Molla e smorzatore sentono solo il moto relativo, quindi nell'equilibrio della massa i termini della base passano a destra come forzanti: $c\dot x_V + Kx_V$. Con la base sinusoidale sono due sinusoidi in quadratura. Risolvendole separatamente con A e φ e sommando, l'ampiezza della massa è $A\sqrt{1 + 4\xi^2\rho^2}$ volte quella della base. Nel moto relativo le due forzanti si cancellano e resta l'inerzia $m\omega^2X_V$: il rapporto relativo è $\rho^2 A$.`,
+    },
+    d131: {
+      introduzione: r`Sappiamo quanto si muove la massa; ora vogliamo sapere quando, cioè la sua fase rispetto alla base. Con i numeri complessi la forzante è un unico numero $X_V(K + ic\omega)$, che ha un suo angolo; il sistema aggiunge il ritardo φ. La fase della massa è la differenza dei due angoli. Poi dimostriamo che è sempre negativa.`,
+      riepilogo: r`La forzante equivalente è in anticipo sulla base di $\operatorname{arctg}(2\xi\rho)$, per via dello smorzatore. Il sistema ritarda di φ. La fase della massa è la differenza, e confrontando le tangenti si vede che φ vince sempre: la massa è in ritardo per ogni ρ. A bassa frequenza il ritardo è quasi nullo, ad alta tende a un quarto di periodo. Con ampiezza e fase si scrive la risposta completa.`,
+    },
+  },
+  passi: {
+    'd129.1': {
+      tappa: 0,
+      prima: r`Partiamo dalla molla. Di quanto si allunga? Il suo estremo A sulla massa si sposta di $x_G$, ma anche l'estremo A′ sulla base si sposta, di $x_V$. Pensa all'elastico in mano: conta la differenza. Aggiungi l'eventuale deformazione statica. Poi fai lo stesso ragionamento per lo smorzatore, con le velocità.`,
+      dopo: r`Molla e smorzatore vedono solo il moto relativo: $x_G - x_V$ e $\dot x_G - \dot x_V$. Controllo: se massa e base si muovono insieme, entrambe le forze sono nulle, come deve essere. È la riga da cui dipende tutto il resto: sbagliare qui (scrivere solo $-Kx_G$) vuol dire perdere l'eccitazione.`,
+    },
+    'd129.2': {
+      tappa: 1,
+      prima: r`I corpi sono due, ma la base ha moto assegnato: non serve la sua equazione. Basta l'equilibrio della massa: inerzia più smorzatore più molla uguale zero, con tutte le forze disegnate positive. Sviluppa le parentesi delle due forze appena scritte, separando i termini della massa da quelli della base.`,
+      dopo: r`Sei termini: inerzia, smorzatore e molla della massa con segno meno; due termini della base, $+c\dot x_V$ e $+Kx_V$, con segno più; e il termine statico. I termini della base non dipendono dall'incognita: sono loro, tra poco, la forzante.`,
+    },
+    'd129.3': {
+      tappa: 1,
+      prima: r`Prima togliamo il termine statico: in quiete base e massa sono ferme e il moto è orizzontale, quindi la molla è a riposo. Poi metti a sinistra i termini con l'incognita $x_G$ e a destra quelli noti, cambiando i segni in modo che inerzia, smorzatore e molla siano positivi.`,
+      dopo: r`A sinistra l'oscillatore di sempre, a destra la forzante: il moto della base agisce come due forze, una viscosa $c\dot x_V$ e una elastica $Kx_V$. Controllo: con la base ferma torni al moto libero. Con $c = 0$ la forza sarebbe solo $Kx_V$, cioè la base tira la massa attraverso la molla.`,
+    },
+    'd129.4': {
+      tappa: 1,
+      prima: r`Sostituiamo la legge della base, $x_V = X_V\sin\omega t$. Serve anche la sua velocità: la derivata del seno è il coseno, e un coseno è un seno anticipato di un quarto di periodo, $\pi/2$. Scrivi così le due forzanti entrambe come seni, per vedere le ampiezze e le fasi.`,
+      dopo: r`Due sinusoidi: quella viscosa, di ampiezza $c\omega X_V$, anticipata di $\pi/2$; quella elastica, di ampiezza $KX_V$, in fase con la base. Sono in quadratura. Nota che la viscosa cresce con ω: ad alta frequenza lo smorzatore trascina di più. Per una riga la dispensa chiama $X_0$ l'ampiezza della base.`,
+    },
+    'd129.5': {
+      tappa: 2,
+      prima: r`Risolviamo senza numeri complessi. Sai già come risponde il sistema a una forza $F_0\sin(\omega t + \alpha_F)$: ampiezza A volte lo spostamento statico $F_0/K$, fase della forza meno il ritardo φ. Applicalo due volte. Per la prima forzante $F_0 = c\omega X_V$ e $\alpha_F = \pi/2$; per la seconda $F_0 = KX_V$ e $\alpha_F = 0$.`,
+      dopo: r`La prima risposta ha ampiezza $A\,c\omega X_V/K$ e fase $\pi/2 - \varphi$; la seconda ampiezza $AX_V$ e fase $-\varphi$. Controllo: nella seconda la K si semplifica, e infatti se ci fosse solo la molla la massa si muoverebbe A volte la base. Attenzione a non dimenticare il $\pi/2$ della prima.`,
+    },
+    'd129.6': {
+      tappa: 2,
+      prima: r`Il sistema è lineare: la risposta alla somma delle forzanti è la somma delle risposte. Somma le due espressioni e raccogli $AX_V$. Per rendere più leggibile la prima, ricorda che un seno anticipato di $\pi/2$ è un coseno: $\sin(\omega t + \pi/2 - \varphi) = \cos(\omega t - \varphi)$.`,
+      dopo: r`La massa si muove con un seno e un coseno dello stesso argomento $\omega t - \varphi$: il seno viene dalla molla, il coseno, pesato con $c\omega/K$, dallo smorzatore. La somma risolve l'equazione completa. Con $c = 0$ resta $AX_V\sin(\omega t - \varphi)$.`,
+    },
+    'd129.7': {
+      tappa: 2,
+      prima: r`Quanto vale l'ampiezza della somma? Un seno e un coseno dello stesso angolo sono due oscillazioni sfasate di 90°, e si compongono come i cateti di un triangolo rettangolo: ampiezza totale uguale alla radice della somma dei quadrati delle ampiezze. Poi usa $c\omega/K = 2\xi\rho$.`,
+      dopo: r`La massa si muove $A\sqrt{1 + 4\xi^2\rho^2}$ volte la base: il fattore in più rispetto alla forza diretta viene dallo smorzatore. È la trasmissibilità di spostamento. Controllo: a ρ = 0 vale 1, la massa segue la base; senza smorzamento coincide con A.`,
+    },
+    'd129.8': {
+      tappa: 3,
+      prima: r`Cambiamo punto di vista: guardiamo la massa dalla base, con lo spostamento relativo $x_G^R = x_G - x_V$. La base trasla senza ruotare, quindi l'accelerazione assoluta è relativa più quella della base, senza altri termini. Sostituisci $x_G = x_G^R + x_V$ nell'equazione del moto e guarda cosa succede ai termini $c\dot x_V$ e $Kx_V$.`,
+      dopo: r`I termini della base compaiono a sinistra e a destra e si cancellano: resta un oscillatore in $x_G^R$ forzato da $-m\ddot x_V$, l'inerzia di trascinamento. Con la base sinusoidale, $\ddot x_V = -\omega^2X_V\sin\omega t$, quindi la forza è $m\omega^2X_V\sin\omega t$. È la forza che ti spinge sul sedile quando l'auto accelera.`,
+    },
+    'd129.9': {
+      tappa: 3,
+      prima: r`Ora è una forzata classica con $F_0 = m\omega^2X_V$. Applica il fattore di amplificazione: ampiezza uguale A per $F_0/K$. Per scrivere $F_0/K$ con ρ usa $m/K = 1/\omega_m^2$. Poi dividi per $X_V$.`,
+      dopo: r`Il moto relativo, misurato in ampiezze della base, è $\rho^2 A$. Rispetto alla forza diretta c'è il fattore $\rho^2$: più alta la frequenza, più grande l'accelerazione della base. Ad alta frequenza tende a 1: la massa resta ferma nello spazio e la base le scorre sotto. È il principio del sismografo.`,
+    },
+    'd131.1': {
+      tappa: 4,
+      prima: r`Passiamo ai numeri complessi: la forzante equivalente, molla più smorzatore trascinati dalla base, è $X_V(K + ic\omega)e^{i\omega t}$. Il suo angolo rispetto alla base è l'argomento di $K + ic\omega$: arcotangente di parte immaginaria su parte reale. Poi esprimi $c\omega/K$ con ξ e ρ.`,
+      dopo: r`La forzante è in anticipo sulla base di un angolo $\alpha_F$ fra 0 e π/2, per colpa della parte viscosa, in quadratura. Senza smorzamento sarebbe in fase. Attenzione: a margine la dispensa dimentica una ω, ma il risultato $2\xi\rho$ è giusto.`,
+    },
+    'd131.2': {
+      tappa: 4,
+      prima: r`Il sistema introduce il suo ritardo, lo stesso visto nella forzata: l'argomento della rigidezza dinamica $p(i\omega)$. Scrivilo con ξ e ρ dividendo per $K$, e ricorda la regola del quadrante per ρ > 1.`,
+      dopo: r`È lo stesso φ di sempre, fra 0 e π: piccolo a bassa frequenza, π/2 in risonanza, vicino a π ad alta frequenza. Non dipende dall'eccitazione ma solo dal sistema, perché il denominatore è sempre la rigidezza dinamica.`,
+    },
+    'd131.3': {
+      tappa: 4,
+      prima: r`La risposta complessa è forzante divisa per rigidezza dinamica. L'argomento di un quoziente è la differenza degli argomenti: argomento del numeratore $K + ic\omega$ meno argomento del denominatore $p$. Scrivi la fase della massa con i due angoli appena trovati.`,
+      dopo: r`La fase iniziale della massa è $\alpha_F - \varphi$: l'anticipo della forzante meno il ritardo del sistema. Controllo: nella forza diretta sulla massa $\alpha_F = 0$ e ritrovi $-\varphi$. Ora la domanda è: chi vince fra i due angoli?`,
+    },
+    'd131.4': {
+      tappa: 4,
+      prima: r`Per confrontare due angoli fra 0 e π/2 basta confrontare le tangenti, perché la tangente cresce. Calcola $\operatorname{tg}\varphi - \operatorname{tg}\alpha_F$ con lo stesso denominatore $1 - \rho^2$. Poi ragiona a parte per ρ ≥ 1: dove sta φ rispetto a π/2, e dove sta $\alpha_F$?`,
+      dopo: r`Per ρ < 1 la differenza vale $2\xi\rho^3/(1 - \rho^2)$, positiva: φ è più grande. Per ρ ≥ 1 φ è almeno π/2 mentre $\alpha_F$ è sempre sotto π/2. Quindi φ supera $\alpha_F$ per ogni ρ, come afferma la dispensa senza conto.`,
+    },
+    'd131.5': {
+      tappa: 4,
+      prima: r`Dalla riga precedente, che segno ha $\alpha_x = \alpha_F - \varphi$? Poi calcolalo in due punti notevoli: in risonanza, dove φ = π/2, e ad alta frequenza, dove $\alpha_F$ tende a π/2 (la tangente $2\xi\rho$ va all'infinito) e φ tende a π.`,
+      dopo: r`La massa è sempre in ritardo sulla base: segue, non anticipa mai. A bassa frequenza il ritardo è quasi zero, la massa va con la base; ad alta frequenza tende a un quarto di periodo. In risonanza vale $\operatorname{arctg}(2\xi) - \pi/2$.`,
+    },
+    'd131.6': {
+      tappa: 4,
+      prima: r`Abbiamo ampiezza e fase: possiamo scrivere la risposta completa. L'ampiezza è la trasmissibilità per l'ampiezza della base, la fase è $\alpha_x$. Mettile in un seno alla pulsazione ω.`,
+      dopo: r`È la risposta della massa in una riga: ampiezza $T_R X_V$, fase $\alpha_x$ negativa. Coincide con la somma delle due risposte trovata senza numeri complessi: i due metodi dicono la stessa cosa, uno con la trigonometria, l'altro con gli angoli dei numeri complessi.`,
+    },
+  },
+  racconto: r`All'orale dici subito che sulla massa non agisce nessuna forza esterna: è la base a muoversi con legge $x_V = X_V\sin\omega t$. Molla e smorzatore sentono solo il moto relativo, quindi l'equilibrio della massa dà $m\ddot x_G + c\dot x_G + Kx_G = c\dot x_V + Kx_V$: due forzanti in quadratura. Le risolvi con A e φ, sommi e trovi l'ampiezza $A\sqrt{1 + 4\xi^2\rho^2}\,X_V$. Poi mostri la scrittura relativa: i termini della base si cancellano e resta la forza d'inerzia $m\omega^2X_V$, quindi $\rho^2 A$. Chiudi con la fase: $\operatorname{arctg}(2\xi\rho) - \varphi$, sempre negativa, la massa insegue la base.`,
+};
+
+// ------------------------------------------------------------------ c7-trasmissibilita
+const trasmissibilita: LezioneArgomento = {
+  perche: r`Accanto a un ufficio c'è una pressa che batte 120 colpi al minuto: il pavimento trema e gli oggetti si spostano sulle scrivanie. Come la monti perché al pavimento arrivi meno forza di quella che produce? Oppure: vuoi proteggere un microscopio dalle vibrazioni del pavimento. Sono due facce dello stesso problema, l'isolamento. La domanda della lezione è: **quanto di una vibrazione passa attraverso una sospensione, e come va progettata la sospensione perché ne passi meno?** La risposta sorprende: bisogna rendere il supporto più morbido, e lo smorzamento, oltre una certa frequenza, peggiora le cose.`,
+  idea: r`Pensa al sedile di un'auto con la molla molto morbida: le vibrazioni veloci del motore non arrivano a te, perché la molla si deforma e tu, con la tua inerzia, resti quasi fermo. Se invece la molla fosse rigida, ogni vibrazione ti arriverebbe intera. Se poi il motore vibrasse proprio alla frequenza naturale del sedile, verresti scosso più del motore stesso.
+
+La trasmissibilità mette un numero su questa intuizione: è il rapporto fra ciò che esce dalla sospensione e ciò che entra. Se è maggiore di 1 la sospensione amplifica, se è minore di 1 isola. Scopriremo che la soglia è sempre la stessa, una frequenza di eccitazione $\sqrt2$ volte quella naturale, qualunque sia lo smorzamento. E che sopra questa soglia lo smorzatore, che è un collegamento in più fra le due parti, fa passare più vibrazione invece di meno.`,
+  richiami: [
+    { titolo: 'Modulo di un quoziente complesso', testo: r`Per un numero $a + ib$ il modulo è $\sqrt{a^2 + b^2}$, la lunghezza della freccia nel piano complesso. Il modulo di un quoziente è il quoziente dei moduli: per sapere quanto è grande la risposta complessa basta dividere il modulo della forzante per quello della rigidezza dinamica.` },
+    { titolo: 'Eccitazione di vincolo', testo: r`Se la base si muove con $x_V = X_V\sin\omega t$, molla e smorzatore sentono il moto relativo e l'equazione della massa diventa $m\ddot x_G + c\dot x_G + Kx_G = c\dot x_V + Kx_V$. In complesso la forzante è $X_V(K + i\omega c)e^{i\omega t}$.` },
+    { titolo: 'Gruppi adimensionali', testo: r`Dividendo per K: $m\omega^2/K = \rho^2$, con $\rho = \omega/\omega_m$ rapporto fra pulsazione dell'eccitazione e pulsazione naturale, e $c\omega/K = 2\xi\rho$, con ξ smorzamento relativo. Tutto il comportamento dipende solo da questi due numeri.` },
+    { titolo: 'Azione e reazione', testo: r`Se la molla spinge la massa con una forza, spinge il muro con una forza uguale e opposta. Quindi la forza che arriva al muro è l'opposto della forza che molla e smorzatore esercitano sulla massa.` },
+  ],
+  ipotesiPerche: [
+    r`Il modello lineare a un grado di libertà a regime ci permette di usare tutte le formule della forzata: rigidezza dinamica, A, φ.`,
+    r`I due problemi sono diversi (la base che si muove, oppure la forza sulla massa con base ferma) e vanno tenuti distinti, anche se alla fine danno la stessa funzione.`,
+    r`Al muro arriva solo ciò che passa per molla e smorzatore: la forzante agisce sulla massa e non tocca direttamente il muro.`,
+  ],
+  disegnoGuida: r`Fai due disegni. A sinistra il muro fisso con i punti A′ e B′, la molla K e lo smorzatore c che vanno alla massa su guida, la forza $F_0\sin\omega t$ sulla massa e, sul muro, le due forze $F_{el}$ e $F_c$ rivolte verso il muro: sono la forza trasmessa. A destra il grafico di $T_R$ in funzione di ρ: tutte le curve partono da 1, hanno un picco vicino a ρ = 1, più basso con ξ maggiore, e si incrociano tutte nel punto $(\sqrt2, 1)$. Traccia la retta orizzontale a quota 1 e la verticale a $\sqrt2$, scrivi «amplificazione» a sinistra e «isolamento» a destra, e fai vedere che a destra le curve con ξ grande stanno sopra.`,
+  mappa: [
+    'Base che si muove: rapporto fra ampiezza della massa e ampiezza della base.',
+    'Base ferma e forza sulla massa: forza che arriva al muro su forza applicata.',
+    'È la stessa funzione: quando è minore di 1? Il punto (√2, 1).',
+    'Effetto dello smorzamento e regola di progetto della pressa.',
+  ],
+  dims: {
+    d130: {
+      introduzione: r`Vogliamo il rapporto fra l'ampiezza della massa e quella della base. Con i numeri complessi è un solo passaggio: la risposta è forzante divisa per rigidezza dinamica, e il rapporto delle ampiezze è il rapporto dei moduli. Poi rendiamo tutto adimensionale e leggiamo la curva nei punti notevoli.`,
+      riepilogo: r`La base equivale a una forzante complessa $X_V(K + i\omega c)$; la risposta è questa forzante divisa per la rigidezza dinamica. Il rapporto dei moduli, diviso per K, è la trasmissibilità $\sqrt{1 + 4\xi^2\rho^2}/\sqrt{(1 - \rho^2)^2 + 4\xi^2\rho^2}$. Vale 1 a frequenza nulla, ha il picco vicino alla risonanza, tende a 1 se lo smorzatore è rigidissimo, e tutte le curve passano per $(\sqrt2, 1)$: sotto si amplifica, sopra si isola.`,
+    },
+    d132: {
+      introduzione: r`Ora il problema rovesciato: la base è ferma, la forza agisce sulla massa. Quanta forza arriva al muro? Strategia: scrivo che cosa trasmettono molla e smorzatore, sostituisco la risposta della forzata, calcolo l'ampiezza della forza trasmessa e la divido per quella applicata.`,
+      riepilogo: r`Con il muro fermo molla e smorzatore dipendono solo dal moto della massa. Al muro arriva $Kx_G + c\dot x_G$: due termini in quadratura, di ampiezza totale $X_0\sqrt{K^2 + (c\omega)^2}$. Dividendo per $F_0$ e usando l'ampiezza della forzata si ottiene esattamente la stessa funzione della trasmissibilità di spostamento. Cambia solo il significato: forza al muro su forza applicata.`,
+    },
+    d133: {
+      introduzione: r`Abbiamo una sola funzione per due problemi. Ora la domanda di progetto: per quali ρ la trasmissibilità è minore di 1? Lavoriamo sul quadrato, per togliere le radici, e guardiamo il segno di $T_R^2 - 1$. Poi vediamo come lo smorzamento sposta le curve e traduciamo tutto in una regola pratica per la pressa.`,
+      riepilogo: r`Nel conto di $T_R^2 - 1$ lo smorzamento sparisce dal numeratore: il segno dipende solo da $2 - \rho^2$. Quindi si isola per ρ > $\sqrt2$, qualunque sia ξ. La derivata rispetto a $\xi^2$ mostra che sopra $\sqrt2$ più smorzamento vuol dire più trasmissione. Per la pressa da 2 Hz il supporto deve avere frequenza naturale sotto 1,41 Hz, cioè cedere staticamente almeno 12 cm circa.`,
+    },
+  },
+  passi: {
+    'd130.1': {
+      tappa: 0,
+      prima: r`Ripartiamo dall'equazione dell'eccitazione di vincolo e usiamo il complex replacement: sostituiamo la base con $X_Ve^{i\omega t}$. La sua velocità è $i\omega$ volte la posizione. Allora la somma $c\dot x_V + Kx_V$ si raccoglie in un unico numero complesso per $e^{i\omega t}$: quale?`,
+      dopo: r`Le due forzanti della base diventano una sola forzante complessa, $X_V(K + i\omega c)$: la parte reale è la molla, quella immaginaria lo smorzatore, sfasato di 90°. Si risolve cercando una risposta della stessa forma, $\hat X_Ge^{i\omega t}$.`,
+    },
+    'd130.2': {
+      tappa: 0,
+      prima: r`Sostituisci la risposta di prova: ogni derivata porta un fattore $i\omega$. A sinistra raccogli $\hat X_G$ e trovi la rigidezza dinamica $p(i\omega)$, la stessa della forzata. Poi dividi.`,
+      dopo: r`Ampiezza complessa uguale forzante complessa diviso rigidezza dinamica, esattamente come nella forzata: cambia solo il numeratore. Il numeratore rappresenta il collegamento fra base e massa, il denominatore la dinamica della massa. Attenzione al segno di $\omega^2 m$: senza il meno non ci sarebbe risonanza.`,
+    },
+    'd130.3': {
+      tappa: 0,
+      prima: r`Ci interessano le ampiezze, cioè i moduli. Per ciascun numero complesso prendi la radice della somma dei quadrati di parte reale e parte immaginaria. Al numeratore puoi portare $X_V$ fuori dalla radice.`,
+      dopo: r`Il modulo della forzante è $X_V\sqrt{(c\omega)^2 + K^2}$: cresce con la frequenza per via dello smorzatore. Il modulo di $p$ è l'opposizione del sistema, la stessa radice della forzata. Controllo: con $\omega = 0$ entrambi valgono K (per $X_V$).`,
+    },
+    'd130.4': {
+      tappa: 0,
+      prima: r`Il modulo di un quoziente è il quoziente dei moduli. Scrivi quindi l'ampiezza della massa come rapporto dei due moduli appena calcolati e dividi per l'ampiezza della base: $X_V$ si semplifica.`,
+      dopo: r`Il rapporto delle ampiezze non dipende da quanto si muove la base: è una proprietà del sistema e della frequenza. Controllo: a $\omega = 0$ vale $K/K = 1$, la massa segue la base.`,
+    },
+    'd130.5': {
+      tappa: 0,
+      prima: r`Rendiamo il rapporto adimensionale dividendo sopra e sotto per K, dentro le radici. Al numeratore $K/K = 1$ e $c\omega/K = 2\xi\rho$; al denominatore $\omega^2m/K = \rho^2$. Sono le stesse sostituzioni del fattore di amplificazione.`,
+      dopo: r`È la trasmissibilità: dice se il moto della base viene amplificato o attenuato. Il denominatore è lo stesso di A; il numeratore $\sqrt{1 + 4\xi^2\rho^2}$ viene dallo smorzatore. Attenzione al refuso della dispensa nella riga dopo: scrive $(1 + \rho^2)^2$, che farebbe sparire la risonanza. Si scrive $(1 - \rho^2)^2$.`,
+    },
+    'd130.6': {
+      tappa: 0,
+      prima: r`Leggiamo la curva nei punti notevoli. Metti ξ = 0: il numeratore vale 1. Poi ρ = 0: quanto vale il rapporto? Infine ρ = 1: il termine $(1 - \rho^2)^2$ si annulla, e resta un rapporto con solo ξ.`,
+      dopo: r`Senza smorzamento la trasmissibilità coincide con A. A frequenza nulla vale 1: la massa si sposta quanto il vincolo, come un blocco unico. In risonanza il picco è finito se ξ > 0: circa 5,1 per ξ = 0,1, come nel grafico stampato della dispensa.`,
+    },
+    'd130.7': {
+      tappa: 0,
+      prima: r`E se lo smorzamento diventa enorme? Per ξ molto grande, dentro le due radici dominano i termini $4\xi^2\rho^2$, uguali sopra e sotto. Che cosa resta del rapporto? Pensa anche al significato fisico di uno smorzatore infinitamente duro.`,
+      dopo: r`La trasmissibilità tende a 1. Uno smorzatore che non si lascia comprimere è come un'asta rigida: massa e base diventano un blocco unico. La massa segue perfettamente il vincolo: non amplifica, ma neanche isola.`,
+    },
+    'd130.8': {
+      tappa: 2,
+      prima: r`Cerchiamo il punto speciale del grafico: c'è un ρ in cui il valore non dipende da ξ? Servirebbe che numeratore e denominatore fossero uguali, cioè $(1 - \rho^2)^2 = 1$. Risolvi: oltre a ρ = 0, quale valore positivo funziona?`,
+      dopo: r`A $\rho = \sqrt2$ la trasmissibilità vale 1 per ogni smorzamento: tutte le curve passano per il punto $(\sqrt2, 1)$. È il confine fra le due zone. Non confonderlo con ρ = 1, che è la risonanza, dove la trasmissibilità è massima.`,
+    },
+    'd130.9': {
+      tappa: 2,
+      prima: r`Ai due lati del punto $(\sqrt2, 1)$ le curve stanno sopra o sotto 1? Guarda il grafico: a ρ = 0 valgono 1 e poi salgono verso il picco, quindi prima di $\sqrt2$ stanno sopra. Dopo $\sqrt2$ scendono. Che nome dai alle due zone?`,
+      dopo: r`Sotto $\sqrt2$ la sospensione amplifica, sopra isola. Il manoscritto scrive il contrario per la prima zona e dice anche che sopra $\sqrt2$ più smorzamento riduce l'ampiezza: entrambi errori. Il grafico e il testo battuto della stessa pagina sono giusti; la dimostrazione è nella d133.`,
+    },
+    'd132.1': {
+      tappa: 1,
+      prima: r`Ora la base è un muro fermo e la forza agisce sulla massa. Riscrivi molla e smorzatore con la regola della differenza fra gli estremi. Che cosa fanno gli estremi A′ e B′ attaccati al muro? E la deformazione statica, in orizzontale?`,
+      dopo: r`Con il muro fermo i termini della base spariscono: la molla vale $-Kx_G$ e lo smorzatore $-c\dot x_G$, come nella forzata classica. È il caso particolare delle formule generali con $x_V = 0$.`,
+    },
+    'd132.2': {
+      tappa: 1,
+      prima: r`Quale forza arriva al muro? La forzante agisce sulla massa e non tocca il muro: al muro arriva solo ciò che passa attraverso molla e smorzatore. Per azione e reazione, sul muro agisce l'opposto della forza che questi esercitano sulla massa.`,
+      dopo: r`La forza trasmessa è $Kx_G + c\dot x_G$: la molla trasmette in proporzione allo spostamento, lo smorzatore alla velocità. È la forza che può rompere i supporti: i duomi delle sospensioni di un'auto su una buca, o il pavimento sotto la pressa. Controllo: con la massa ferma il muro non riceve nulla.`,
+    },
+    'd132.3': {
+      tappa: 1,
+      prima: r`Sostituisci la risposta a regime della forzata, $x_G = X_0\sin(\omega t - \varphi)$, e la sua velocità. La molla dà un seno, lo smorzatore un coseno con un fattore ω. Due oscillazioni in quadratura: si compongono in un'unica sinusoide con ampiezza uguale alla radice della somma dei quadrati.`,
+      dopo: r`La forza trasmessa è una sinusoide di ampiezza $X_0\sqrt{K^2 + (c\omega)^2}$, sfasata di un angolo in più dovuto allo smorzatore. In complesso è $\hat X(K + i\omega c)e^{i\omega t}$: lo stesso numeratore della trasmissibilità di spostamento. È il primo indizio che le due funzioni coincideranno.`,
+    },
+    'd132.4': {
+      tappa: 1,
+      prima: r`Ci serve l'ampiezza della forza trasmessa in funzione della forza applicata. Prendi l'ampiezza appena trovata e sostituisci $X_0$ con la sua espressione dalla forzata: forza diviso modulo della rigidezza dinamica.`,
+      dopo: r`Ora la forza trasmessa è espressa con i dati: $F_0$ per un rapporto di due radici. A frequenza nulla vale $F_0$: tutta la forza statica va al muro, come ti aspetti quando spingi una massa appoggiata a una molla.`,
+    },
+    'd132.5': {
+      tappa: 1,
+      prima: r`Dividi l'ampiezza della forza trasmessa per $F_0$: resta il rapporto delle due radici. Poi dividi sopra e sotto per K, con le solite sostituzioni $c\omega/K = 2\xi\rho$ e $\omega^2m/K = \rho^2$. Confronta il risultato con quello della d130.`,
+      dopo: r`È esattamente la stessa espressione della trasmissibilità di spostamento. Anche qui la dispensa ha il refuso $(1 + \rho^2)^2$ al denominatore. Controllo: se contassi solo la molla otterresti A; il numeratore $\sqrt{1 + 4\xi^2\rho^2}$ è la forza che passa per lo smorzatore.`,
+    },
+    'd132.6': {
+      tappa: 2,
+      prima: r`Abbiamo due problemi diversi e una formula identica. Chiediti che cosa vuol dire: le due funzioni hanno lo stesso numeratore (il collegamento $K + i\omega c$) e lo stesso denominatore (la rigidezza dinamica). Cosa cambia allora fra i due casi?`,
+      dopo: r`Cambia solo il significato: in un caso spostamento della massa su spostamento della base, nell'altro forza al muro su forza applicata. Le zone di amplificazione e di isolamento e il punto $(\sqrt2, 1)$ valgono per entrambi. Una sola teoria serve a proteggere sia lo strumento dal pavimento sia il pavimento dalla macchina.`,
+    },
+    'd133.1': {
+      tappa: 2,
+      prima: r`Isolare vuol dire che esce meno di quanto entra: $T_R < 1$. Le radici sono scomode. Siccome $T_R$ è positivo, essere minore di 1 equivale ad avere il quadrato minore di 1. Così si lavora con un rapporto di polinomi.`,
+      dopo: r`Ora basta studiare il segno di $T_R^2 - 1$: negativo vuol dire isolamento, positivo amplificazione. Elevare al quadrato è lecito perché entrambi i membri sono positivi e l'ordine si conserva.`,
+    },
+    'd133.2': {
+      tappa: 2,
+      prima: r`Calcola $T_R^2 - 1$ mettendo tutto sullo stesso denominatore. Al numeratore resta $1 + 4\xi^2\rho^2$ meno il denominatore. Guarda bene: i termini con lo smorzamento si eliminano. Sviluppa poi $1 - (1 - \rho^2)^2$ ricordando il doppio prodotto, e raccogli $\rho^2$.`,
+      dopo: r`Il numeratore è $\rho^2(2 - \rho^2)$, senza ξ; il denominatore è sempre positivo. Quindi il segno di $T_R - 1$ dipende solo da $2 - \rho^2$, non dallo smorzamento. È per questo che tutte le curve si incrociano nello stesso punto.`,
+    },
+    'd133.3': {
+      tappa: 2,
+      prima: r`Leggi il segno: $\rho^2$ è positivo, quindi tutto dipende da $2 - \rho^2$. Quando è negativo? Quando è zero? Traduci ogni caso in isolamento o amplificazione.`,
+      dopo: r`Si isola solo per ρ > $\sqrt2$, per qualunque smorzamento; a $\sqrt2$ la trasmissibilità vale esattamente 1; sotto si amplifica sempre. La dispensa chiama «zona di isolamento» la zona sotto $\sqrt2$: è sbagliato, e ora sai dimostrarlo. Non confondere la soglia con la risonanza ρ = 1.`,
+    },
+    'd133.4': {
+      tappa: 3,
+      prima: r`Ora: come agisce lo smorzamento? Deriviamo $T_R^2$ rispetto a $\xi^2$, che compare sopra e sotto con lo stesso coefficiente $4\rho^2$. Usa la regola del quoziente: derivata del numeratore per denominatore meno numeratore per derivata del denominatore, tutto sul denominatore al quadrato. Poi guarda il segno.`,
+      dopo: r`La derivata ha il segno di $\rho^2 - 2$. Sotto $\sqrt2$ è negativa: lo smorzamento abbassa il picco, bene. Sopra $\sqrt2$ è positiva: più smorzamento, più trasmissione. Lo smorzatore è un collegamento rigido in più. A ρ = 2: 0,36 con ξ = 0,1 e 0,62 con ξ = 0,5. Il manoscritto dice il contrario; il testo battuto ha ragione.`,
+    },
+    'd133.5': {
+      tappa: 3,
+      prima: r`Traduciamo in regola di progetto. ρ è il rapporto fra pulsazioni, ma anche fra frequenze: $\rho = f/f_m$, con f la frequenza della sorgente e $f_m$ quella naturale del supporto. La sorgente è data. Imponi ρ > $\sqrt2$ e ricava che cosa deve fare $f_m$.`,
+      dopo: r`La frequenza naturale del supporto deve stare sotto $f/\sqrt2$: per isolare si **ammorbidisce** la sospensione, non la si irrigidisce. Per la pressa da 120 colpi al minuto, cioè 2 Hz, serve un supporto sotto 1,41 Hz.`,
+    },
+    'd133.6': {
+      tappa: 3,
+      prima: r`Come si riconosce un supporto abbastanza morbido? Ricorda che la pulsazione naturale si legge dalla freccia statica, quanto il supporto cede sotto il peso: $\omega_m^2 = g/x^{ST}$. Sostituisci nella condizione $\omega_m^2 < \omega^2/2$ e ricava $x^{ST}$. Poi metti i numeri della pressa, $\omega = 4\pi$ rad/s.`,
+      dopo: r`Il supporto deve cedere staticamente più di $2g/\omega^2$: per la pressa più di circa 12 cm. Ecco perché gli isolatori sono molle morbide. In zona di isolamento conviene poco smorzamento, ma un po' serve: all'avviamento la macchina attraversa la risonanza, e lì lo smorzamento limita il picco.`,
+    },
+  },
+  racconto: r`All'orale dici che la trasmissibilità misura quanto di una vibrazione passa attraverso la sospensione, e che vale in due problemi: base che si muove (spostamento della massa su spostamento della base) e forza sulla massa con base ferma (forza al muro su forza applicata). In entrambi è il rapporto dei moduli di $K + i\omega c$ e della rigidezza dinamica, cioè $T_R = \sqrt{1 + 4\xi^2\rho^2}/\sqrt{(1 - \rho^2)^2 + 4\xi^2\rho^2}$. Disegni il grafico con il punto $(\sqrt2, 1)$, mostri che $T_R^2 - 1 = \rho^2(2 - \rho^2)/D$, quindi si isola solo per ρ > $\sqrt2$, cioè $f_m < f/\sqrt2$, e chiudi con lo smorzamento che lì peggiora l'isolamento. Esempio: la pressa.`,
+};
+
 export const LEZIONI: Record<string, LezioneArgomento> = {
   'c7-forzate': forzate,
   'c7-eccentrica': eccentrica,
+  'c7-vincolo': vincolo,
+  'c7-trasmissibilita': trasmissibilita,
 };

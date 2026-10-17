@@ -459,7 +459,149 @@ const dentiPresa: LezioneArgomento = {
     "All'orale dici che con l'evolvente il contatto corre sulla retta di pressione, ma solo fra le due circonferenze di testa: è il segmento dei contatti AB, con B inizio (accesso) e A fine (recesso). Lo calcoli spezzandolo in AC e CB: Pitagora nei triangoli $O_1H_1A$ e $O_2H_2B$, meno $R\\sin\\theta$. Poi passi all'arco d'azione sulla primitiva: la retta srotola la fondamentale, quindi $\\ell = \\overline{AB}/\\cos\\theta$. Dividendo per il passo hai $z_p = \\overline{AB}/(p\\cos\\theta) \\ge 1$, condizione di continuità del moto, indipendente dal modulo. Aggiungi che $p\\cos\\theta$ è il passo di base, la distanza fra due contatti successivi sulla retta.",
 };
 
+// ------------------------------------------------------------------ c5-interferenza
+const interferenza: LezioneArgomento = {
+  perche:
+    "Vuoi un riduttore compatto, quindi un pignone piccolo, con pochi denti, che ingrana con una ruota grande. A un certo punto, però, se togli ancora denti al pignone, gli ingranaggi non girano più bene: la punta dei denti della ruota grande va a scavare nella base dei denti del pignone. In officina, per non farli bloccare, la dentatrice stessa asporta materiale alla base del dente e lo indebolisce. È l'interferenza. La domanda della lezione è: **quanti denti deve avere, come minimo, la ruota piccola perché questo non succeda?** La risposta è un numero famoso: circa 17 con θ = 20°.",
+  idea:
+    "Un fianco a evolvente esiste solo fuori dalla circonferenza fondamentale, perché l'evolvente nasce lì. Sulla retta di pressione questo vuol dire una cosa precisa: i contatti «buoni», fra due evolventi, sono possibili solo fra i punti di tangenza $H_1$ e $H_2$. Oltre $H_2$, per esempio, si è già dentro la fondamentale della ruota 2, dove il suo fianco non è più evolvente.\n\nIl contatto, d'altra parte, va da B ad A, dove le teste tagliano la retta. Allora la regola è semplice: **A e B devono restare dentro $H_1H_2$**. La testa della ruota grande è quella che arriva più lontano, quindi il caso critico è A che raggiunge $H_2$. Tradurre «A non oltre $H_2$» in numeri richiede la distanza di $H_2$ da $O_1$, che si trova con il teorema di Carnot. Poi si scrivono i raggi con m e z, il modulo sparisce e resta un numero minimo di denti della ruota piccola, che dipende dal rapporto e da θ. Con la dentiera il conto si fa a occhio e viene $2/\\sin^2\\theta$.",
+  richiami: [
+    { titolo: 'Teorema di Carnot (del coseno)', testo: "In un triangolo qualsiasi, il quadrato di un lato è la somma dei quadrati degli altri due meno il loro doppio prodotto per il coseno dell'angolo compreso: $c^2 = a^2 + b^2 - 2ab\\cos\\gamma$. Se l'angolo è retto il coseno è zero e torni a Pitagora. Si ricava scrivendo un lato come somma vettoriale degli altri due e facendone il quadrato scalare." },
+    { titolo: 'Fondamentale, primitiva, testa', testo: "Ogni ruota ha tre circonferenze. La fondamentale $R_f = R\\cos\\theta$, su cui nasce l'evolvente; la primitiva $R = mz/2$, quella che rotola; la testa $R + a$, con a = m, dove finiscono i denti. Il fianco del dente è un'evolvente solo dalla fondamentale in su." },
+    { titolo: 'Segmento dei contatti AB', testo: "Il contatto fra i denti corre sulla retta di pressione da B, dove la testa della ruota 2 taglia la retta, ad A, dove la taglia la testa della ruota 1. A sta dalla parte di $H_2$, B dalla parte di $H_1$. Più i denti sono alti, più AB è lungo." },
+    { titolo: 'Disuguaglianze e radici', testo: "Se due numeri sono positivi, si possono elevare al quadrato o invertire mantenendo il confronto (invertendo, il verso si rovescia). Prima di farlo bisogna sempre controllare che i due membri siano positivi, altrimenti il verso può cambiare." },
+  ],
+  ipotesiPerche: [
+    "Chiamare 1 la ruota grande e 2 la piccola fissa le idee: il numero minimo di denti riguarda la piccola, ed è la testa della grande quella pericolosa. Il rapporto in modulo è quindi almeno 1.",
+    "Servono per scrivere tutti i raggi con m e z: il modulo si semplificherà e il risultato dipenderà solo dai numeri di denti.",
+    "All'interasse nominale le primitive si toccano in C e la distanza dei centri è $R_1 + R_2$, il lato del triangolo di Carnot. θ è il dato che decide il numero finale.",
+  ],
+  disegnoGuida:
+    "Disegna la ruota grande 1 a sinistra e la piccola 2 a destra, con le primitive che si toccano in C sull'interasse. Traccia la retta di pressione, tangente alle fondamentali in $H_1$ e $H_2$. Disegna le circonferenze di testa e segna gli incroci con la retta: A per la testa della ruota 1, vicino a $H_2$, e B per la testa della ruota 2, vicino a $H_1$. Nota che A arriva molto più vicino a $H_2$ di quanto B arrivi a $H_1$: è il caso critico. Ora evidenzia, magari in grigio, il triangolo $O_1O_2H_2$: ha l'angolo θ in $O_2$, fra $O_2H_2$ e l'interasse. Segna i due segmenti da confrontare, $O_1A = R_1 + a$ e $O_1H_2$. A parte, disegna il caso dentiera, con la primitiva retta per C e la testa parallela a distanza a.",
+  mappa: [
+    'Capisco che cos\'è l\'interferenza: la punta lavora dove l\'altro fianco non è evolvente.',
+    'Scrivo la condizione: A e B dentro H₁H₂, e il caso critico è A che arriva in H₂.',
+    'Traduco la condizione in raggi con il teorema di Carnot.',
+    'Scrivo i raggi con i denti e ricavo il numero minimo di denti della ruota piccola.',
+    'Guardo il caso dentiera e metto i numeri con θ = 20°.',
+  ],
+  dims: {
+    d081: {
+      introduzione:
+        "Prima di fare conti dobbiamo capire esattamente quando c'è interferenza e trasformare la cosa in una condizione geometrica precisa. La strategia è: vedere dove i contatti a evolvente sono possibili sulla retta di pressione, capire quale estremo del segmento dei contatti rischia di uscire, e poi scrivere quella condizione con le distanze da $O_1$, usando Carnot.",
+      riepilogo:
+        "L'interferenza è la punta di un dente che lavora contro la parte di fianco dell'altra ruota che non è evolvente. Sulla retta di pressione questo si evita se A e B restano fra $H_1$ e $H_2$. Il caso critico è la testa della ruota grande: deve restare dentro la distanza $O_1H_2$. Con Carnot nel triangolo $O_1O_2H_2$ abbiamo scritto $O_1H_2$ con i raggi, e abbiamo visto che la condizione equivale a $CA \\le CH_2$.",
+    },
+    d082: {
+      introduzione:
+        "Abbiamo la condizione con i raggi. Ora vogliamo un numero di denti. La strategia è sostituire raggi e addendum con m e z, dividere per il modulo e poi per $z_2/2$ per far comparire il rapporto, semplificare con $\\cos^2 + \\sin^2 = 1$ e isolare $z_2$. Poi guardiamo il limite della dentiera, lo verifichiamo con un conto diretto e mettiamo i numeri.",
+      riepilogo:
+        "Scrivendo i raggi con i denti il modulo sparisce, e dividendo per $z_2/2$ compare il rapporto $|\\tau|$. Dopo la semplificazione trigonometrica si isola $z_2$: il minimo dipende da $|\\tau|$ e da θ. Al crescere del rapporto il minimo cresce, fino al limite della dentiera, $2/\\sin^2\\theta$, che ritroviamo anche con un conto diretto. Con θ = 20° servono almeno 15 denti con $|\\tau| = 2$ e 18 con la dentiera, che è la scelta prudente per tutte le ruote esterne.",
+    },
+  },
+  passi: {
+    'd081.1': {
+      tappa: 0,
+      prima: "Ricorda dove il fianco del dente è un'evolvente: solo dalla fondamentale in su. Se il fondo del vano sta sotto la fondamentale, cosa che succede con pochi denti, quel tratto di fianco ha un'altra forma e non è coniugato al profilo dell'altra ruota. Chiediti: che cosa succede se la punta di un dente dell'altra ruota arriva a lavorare proprio lì?",
+      dopo: "I due profili non sono più coniugati: la punta di un dente entra nel fondo del vano dell'altro, cioè i denti si compenetrano. È l'interferenza. In pratica o le ruote si bloccano, o il dente viene scavato alla base e diventa più debole.",
+    },
+    'd081.2': {
+      tappa: 1,
+      prima: "Traduciamo sulla retta di pressione. Su di essa il contatto fra due evolventi è possibile solo dove entrambe esistono. Oltre $H_2$, verso l'esterno, saresti dentro la fondamentale della ruota 2; oltre $H_1$, dentro quella della ruota 1. E il contatto dove va? Da B ad A.",
+      dopo: "Non c'è interferenza se A e B stanno tutti e due nel tratto $H_1H_2$. Basta che uno solo dei due esca per avere interferenza. Così un problema di forme dei denti è diventato un confronto fra punti su una retta.",
+    },
+    'd081.3': {
+      tappa: 1,
+      prima: "Quale dei due estremi rischia di più? Pensa alle teste: la ruota grande ha un raggio grande, e la sua testa taglia la retta lontano da C, molto vicino a $H_2$. La ruota piccola invece arriva sulla retta presto, lontano da $H_1$. Quindi basta controllare un estremo. Come lo scrivi con le distanze da $O_1$?",
+      dopo: "Il caso critico è A che raggiunge $H_2$: se la circonferenza di testa della ruota 1 non arriva oltre $H_2$, cioè $O_1A \\le O_1H_2$, va tutto bene, e anche B è al sicuro. Controllo: con due ruote uguali il problema sarebbe simmetrico, e i due estremi rischierebbero allo stesso modo.",
+    },
+    'd081.4': {
+      tappa: 1,
+      prima: "Il membro di sinistra è facile. A sta sulla circonferenza di testa della ruota 1. Qual è il raggio di quella circonferenza, in funzione del raggio primitivo e dell'addendum?",
+      dopo: "La distanza di A da $O_1$ è il raggio di testa, primitivo più addendum. Il lato difficile è l'altro, $O_1H_2$, perché $H_2$ è un punto della ruota 2 e va misurato dal centro della ruota 1.",
+    },
+    'd081.5': {
+      tappa: 2,
+      prima: "Come troviamo $O_1H_2$? Guarda il triangolo $O_1O_2H_2$. Conosci due lati, l'interasse $O_1O_2$ e il raggio fondamentale $O_2H_2$, e l'angolo fra loro in $O_2$, che è θ. Quale teorema dà il terzo lato quando conosci due lati e l'angolo compreso, in un triangolo che non è rettangolo?",
+      dopo: "È il teorema di Carnot: il quadrato di $O_1H_2$ è la somma dei quadrati degli altri due lati meno il doppio prodotto per cos θ. Il meno nasce perché, sommando i vettori, l'angolo fra $H_2 - O_2$ e $O_2 - O_1$ è $\\pi - \\theta$, e il suo coseno è $-\\cos\\theta$.",
+    },
+    'd081.6': {
+      tappa: 2,
+      prima: "Sostituisci nella formula di Carnot i due lati noti: l'interasse nominale è la somma dei raggi primitivi, e $O_2H_2$ è il raggio fondamentale della ruota 2, cioè il primitivo per cos θ. Fai attenzione: nel doppio prodotto il cos θ compare due volte.",
+      dopo: "Abbiamo $O_1H_2$ scritto solo con i raggi primitivi e θ. Il doppio prodotto ha $\\cos^2\\theta$: un cos θ viene dal raggio fondamentale, l'altro dall'angolo di Carnot.",
+    },
+    'd081.7': {
+      tappa: 2,
+      prima: "Ora mettiamo insieme i due lati della condizione $O_1A \\le O_1H_2$: a sinistra il raggio di testa della ruota 1, a destra la radice dell'espressione di Carnot appena trovata.",
+      dopo: "È la condizione di non interferenza scritta con i raggi: la testa della ruota 1 deve restare dentro il cerchio di raggio $O_1H_2$. Da qui partirà il conto del numero minimo di denti.",
+    },
+    'd081.8': {
+      tappa: 2,
+      prima: "C'è un modo più intuitivo di vedere la stessa condizione, sulla retta stessa. A e $H_2$ stanno sulla retta di pressione, che è perpendicolare a $O_1H_1$. Per Pitagora, la distanza da $O_1$ di un punto della retta si trova con $R_{f1}$ e con la distanza da $H_1$. Allora, quale punto è più lontano da $O_1$?",
+      dopo: "Quello più lontano da $H_1$. Quindi confrontare le distanze da $O_1$ equivale a confrontare le posizioni sulla retta: $CA \\le CH_2$. È la forma che la dispensa usa per la dentiera, dove i raggi della ruota 1 sono infiniti.",
+    },
+    'd082.1': {
+      tappa: 3,
+      prima: "Riprendiamo la condizione geometrica appena trovata. Ricorda cosa dice: il raggio di testa della ruota grande non deve superare la distanza fra $O_1$ e $H_2$. È tutta scritta con i raggi; ora la porteremo nei denti.",
+      dopo: "Questa è la disuguaglianza da cui parte il conto. Nota che tutti i termini hanno le dimensioni di una lunghezza: sono raggi o addendum. Questo farà sparire il modulo al passo successivo.",
+    },
+    'd082.2': {
+      tappa: 3,
+      prima: "Proporzionamento modulare: l'addendum è un modulo, ogni raggio primitivo è $mz/2$. Sostituisci queste espressioni dappertutto. Poi guarda: ogni termine contiene m, anche sotto radice, dove c'è $m^2$. Dividi tutto per m.",
+      dopo: "La condizione non dipende più dal modulo: a sinistra c'è $z_1/2 + 1$, sotto radice solo numeri di denti e θ. È un risultato importante: l'interferenza è una questione di numeri di denti, non di grandezza del dente.",
+    },
+    'd082.3': {
+      tappa: 3,
+      prima: "Vogliamo far comparire il rapporto $|\\tau| = z_1/z_2$. Dividi entrambi i membri per $z_2/2$. A sinistra viene $z_1/z_2 + 2/z_2$. Sotto radice, dividere la radice per $z_2/2$ vuol dire dividere ogni termine per $z_2^2/4$.",
+      dopo: "Ora la disuguaglianza contiene solo $|\\tau|$, θ e, a sinistra, $2/z_2$: l'incognita compare una sola volta. È la forma giusta per isolare $z_2$.",
+    },
+    'd082.4': {
+      tappa: 3,
+      prima: "Semplifichiamo il sotto radice. Sviluppa $(|\\tau|+1)^2$ e moltiplica il termine $2(|\\tau|+1)\\cos^2\\theta$. Poi raggruppa: un pezzo $2|\\tau|$ con $-2|\\tau|\\cos^2\\theta$, un pezzo $1$ con $\\cos^2\\theta - 2\\cos^2\\theta$. Che cosa riconosci in $1 - \\cos^2\\theta$?",
+      dopo: "È $\\sin^2\\theta$, e il sotto radice diventa $\\tau^2 + (2|\\tau|+1)\\sin^2\\theta$. Controllo: con θ = 0 la radice vale $|\\tau|$, e la condizione diventerebbe $2/z_2 \\le 0$, impossibile. Ha senso: con θ nullo $H_2$ coinciderebbe con C e non resterebbe spazio per il contatto.",
+    },
+    'd082.5': {
+      tappa: 3,
+      prima: "Isoliamo $z_2$. Porta $|\\tau|$ a destra: a sinistra resta $2/z_2$. Il membro di destra è positivo, perché la radice supera $|\\tau|$. Allora puoi invertire entrambi i membri, ricordando che invertendo il verso della disuguaglianza si rovescia.",
+      dopo: "Il numero di denti della ruota piccola deve essere almeno $f(|\\tau|, \\theta)$: è il numero minimo per evitare l'interferenza. Dipende solo dal rapporto e dall'angolo di pressione.",
+    },
+    'd082.6': {
+      tappa: 4,
+      prima: "Che cosa succede se il rapporto cresce sempre di più? La forma con la differenza al denominatore è scomoda per fare il limite. Razionalizza: moltiplica sopra e sotto per la radice più $|\\tau|$. Poi chiediti che cosa vuol dire fisicamente $|\\tau| \\to \\infty$, cioè $R_1$ che va all'infinito.",
+      dopo: "Il limite è $2/\\sin^2\\theta$, e corrisponde alla dentiera, una ruota di raggio infinito. Siccome f cresce con $|\\tau|$, la dentiera dà il valore più grande: usarla per tutte le ruote esterne è una scelta prudente, che garantisce l'assenza di interferenza.",
+    },
+    'd082.7': {
+      tappa: 4,
+      prima: "Rifacciamo il caso dentiera direttamente, è più semplice. La primitiva della dentiera è una retta per C, e la sua testa è una retta parallela, a distanza a. La retta di pressione la taglia in A. Che lunghezza ha CA, se la retta di pressione è inclinata di θ sulla primitiva? E $CH_2$, nel triangolo $O_2CH_2$?",
+      dopo: "CA è a diviso sin θ, perché a è il cateto opposto all'angolo θ e CA l'ipotenusa. $CH_2$ è $R_2\\sin\\theta$. Controllo: un addendum più grande allontana A da C, ed è giusto, perché denti più alti arrivano più lontano.",
+    },
+    'd082.8': {
+      tappa: 4,
+      prima: "Imponi che A non vada oltre $H_2$, cioè $CA \\le CH_2$. Moltiplica per sin θ, poi sostituisci a = m e $R_2 = mz_2/2$ e semplifica il modulo.",
+      dopo: "Si ottiene $z_2 \\ge 2/\\sin^2\\theta$, esattamente il limite della formula generale. Due strade diverse, il limite e il conto diretto, danno lo stesso numero: buon segno.",
+    },
+    'd082.9': {
+      tappa: 4,
+      prima: "Mettiamo i numeri in un caso tipico: rapporto 2 in modulo e θ = 20°. Calcola $\\sin^2 20^\\circ \\approx 0{,}117$, poi la radice di $4 + 5\\cdot 0{,}117$ e sottrai 2. Infine 2 diviso il risultato. Ricorda che i denti sono numeri interi.",
+      dopo: "Viene 14,16, quindi servono almeno 15 denti: si arrotonda sempre per eccesso, perché 14 denti darebbero interferenza. È il minimo vero per questo rapporto, ottenuto con la formula esatta.",
+    },
+    'd082.10': {
+      tappa: 4,
+      prima: "Ora la formula della dentiera con θ = 20°: 2 diviso $\\sin^2 20^\\circ$. Ragiona su quando usarla: vale per la dentiera, ma siccome dà il valore più grande, va bene anche per ogni ruota esterna.",
+      dopo: "Viene 17,10, quindi 18 denti. È il famoso «17» del grafico della dispensa. Usata per una ruota esterna è conservativa: garantisce l'assenza di interferenza al prezzo di qualche dente in più.",
+    },
+    'd082.11': {
+      tappa: 4,
+      prima: "Riassumiamo quando usare ciascuna formula, come nella tabella della dispensa. Ruote esterne: τ negativo e f cresce verso il limite della dentiera. Ruote interne: τ positivo, e la geometria cambia. Chiediti se il valore della dentiera è ancora un limite superiore in quel caso.",
+      dopo: "Per le ruote esterne vanno bene sia la formula esatta sia la conservativa; per la dentiera solo la conservativa; per le ruote interne la conservativa non basta più e serve la formula con τ. È la tabella da ricordare all'orale.",
+    },
+  },
+  racconto:
+    "All'orale definisci l'interferenza: la punta del dente di una ruota lavora contro la parte di fianco dell'altra che sta sotto la fondamentale, che non è evolvente, e i denti si compenetrano. Sulla retta di pressione i contatti a evolvente sono possibili solo fra $H_1$ e $H_2$, quindi A e B devono restare lì dentro; il caso critico è la testa della ruota grande, che non deve superare $H_2$: $R_1 + a \\le O_1H_2$. Con Carnot nel triangolo $O_1O_2H_2$ e i raggi scritti con m e z, il modulo sparisce e arrivi a $z_2 \\ge 2/(\\sqrt{\\tau^2 + (2|\\tau|+1)\\sin^2\\theta} - |\\tau|)$. Chiudi con la dentiera, $2/\\sin^2\\theta \\approx 17$ con θ = 20°, valore prudente per tutte le ruote esterne.",
+};
+
 export const LEZIONI: Record<string, LezioneArgomento> = {
   'c5-ruote-dentate': ruoteDentate,
   'c5-denti-presa': dentiPresa,
+  'c5-interferenza': interferenza,
 };
