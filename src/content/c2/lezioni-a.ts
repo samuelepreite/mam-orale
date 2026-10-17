@@ -181,7 +181,7 @@ Nell'auto in curva la storia è identica. La forza centrifuga agisce nel baricen
     'd034.6': {
       tappa: 4,
       prima: r`Anche l'auto, come il blocco, può perdere l'equilibrio in un altro modo: slittando verso l'esterno. La velocità di slittamento è $\sqrt{f_{ad}gR}$, che ricaverai nella lezione sul veicolo. Per sapere cosa succede prima, fai il rapporto dei quadrati delle due velocità e semplifica.`,
-      dopo: r`L'auto si ribalta prima se $c/(2h) < f_{ad}$: è la stessa condizione del blocco, con la carreggiata al posto della base. Le auto normali hanno $c/(2h)$ ben sopra 1 e quindi slittano prima di ribaltarsi; un veicolo alto e stretto su un asfalto molto aderente rischia invece il ribaltamento.`,
+      dopo: r`L'auto si ribalta prima se $c/(2h) < f_{ad}$: è la stessa condizione del blocco, con la carreggiata al posto della base. Le auto normali hanno $c/(2h)$ sopra 1 (circa 1,4) e quindi slittano prima di ribaltarsi; un veicolo alto e stretto su un asfalto molto aderente rischia invece il ribaltamento.`,
     },
   },
   racconto: r`All'orale direi subito che un corpo appoggiato perde l'equilibrio in due modi: slitta quando la tangenziale richiesta supera $f_{ad}F_N$, ribalta quando la risultante delle pressioni normali arriva al bordo dell'appoggio, perché il suolo può solo spingere. Per il blocco spinto a quota h la normale si sposta di $b = Fh/(Mg)$; con $b = s/2$ trovo $F_{rib} = Mg\,s/(2h)$ e, confrontando con $f_{ad}Mg$, ribalta prima se $s/(2h) < f_{ad}$. Per l'auto in curva aggiungo la centrifuga in G, scrivo i momenti rispetto alla ruota esterna e ottengo il carico sulla ruota interna; annullandolo trovo $v = \sqrt{Rcg/(2h)}$. Chiudo con il confronto con lo slittamento.`,

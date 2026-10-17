@@ -204,7 +204,7 @@ Per l'attrito, ogni sfera rotola con un po' di attrito volvente: la forza che ri
     'd037.9': {
       tappa: 5,
       prima: r`Passiamo all'attrito. Ogni elemento rotola deformandosi, come la ruota della lezione sull'attrito volvente: la forza che riceve non passa più per il suo centro, ma è spostata di u. Se la forza è inclinata di un angolo α rispetto alla direzione radiale, la sua distanza dal centro dell'elemento è il raggio per il seno di α.`,
-      dopo: r`Il seno dell'angolo di inclinazione è u diviso il raggio dell'elemento, cioè il coefficiente volvente $f_v$. Attenzione: qui R è il raggio dell'elemento (nella cinematica lo chiamavamo r). L'angolo è piccolissimo, perché $f_v$ vale circa 0,001–0,01.`,
+      dopo: r`Il seno dell'angolo di inclinazione è u diviso il raggio dell'elemento, cioè il coefficiente volvente $f_v$. Attenzione: qui R è il raggio dell'elemento (nella cinematica lo chiamavamo r). L'angolo è piccolissimo, perché $f_v$ è un numero molto minore di 1.`,
     },
     'd037.10': {
       tappa: 5,

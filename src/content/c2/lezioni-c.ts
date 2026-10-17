@@ -137,7 +137,7 @@ Ecco perché conta quali ruote sono motrici. Con la trazione anteriore, accelera
     'd032.5': {
       tappa: 2,
       prima: r`È la condizione dei dragster, le auto da accelerazione: si sfrutta tutta l'aderenza e il muso è al limite del sollevamento. Imponi che la normale anteriore sia zero e scrivi i momenti rispetto al contatto posteriore. Quali forze restano con un momento?`,
-      dopo: r`Restano solo il peso, con braccio $l_2$, e l'inerzia, con braccio h: l'accelerazione vale $gl_2/h$. Tutto il peso sta sul posteriore e la forza al suolo è $f_{ad}Mg$, quindi $a = f_{ad}g$: è il massimo possibile con un solo asse motore. Ecco perché i dragster hanno il baricentro basso e molto arretrato rispetto al muso lunghissimo.`,
+      dopo: r`Restano solo il peso, con braccio $l_2$, e l'inerzia, con braccio h: l'accelerazione vale $gl_2/h$. Tutto il peso sta sul posteriore e la forza al suolo è $f_{ad}Mg$, quindi $a = f_{ad}g$: è il massimo possibile con un solo asse motore. Ecco perché i dragster hanno il passo lunghissimo e il baricentro basso: $l_2/h$ grande alza questo limite.`,
     },
     'd032.6': {
       tappa: 2,
