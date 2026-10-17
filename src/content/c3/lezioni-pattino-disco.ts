@@ -112,7 +112,7 @@ export const pattinoLezione: LezioneArgomento = {
     'd045.4': {
       tappa: 4,
       prima: r`Dove questa retta incontra il nastro? A è a quota a sopra il nastro. Scendendo di a lungo una retta inclinata di φ rispetto alla verticale, ci si sposta orizzontalmente di a tg φ, cioè a f. Il punto di arrivo è dove deve cadere la risultante delle pressioni.`,
-      dopo: r`Il centro di pressione è a $x_A - af$: la retta parte da A e, scendendo, si sposta verso monte rispetto al nastro. Controllo di progetto: questo punto deve cadere dentro il pattino, altrimenti il pattino si alzerebbe da una parte e la pressione non potrebbe equilibrarlo.`,
+      dopo: r`Il centro di pressione è a $x_A - af$: scendendo da A fino al nastro la retta si sposta orizzontalmente di af, dalla parte imposta dal verso del nastro. Controllo di progetto: questo punto deve cadere dentro il pattino, altrimenti il pattino si alzerebbe da una parte e la pressione non potrebbe equilibrarlo.`,
     },
     'd045.5': {
       tappa: 4,
