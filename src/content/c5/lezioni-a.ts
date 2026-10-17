@@ -600,8 +600,199 @@ const interferenza: LezioneArgomento = {
     "All'orale definisci l'interferenza: la punta del dente di una ruota lavora contro la parte di fianco dell'altra che sta sotto la fondamentale, che non è evolvente, e i denti si compenetrano. Sulla retta di pressione i contatti a evolvente sono possibili solo fra $H_1$ e $H_2$, quindi A e B devono restare lì dentro; il caso critico è la testa della ruota grande, che non deve superare $H_2$: $R_1 + a \\le O_1H_2$. Con Carnot nel triangolo $O_1O_2H_2$ e i raggi scritti con m e z, il modulo sparisce e arrivi a $z_2 \\ge 2/(\\sqrt{\\tau^2 + (2|\\tau|+1)\\sin^2\\theta} - |\\tau|)$. Chiudi con la dentiera, $2/\\sin^2\\theta \\approx 17$ con θ = 20°, valore prudente per tutte le ruote esterne.",
 };
 
+// ------------------------------------------------------------------ c5-forze-dritti
+const forzeDritti: LezioneArgomento = {
+  perche:
+    "Per dimensionare un ingranaggio non basta sapere quanto girano le ruote: devi sapere con che forza si spingono i denti, perché da quella forza dipendono la resistenza del dente, il carico sui cuscinetti e la flessione degli alberi. E devi sapere quanta potenza si perde: un riduttore che scalda è un riduttore che spreca energia. La domanda della lezione è doppia: **quanto vale la forza fra due denti, e come si scompone? E che cosa cambia quando c'è attrito, cioè dove e quanto si perde?**",
+  idea:
+    "Se i denti fossero perfettamente lisci, si spingerebbero solo lungo la normale al contatto. Con l'evolvente la normale comune è sempre la retta di pressione: la forza ha quindi una direzione fissa, e il suo braccio rispetto al centro di ogni ruota è il raggio fondamentale. Scomponendola nel punto C ottieni due pezzi: uno tangente alle primitive, che fa la coppia, e uno radiale, che non fa coppia ma spinge le ruote a separarsi e carica i supporti.\n\nCon l'attrito c'è anche una forza tangente ai denti, cioè perpendicolare alla retta di pressione. Il suo verso dipende da come striscia un dente sull'altro: in C non striscia nessuno, prima e dopo C lo strisciamento ha versi opposti. Per questo i conti si dividono in due fasi, accesso e recesso. L'attrito cambia i bracci negli equilibri, e il rapporto fra potenza uscente ed entrante, il rendimento istantaneo, vale 1 in C e cala allontanandosi. La potenza persa, alla fine, è proporzionale alla distanza del contatto da C.",
+  richiami: [
+    { titolo: 'Equilibrio alla rotazione (II equazione cardinale)', testo: "Per una ruota che gira a velocità costante attorno a un centro fisso, la somma dei momenti attorno a quel centro è zero. Il momento di una forza è forza per braccio, e il braccio è la distanza del centro dalla retta della forza, non dal punto in cui la forza è applicata. Una forza la cui retta passa per il centro non dà momento." },
+    { titolo: 'Attrito radente di Coulomb', testo: "Quando due superfici strisciano, nasce una forza tangente alle superfici, opposta alla velocità con cui una scivola sull'altra, di modulo f volte la forza normale: $F_T = f F_N$. Il verso è la cosa delicata: è opposto alla velocità **relativa** del corpo su cui agisce rispetto all'altro." },
+    { titolo: 'Azione e reazione', testo: "La forza che la ruota 2 esercita sulla ruota 1 è uguale e opposta a quella che la 1 esercita sulla 2: $F^{1,2} = -F^{2,1}$. Stessa retta, stesso modulo, verso opposto. Così basta trovare la forza su una ruota per conoscerla anche sull'altra." },
+    { titolo: 'Velocità relativa fra i denti', testo: "Nella legge dell'ingranamento abbiamo visto che C è il C.I.R. del moto relativo: la velocità del dente 2 rispetto al dente 1 è $(\\omega_2 - \\omega_1) \\wedge (P - C)$. È nulla in C, cresce con la distanza PC ed è perpendicolare a PC." },
+    { titolo: 'Potenza e rendimento', testo: "La potenza di una coppia è coppia per velocità angolare; quella di una forza è forza scalare velocità. Il rendimento è potenza utile in uscita diviso potenza in entrata: vale 1 se non si perde nulla, è minore di 1 se una parte della potenza si perde per attrito." },
+  ],
+  ipotesiPerche: [
+    "Fissiamo chi spinge e chi è spinto, e i versi di rotazione: servono per trovare il verso dell'attrito. In regime le accelerazioni sono nulle e possiamo usare gli equilibri alla rotazione.",
+    "Con l'evolvente la normale comune non cambia mai: la forza normale ha direzione fissa e braccio uguale al raggio fondamentale, qualunque sia il punto di contatto.",
+    "È il modello d'attrito più semplice: forza proporzionale alla normale, opposta allo strisciamento. Basta un numero, f.",
+    "La distanza x da C dice quanto strisciano i denti; separare accesso e recesso serve perché in C lo strisciamento cambia verso, e con esso l'attrito.",
+  ],
+  disegnoGuida:
+    "Metti sull'interasse $O_1$, C e $O_2$; disegna le fondamentali. Segna i versi: $\\omega_1$ antioraria per la motrice, $\\omega_2$ oraria per la condotta. Traccia la retta di pressione da $H_1$ a $H_2$, con gli angoli retti nei punti di tangenza e l'angolo θ. Scegli il contatto P fra C e $H_1$, a distanza x da C: è la fase di accesso. In P disegna la forza normale della ruota 2 sulla 1, $F_N^{2,1}$, lungo la retta, verso $H_1$. Poi la velocità relativa di 1 rispetto a 2, perpendicolare alla retta, e l'attrito $F_T^{2,1}$ opposto a essa. Quota i bracci rispetto a $O_1$: $R_{f1}$ per la normale e $PH_1 = R_1\\sin\\theta - x$ per l'attrito. Infine le coppie: $C_1$ motrice e $C_2$ resistente.",
+  mappa: [
+    'Senza attrito: la forza sta sulla retta di pressione, braccio uguale al raggio fondamentale.',
+    'La scompongo in C: la tangenziale trasmette la coppia, la radiale carica i supporti.',
+    'Con attrito: trovo la velocità relativa e il verso dell\'attrito.',
+    'Scrivo gli equilibri con attrito e ricavo il rendimento istantaneo, in accesso e in recesso.',
+    'Calcolo quanta potenza si perde e come varia lungo il segmento dei contatti.',
+  ],
+  dims: {
+    d083: {
+      introduzione:
+        "Cominciamo dal caso ideale, denti lisci. La strategia è: capire la direzione della forza fra i denti, scrivere l'equilibrio alla rotazione della motrice con il braccio giusto, scomporre la forza in C in una parte tangenziale e una radiale, e infine ripetere l'equilibrio sulla condotta per legare le due coppie.",
+      riepilogo:
+        "Senza attrito la forza fra i denti è lungo la retta di pressione, sempre con la stessa direzione. Il suo braccio rispetto a $O_1$ è il raggio fondamentale, quindi $C_1 = F R_{f1}$. Scomposta in C, la componente tangenziale $Q = F\\cos\\theta$ fa la coppia con braccio $R_1$, la radiale $F\\sin\\theta$ non fa coppia ma carica i supporti. Le coppie stanno come i raggi, e la forza vale $C_1/(R_1\\cos\\theta)$.",
+    },
+    d084: {
+      introduzione:
+        "Ora aggiungiamo l'attrito. Il punto difficile è il verso della forza d'attrito, che dipende dallo strisciamento. La strategia è: trovare la velocità relativa nel contatto, dedurne il verso dell'attrito, scrivere l'equilibrio alla rotazione di ciascuna ruota con i bracci giusti, ricavare il rapporto delle coppie e da lì il rendimento istantaneo. Facciamo tutto in accesso, poi ripetiamo in recesso.",
+      riepilogo:
+        "La velocità relativa è una rotazione attorno a C, quindi l'attrito è perpendicolare alla retta di pressione e cambia verso quando il contatto passa per C. Negli equilibri l'attrito ha braccio $R\\sin\\theta \\mp x$, misurato lungo la retta dal punto di tangenza. Eliminando la forza normale si ottiene il rapporto delle coppie e quindi il rendimento istantaneo, con formule diverse in accesso e in recesso. In C entrambi valgono 1, e calano allontanandosi da C.",
+    },
+    d085: {
+      introduzione:
+        "Quanto velocemente striscia un dente sull'altro? Ci serve sia per capire il verso dell'attrito sia per calcolare la potenza persa. La strategia è partire dalla rotazione relativa attorno a C, già trovata nella legge dell'ingranamento, e leggerla per ruote esterne, dove le due ω hanno versi opposti.",
+      riepilogo:
+        "La velocità del dente 2 rispetto al dente 1 è una rotazione relativa attorno a C. Nelle ruote esterne la velocità angolare relativa ha modulo $|\\omega_1| + |\\omega_2|$, quindi lo strisciamento vale questa somma per x, ed è perpendicolare alla retta di pressione, cioè tangente ai denti. È nullo in C, cresce linearmente allontanandosi e cambia verso passando per C; a parità di motrice è più forte se la condotta è piccola.",
+    },
+    d086: {
+      introduzione:
+        "Chiudiamo con il bilancio energetico: quanta potenza si trasforma in calore nel contatto? La strategia è scrivere la potenza della forza d'attrito nel moto relativo, usare la velocità di strisciamento appena trovata e, con un'approssimazione per f piccolo, ottenere una potenza proporzionale a x. Poi seguiamo il contatto lungo AB nel tempo.",
+      riepilogo:
+        "La potenza persa è l'attrito per la velocità di strisciamento: $f F_N (|\\omega_1| + |\\omega_2|) x$. Prendendo la normale del caso liscio diventa $Kx$, proporzionale alla distanza da C. Siccome il contatto avanza sulla retta a velocità costante, nel tempo il diagramma è a V: nullo in C, massimo agli estremi. L'energia persa per ogni coppia di denti è l'area dei due triangoli: conviene un segmento dei contatti corto e centrato su C.",
+    },
+  },
+  passi: {
+    'd083.1': {
+      tappa: 0,
+      prima: "Che direzione ha la forza che un dente liscio esercita sull'altro? Senza attrito una superficie può solo spingere perpendicolarmente a sé stessa, come un tavolo liscio che regge un bicchiere. Quindi la forza è lungo la normale comune ai profili. E per l'evolvente, la normale comune che retta è?",
+      dopo: "È la retta di pressione $H_1H_2$. Quindi la forza fra i denti ha sempre la stessa direzione durante tutto l'ingranamento, anche se il punto di contatto si sposta. È un grande pregio dell'evolvente: i supporti vedono un carico di direzione costante.",
+    },
+    'd083.2': {
+      tappa: 0,
+      prima: "Scrivi l'equilibrio alla rotazione della ruota 1 attorno a $O_1$. Agiscono la coppia motrice $C_1$ e la forza del dente. Qual è il braccio della forza? Ricorda: è la distanza di $O_1$ dalla retta della forza, non dal punto di contatto. La retta è la retta di pressione, e la perpendicolare da $O_1$ la incontra in $H_1$.",
+      dopo: "La coppia motrice è la forza per il raggio fondamentale. Il punto di contatto non compare: dovunque sia P sulla retta, il braccio è sempre $R_{f1}$. Quindi con coppia costante anche la forza fra i denti è costante.",
+    },
+    'd083.3': {
+      tappa: 1,
+      prima: "Spostiamo la forza lungo la sua retta fino a C, il punto primitivo: il momento non cambia. Scomponila in due direzioni: tangente alle primitive in C e lungo l'interasse. L'angolo fra la retta di pressione e la tangente alle primitive è θ. Quanto vale la componente tangente, e che braccio ha rispetto a $O_1$?",
+      dopo: "La componente tangente $Q = F\\cos\\theta$ ha braccio $R_1$, e dà lo stesso momento di prima perché $R_1\\cos\\theta = R_{f1}$. È la forza che trasmette davvero la coppia, la stessa che avremmo con due ruote di frizione di raggio $R_1$.",
+    },
+    'd083.4': {
+      tappa: 1,
+      prima: "E l'altra componente, quella lungo l'interasse? Chiediti dove passa la sua retta: passa per C ed è diretta come la congiungente dei centri, quindi passa anche per $O_1$. Che momento fa una forza che passa per il centro?",
+      dopo: "La componente radiale vale $F\\sin\\theta = Q\\tan\\theta$, non fa momento e non trasmette potenza. Però spinge le ruote a separarsi e carica alberi e cuscinetti. Con θ = 20° vale circa il 36% della tangenziale; con un angolo più grande sarebbe ancora maggiore.",
+    },
+    'd083.5': {
+      tappa: 1,
+      prima: "Ora la ruota 2. La forza che riceve è la reazione, uguale e opposta, sempre sulla retta di pressione. Scrivi il suo equilibrio alla rotazione attorno a $O_2$: il braccio è il raggio fondamentale $R_{f2}$. Poi fai il rapporto fra le due coppie: la forza si semplifica.",
+      dopo: "Le coppie stanno come i raggi fondamentali, cioè come i primitivi, e il loro rapporto è $-\\tau$. È lo stesso risultato del bilancio delle potenze: senza attrito la potenza passa intera. Controllo: la ruota grande riceve la coppia più grande.",
+    },
+    'd083.6': {
+      tappa: 1,
+      prima: "Per dimensionare il dente vogliamo la forza in funzione della coppia motrice, che è il dato. Parti da $C_1 = F R_{f1}$, sostituisci $R_{f1} = R_1\\cos\\theta$ e ricava F.",
+      dopo: "La forza fra i denti è la coppia divisa $R_1\\cos\\theta$, cioè la tangenziale divisa cos θ. Controllo: a parità di coppia, aumentando θ cresce la forza totale e soprattutto la radiale. Per questo non si usano angoli di pressione grandi.",
+    },
+    'd084.1': {
+      tappa: 2,
+      prima: "Per sapere dove punta l'attrito ci serve la velocità con cui un dente striscia sull'altro. Scrivi la velocità del punto di contatto della ruota 2 meno quella della ruota 1. Ricorda dalla legge dell'ingranamento chi è il C.I.R. del moto relativo.",
+      dopo: "La velocità relativa è una rotazione attorno a C, con velocità angolare $\\omega_2 - \\omega_1$. Quindi è perpendicolare a PC, cioè alla retta di pressione: è tangente ai denti, come deve essere uno strisciamento.",
+    },
+    'd084.2': {
+      tappa: 2,
+      prima: "Troviamo i versi. $\\omega_2$ è oraria, $\\omega_1$ antioraria: «orario meno antiorario» che verso dà? A noi serve la velocità di 1 rispetto a 2, che è opposta. Poi guarda il disegno: con P fra B e C, il vettore $P - C$ punta verso $H_1$. Ruota quel vettore di 90° nel verso di $\\omega_{1,2}$.",
+      dopo: "La velocità di 1 rispetto a 2 va verso il basso a destra, perpendicolare alla retta; l'attrito della 2 sulla 1 è opposto, verso l'alto a sinistra, di modulo $f F_N$. Quando P supera C, $P - C$ cambia verso e con lui l'attrito: per questo accesso e recesso vanno trattati separatamente.",
+    },
+    'd084.3': {
+      tappa: 3,
+      prima: "Equilibrio alla rotazione della ruota 1 attorno a $O_1$, in accesso. La normale ha braccio $R_{f1}$, come prima. L'attrito invece è perpendicolare alla retta di pressione: il suo braccio è la distanza di $O_1$ dalla retta dell'attrito, che si misura **lungo** la retta di pressione, da P fino a $H_1$. Quanto è lungo $PH_1$, se $CH_1 = R_1\\sin\\theta$?",
+      dopo: "Il braccio dell'attrito è $R_1\\sin\\theta - x$, e il suo momento ha lo stesso verso di $C_1$, quindi compare con lo stesso segno. Controllo: se P arrivasse in $H_1$ il braccio sarebbe nullo, perché la retta dell'attrito passerebbe per $O_1$.",
+    },
+    'd084.4': {
+      tappa: 3,
+      prima: "Vogliamo la forza normale. Nell'equazione ci sono due incognite, la normale e l'attrito, ma sono legate da Coulomb. Sostituisci $F_T = f F_N$ e $R_{f1} = R_1\\cos\\theta$, raccogli $F_N$ e dividi.",
+      dopo: "La normale è la coppia diviso $R_1\\cos\\theta - f(R_1\\sin\\theta - x)$. Controllo: con f = 0 ritrovi la forza del caso liscio, $C_1/(R_1\\cos\\theta)$. Il denominatore deve restare positivo, e lo è per valori normali di f.",
+    },
+    'd084.5': {
+      tappa: 3,
+      prima: "Stesso equilibrio sulla ruota 2, con le reazioni. La normale ha braccio $R_{f2}$. Per l'attrito il braccio si misura lungo la retta fino a $H_2$: P sta dall'altra parte di C rispetto a $H_2$, quindi la distanza è $CH_2$ **più** x. Il momento dell'attrito si oppone alla rotazione della 2, come la coppia resistente.",
+      dopo: "Si ottiene la normale in funzione di $C_2$, con un denominatore $R_2\\cos\\theta - f(R_2\\sin\\theta + x)$. Qui $C_2$ è il modulo della coppia resistente. Controllo: anche qui con f = 0 torni al caso liscio.",
+    },
+    'd084.6': {
+      tappa: 3,
+      prima: "Abbiamo due espressioni della stessa forza normale: per azione e reazione il modulo sulla ruota 1 e sulla ruota 2 è lo stesso. Uguagliale e ricava il rapporto fra la coppia resistente e quella motrice.",
+      dopo: "Il rapporto delle coppie è il rapporto dei due denominatori. Controllo: con f = 0 vale $R_2/R_1$, come nel caso liscio. Con l'attrito, in proporzione, il numeratore cala più del denominatore, quindi la coppia d'uscita è un po' minore di quella ideale.",
+    },
+    'd084.7': {
+      tappa: 3,
+      prima: "Il rendimento istantaneo è potenza uscente diviso potenza entrante, cioè $|C_2||\\omega_2|$ su $|C_1||\\omega_1|$. Il rapporto delle velocità lo conosciamo: $R_1/R_2$. Moltiplicalo per il rapporto delle coppie, poi dividi numeratore per $R_2\\cos\\theta$ e denominatore per $R_1\\cos\\theta$.",
+      dopo: "Si ottiene la formula della dispensa per l'accesso. Il numeratore è più piccolo del denominatore perché il termine con x è sottratto sopra e aggiunto sotto: il rendimento è minore di 1. Cala man mano che il contatto si allontana da C.",
+    },
+    'd084.8': {
+      tappa: 3,
+      prima: "In recesso P è oltre C, verso $H_2$. Due cose cambiano: lo strisciamento ha cambiato verso, quindi l'attrito sulla ruota 1 si oppone ora al moto, e il braccio dell'attrito rispetto a $O_1$ è la distanza da $H_1$, che adesso è $R_1\\sin\\theta + x$. Riscrivi l'equilibrio della ruota 1 con questi cambi.",
+      dopo: "La normale in recesso ha un più nel denominatore: con lo stesso $C_1$ è un po' minore del caso liscio. La domanda 25 attribuisce questa formula alla dispensa senza dire che vale solo in recesso: è un dettaglio da ricordare.",
+    },
+    'd084.9': {
+      tappa: 3,
+      prima: "Ripeti gli stessi passi del caso di accesso con l'attrito invertito: equilibrio della ruota 2 con braccio $R_2\\sin\\theta - x$, uguaglianza delle normali, moltiplicazione per $R_1/R_2$ e raccoglimento dei termini con cos θ.",
+      dopo: "È il rendimento di recesso, con i segni scambiati rispetto all'accesso. Anche qui il termine con x abbassa il numeratore e alza il denominatore, quindi il rendimento è minore di 1 e cala allontanandosi da C.",
+    },
+    'd084.10': {
+      tappa: 3,
+      prima: "Facciamo un controllo finale, il più importante: che cosa succede quando il contatto è proprio nel punto primitivo C, cioè x = 0? Sostituisci nelle due formule e guarda numeratore e denominatore.",
+      dopo: "Diventano uguali e il rendimento vale 1, sia in accesso sia in recesso. Ha senso: in C i denti rotolano senza strisciare, e un attrito senza strisciamento non dissipa. Le perdite nascono solo allontanandosi da C.",
+    },
+    'd085.1': {
+      tappa: 2,
+      prima: "Partiamo da ciò che sappiamo dalla legge dell'ingranamento. Il moto del dente 2 visto dal dente 1 è, istante per istante, una rotazione attorno a un punto. Quale? Il punto dove le due ruote hanno la stessa velocità.",
+      dopo: "È C, e la velocità relativa è $(\\omega_2 - \\omega_1) \\wedge (P - C)$. Tutto lo strisciamento è descritto da una rotazione relativa attorno al punto primitivo.",
+    },
+    'd085.2': {
+      tappa: 2,
+      prima: "Nelle ruote esterne $\\omega_1$ e $\\omega_2$ hanno versi opposti, quindi componenti lungo $\\underline k$ di segno opposto. Chiediti: quanto vale in modulo la differenza fra un numero positivo e uno negativo? Prova con 3 e −2.",
+      dopo: "La differenza ha per modulo la somma dei moduli: 3 − (−2) = 5. Nelle ruote esterne lo strisciamento è quindi «sommato»: un dente gira in un verso, l'altro nell'altro, e uno scorre sull'altro più velocemente.",
+    },
+    'd085.3': {
+      tappa: 2,
+      prima: "Ora il prodotto vettoriale. $P - C$ sta sulla retta di pressione e ha lunghezza x; la velocità angolare relativa è perpendicolare al piano. Che direzione ha il prodotto, e che modulo, se i due vettori sono perpendicolari fra loro?",
+      dopo: "La velocità di strisciamento vale $(|\\omega_1| + |\\omega_2|)x$ ed è perpendicolare alla retta di pressione, quindi tangente ai profili. Non ha componente normale: i denti non si staccano né si compenetrano, scivolano soltanto.",
+    },
+    'd085.4': {
+      tappa: 2,
+      prima: "Leggiamo la formula al variare di P. Che cosa succede quando il contatto passa proprio per C? E che cosa succede al vettore $P - C$ quando P passa da una parte all'altra di C?",
+      dopo: "In C lo strisciamento è nullo: rotolamento puro. Prima e dopo C ha versi opposti, perché $P - C$ cambia verso. Cresce linearmente con la distanza: per avere poche perdite, il contatto deve restare vicino a C.",
+    },
+    'd085.5': {
+      tappa: 2,
+      prima: "Spesso conosci solo la velocità della motrice: scriviamo lo strisciamento in funzione di quella. Ricorda che in modulo $|\\omega_2| = |\\omega_1| R_1/R_2$. Sostituisci nella somma e raccogli $|\\omega_1|$.",
+      dopo: "Lo strisciamento è $|\\omega_1|(1 + |\\tau|)x$. A parità di motrice, una condotta piccola, che gira veloce, fa strisciare di più. Con la dentiera, τ = 0, resta $|\\omega_1|x$.",
+    },
+    'd086.1': {
+      tappa: 4,
+      prima: "Quanta potenza si trasforma in calore? La forza normale non lavora nel moto relativo, perché i denti non si avvicinano né si allontanano lungo la normale. Resta l'attrito: la sua potenza è la forza d'attrito sulla ruota 1 per la velocità di 1 rispetto a 2. Scrivi la velocità relativa come rotazione attorno a C e permuta il prodotto misto.",
+      dopo: "La potenza dell'attrito è negativa, perché la forza è opposta alla velocità relativa: è potenza tolta al sistema e trasformata in calore. La permutazione ciclica del prodotto misto è un trucco algebrico che non cambia il valore.",
+    },
+    'd086.2': {
+      tappa: 4,
+      prima: "Calcoliamo il modulo. Forza d'attrito e velocità relativa sono sulla stessa retta, in versi opposti: il prodotto scalare in modulo è il prodotto dei moduli. Sostituisci $|F_T| = f|F_N|$ e la velocità di strisciamento trovata prima.",
+      dopo: "La potenza persa è $f F_N (|\\omega_1| + |\\omega_2|) x$: cresce con il coefficiente d'attrito, con il carico, con la velocità e con la distanza da C. Controllo: in C è nulla.",
+    },
+    'd086.3': {
+      tappa: 4,
+      prima: "La normale, con l'attrito, varia un poco con x, e questo complica i conti. Ma se f è piccolo la normale è quasi quella del caso liscio. La dispensa fa questa approssimazione: sostituisci $F_N \\simeq C_1/(R_1\\cos\\theta)$ e raccogli tutto ciò che non dipende da x in una costante K.",
+      dopo: "La potenza persa è $Kx$: proporzionale alla distanza del contatto da C. K contiene f, la coppia e le velocità, che in regime sono costanti. È una legge semplice da ricordare e da disegnare.",
+    },
+    'd086.4': {
+      tappa: 4,
+      prima: "Come varia x nel tempo? Il punto di contatto è il punto della retta generatrice che srotola l'evolvente della ruota 1. Con che velocità avanza un filo che si srotola da un rocchetto che gira a $\\omega_1$? Con la velocità periferica del rocchetto, cioè della fondamentale.",
+      dopo: "Il contatto avanza sulla retta a velocità costante $R_{f1}\\omega_1$, quindi x varia linearmente nel tempo. La potenza persa scende in linea retta da B a C, si annulla in C e risale fino ad A: un diagramma a V.",
+    },
+    'd086.5': {
+      tappa: 4,
+      prima: "L'energia persa mentre una coppia di denti percorre AB è l'integrale della potenza nel tempo, cioè l'area sotto il diagramma a V. Cambia variabile: il tempo dt è lo spazio percorso diviso la velocità costante $R_{f1}\\omega_1$. Ti restano due triangoli, uno di base BC e uno di base CA.",
+      dopo: "L'energia è K per la somma dei quadrati di BC e CA, divisa per $2R_{f1}|\\omega_1|$. I quadrati dicono che i tratti lunghi pesano molto: conviene un segmento dei contatti corto e ben centrato su C.",
+    },
+  },
+  racconto:
+    "All'orale parti dal caso liscio: la forza fra i denti è lungo la retta di pressione, con braccio $R_{f1}$, quindi $C_1 = F R_{f1} = Q R_1$, con la tangenziale $Q = F\\cos\\theta$ che trasmette la coppia e la radiale $F\\sin\\theta$ che carica i supporti. Poi l'attrito: la velocità relativa è una rotazione attorno a C, di modulo $(|\\omega_1| + |\\omega_2|)x$, perpendicolare alla retta; l'attrito è opposto e cambia verso in C. Negli equilibri ha braccio $R\\sin\\theta \\mp x$, e il rendimento istantaneo vale 1 in C e cala in accesso e in recesso. Chiudi con la potenza dissipata, $Kx$, con il diagramma a V lungo AB.",
+};
+
 export const LEZIONI: Record<string, LezioneArgomento> = {
   'c5-ruote-dentate': ruoteDentate,
   'c5-denti-presa': dentiPresa,
   'c5-interferenza': interferenza,
+  'c5-forze-dritti': forzeDritti,
 };

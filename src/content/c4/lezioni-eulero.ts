@@ -115,7 +115,7 @@ L'altra idea importante è che la cinghia non striscia su tutto l'arco. Entra su
     },
     'd062.6': {
       tappa: 1,
-      prima: L`Dall'equilibrio radiale ricava la forza normale e dividi per $d\theta$, così ottieni la normale per unità d'angolo, cioè quanto la cinghia preme su ogni radiante di puleggia.`,
+      prima: L`Dall'equilibrio radiale, ora che il termine di ordine superiore è sparito, ricava la forza normale: porta tutto il resto dall'altra parte. Poi dividi per $d\theta$, così ottieni la normale per unità d'angolo, cioè quanto la cinghia preme su ogni radiante di puleggia.`,
       dopo: L`La pressione della cinghia per unità d'angolo è la tensione meno la centrifuga. È positiva solo se la tensione vince la centrifuga: la condizione di contatto che conosci già. Ora abbiamo due equazioni, una per la tangente e una per la normale.`,
     },
     'd062.7': {
@@ -150,7 +150,7 @@ L'altra idea importante è che la cinghia non striscia su tutto l'arco. Entra su
     },
     'd063.6': {
       tappa: 2,
-      prima: L`Metti insieme la soluzione e la costante appena trovata. Poi dividi per la tensione utile del lasco, così il risultato diventa un rapporto puro.`,
+      prima: L`Metti insieme la soluzione generale e la costante appena trovata: al posto di $c$ scrivi la tensione utile del lasco. Poi dividi entrambi i membri per questa stessa quantità, così il risultato diventa un rapporto puro, senza unità di misura.`,
       dopo: L`È l'equazione di Eulero: la tensione utile cresce esponenzialmente con l'angolo di scorrimento. Con $f = 0{,}3$, mezzo giro ($\theta = \pi$) moltiplica la tensione utile per circa 2,6, un giro intero per circa 6,6. Controllo: con $f = 0$ il rapporto è uno, cioè senza attrito la tensione non cambia.`,
     },
     'd063.7': {
@@ -195,7 +195,7 @@ L'altra idea importante è che la cinghia non striscia su tutto l'arco. Entra su
     },
     'd064.7': {
       tappa: 3,
-      prima: L`Guarda anche la pressione della cinghia sulla puleggia. La normale per unità d'angolo è tensione meno centrifuga. Sostituisci la tensione dell'arco di scorrimento appena trovata.`,
+      prima: L`Guarda anche la pressione della cinghia sulla puleggia, perché è da lei che dipende l'attrito. Dall'equilibrio radiale sai che la normale per unità d'angolo è tensione meno centrifuga. Sostituisci la tensione dell'arco di scorrimento appena trovata: il termine $\rho V^2$ si cancella.`,
       dopo: L`Anche la pressione cresce esponenzialmente nello scorrimento ed è costante nell'aderenza. La centrifuga la abbassa di una quantità uguale in tutti i punti. Questa pressione ci serve per calcolare l'attrito totale.`,
     },
     'd064.8': {
@@ -220,12 +220,12 @@ L'altra idea importante è che la cinghia non striscia su tutto l'arco. Entra su
     },
     'd065.4': {
       tappa: 4,
-      prima: L`Primo caso limite: coppia nulla. Che cosa dice l'equilibrio della motrice sulle tensioni? E quanto vale il logaritmo di uno? Deduci quanto arco striscia e quanto aderisce.`,
+      prima: L`Controlliamo la formula con due casi limite. Primo: coppia nulla, la cinghia gira a vuoto. Che cosa dice l'equilibrio della motrice sulle due tensioni? Mettile nella formula: quanto vale il logaritmo di uno? Deduci quanto arco striscia e quanto aderisce.`,
       dopo: L`Senza coppia le tensioni sono uguali, l'arco di scorrimento è zero e tutto l'arco aderisce. Nessuno strisciamento, nessuna perdita. La dispensa a p. 142 associa $\theta^* = 0$ all'incipiente scorrimento globale: è il contrario, è il caso di aderenza totale.`,
     },
     'd065.5': {
       tappa: 4,
-      prima: L`Secondo caso limite: aumenta la coppia finché lo scorrimento occupa tutto l'arco. Quanto vale allora l'aderenza? E in che situazione siamo: la coppia passa ancora, o no?`,
+      prima: L`Secondo caso limite: aumenta la coppia poco alla volta. L'arco di scorrimento cresce finché occupa tutto l'arco avvolto. Usa la relazione fra i tre angoli: quanto vale allora l'aderenza? E in che situazione siamo: la coppia passa ancora, o no?`,
       dopo: L`Quando lo scorrimento occupa tutto l'arco l'aderenza è zero: siamo in incipiente scorrimento globale. La coppia è ancora trasmessa, ed è la massima possibile; basta un piccolo aumento per far slittare tutto. La dispensa qui si confonde: con aderenza nulla la coppia massima è ancora trasmessa.`,
     },
     'd065.6': {
@@ -270,12 +270,12 @@ L'altra idea importante è che la cinghia non striscia su tutto l'arco. Entra su
     },
     'd067.2': {
       tappa: 5,
-      prima: L`Ora aumenta la coppia: l'arco di scorrimento, uguale sulle due pulegge, cresce. Deve però stare dentro l'arco avvolto di ciascuna. Quale delle due finisce prima l'arco disponibile?`,
+      prima: L`Ora aumenta la coppia: il salto di tensione cresce e con lui l'arco di scorrimento, che resta uguale sulle due pulegge. Deve però stare dentro l'arco avvolto di ciascuna. Quale delle due finisce per prima l'arco disponibile?`,
       dopo: L`Il limite è il più piccolo dei due angoli avvolti: quando lo scorrimento lo raggiunge, quella puleggia è in incipiente scorrimento globale e la coppia è la massima. «Si sceglie l'angolo più piccolo».`,
     },
     'd067.3': {
       tappa: 5,
-      prima: L`Nella cinghia aperta, quale puleggia ha l'angolo avvolto minore? Ricordati della geometria: la piccola perde arco, la grande ne guadagna.`,
+      prima: L`Applichiamo la regola alla trasmissione più comune, la cinghia aperta con due pulegge di raggio diverso. Quale delle due ha l'angolo avvolto minore? Ricordati della geometria degli angoli avvolti: rispetto a mezzo giro, la piccola perde $2\gamma$ di arco e la grande li guadagna.`,
       dopo: L`È la puleggia piccola a slittare per prima, anche se è la grande a ricevere la coppia maggiore. Negli esercizi la prima cosa da fare è confrontare gli angoli avvolti. Per questo si cerca di avere angoli avvolti ampi sulla puleggia piccola, per esempio con un tenditore.`,
     },
     'd067.4': {

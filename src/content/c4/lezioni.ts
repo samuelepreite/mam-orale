@@ -1,6 +1,8 @@
 /** Lezioni discorsive del capitolo C4 (docs/BRIEF_LEZIONI.md): argomento → testo della lezione. */
 import type { LezioneArgomento } from '../types';
 import { lezioneRapporto } from './lezioni-rapporto';
+import { lezioneEulero } from './lezioni-eulero';
+import { lezioneVelocitaOttima } from './lezioni-velocita';
 
 const frenoNastro: LezioneArgomento = {
   perche:
@@ -78,4 +80,6 @@ const frenoNastro: LezioneArgomento = {
 export const LEZIONI: Record<string, LezioneArgomento> = {
   'c4-freno-nastro': frenoNastro,
   'c4-rapporto': lezioneRapporto,
+  'c4-eulero': lezioneEulero,
+  'c4-velocita-ottima': lezioneVelocitaOttima,
 };
