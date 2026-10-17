@@ -277,7 +277,7 @@ export const discoLezione: LezioneArgomento = {
     },
     'd047.5': {
       tappa: 2,
-      prima: r`Caso della corona completa, come in una frizione o in un disco con pastiglia anulare: basta mettere α = 2π nella formula appena trovata.`,
+      prima: r`Caso della corona completa, come in una frizione o in un disco con pastiglia anulare che tocca tutto il giro. Che cosa cambia nei conti? Solo l'integrale in θ, che ora va su tutto l'angolo giro: basta mettere α = 2π nella formula appena trovata.`,
       dopo: r`Il momento è $\tfrac{2\pi f p_0}{3}(r_e^3 - r_i^3)$: è la formula che si trova di solito nei manuali per la pressione uniforme. Ricorda che vale per una superficie appena montata.`,
     },
     'd047.6': {
@@ -332,12 +332,12 @@ export const discoLezione: LezioneArgomento = {
     },
     'd049.2': {
       tappa: 3,
-      prima: r`Caso usura uniforme: prendi $M_f = fF_Nr_m$ e dividi per $fF_N$.`,
+      prima: r`Caso usura uniforme, quello della dispensa. Il momento l'abbiamo già trovato in d048: è f per la forza normale per il raggio medio. Applica la definizione appena data: prendi $M_f = fF_Nr_m$ e dividi per $fF_N$. Che cosa resta?`,
       dopo: r`$R_m$ è il raggio medio aritmetico $(r_e + r_i)/2$. È la (5.84) del libro per la frizione. Controllo: con $r_i$ = 0,06 m e $r_e$ = 0,12 m viene 0,09 m, a metà fra i due.`,
     },
     'd049.3': {
       tappa: 3,
-      prima: r`Caso pressione uniforme: il momento era $fF_N$ per il rapporto cubico. Dividi per $fF_N$ e leggi che cosa resta.`,
+      prima: r`Caso pressione uniforme, il disco nuovo di d047. Lì, eliminando $p_0$, il momento era $fF_N$ moltiplicato per il rapporto fra una differenza di cubi e una differenza di quadrati. Dividi per $fF_N$ e leggi che cosa resta.`,
       dopo: r`$R_m$ è $\tfrac{2}{3}(r_e^3 - r_i^3)/(r_e^2 - r_i^2)$. Con gli stessi raggi di prima (0,06 e 0,12 m) vale circa 0,093 m: poco più del raggio medio. La differenza è piccola, ma ha sempre lo stesso segno.`,
     },
     'd049.4': {
