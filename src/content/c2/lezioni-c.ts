@@ -211,7 +211,7 @@ Ecco perché conta quali ruote sono motrici. Con la trazione anteriore, accelera
     },
     'd033.4': {
       tappa: 5,
-      prima: r`Il carico sulla ruota esterna lo troviamo senza altri momenti: le due normali sommano al peso. Sottrai dal peso il carico interno appena trovato.`,
+      prima: r`Il carico sulla ruota esterna lo troviamo senza scrivere altri momenti: l'equazione verticale dice che le due normali sommano al peso. Basta sottrarre dal peso il carico interno appena trovato e guardare il segno del termine con la velocità.`,
       dopo: r`La ruota esterna si carica esattamente di quanto l'interna si scarica. È il motivo per cui in curva le gomme esterne si consumano di più e si schiacciano visibilmente. La somma resta il peso, come deve essere.`,
     },
     'd033.5': {

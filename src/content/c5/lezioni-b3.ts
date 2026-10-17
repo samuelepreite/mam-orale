@@ -153,7 +153,7 @@ export const elicoidaliZmin: LezioneArgomento = {
       introduzione:
         "Ora che sappiamo quanti denti ha la ruota fittizia, il numero minimo è quasi immediato. La strategia è imporre che sia la ruota fittizia a rispettare il limite dei denti dritti, perché è lei a descrivere il dente nel piano in cui lavora, e poi tornare alla ruota vera con la formula appena trovata.",
       riepilogo:
-        "L'interferenza si studia sulla ruota fittizia, che deve avere almeno $z^*_{min}$ denti. Al limite $z_{min}/\\cos^3\\alpha = z^*_{min}$, quindi la ruota vera può avere $\\cos^3\\alpha$ volte meno denti di una a denti dritti. Con θ = 20° e α = 20° si passa da 17 a 15 denti: pignoni più piccoli a parità di modulo.",
+        "L'interferenza si studia sulla ruota fittizia, che deve avere almeno $z^*_{min}$ denti. Al limite $z_{min}/\\cos^3\\alpha = z^*_{min}$, quindi la ruota vera può avere $\\cos^3\\alpha$ volte meno denti di una a denti dritti. Con θ = 20° e α = 20° il limite scende da 17,1 a 14,2: da 18 a 15 denti, pignoni più piccoli a parità di modulo.",
     },
   },
   passi: {
@@ -209,7 +209,7 @@ export const elicoidaliZmin: LezioneArgomento = {
     },
   },
   racconto:
-    "All'orale direi che sfrutto il risultato dei denti dritti attraverso una ruota fittizia. Taglio il cilindro primitivo con il piano normale all'elica e ottengo un'ellisse di semiassi $r$ e $r/\\cos\\alpha$. Vicino al contatto, all'estremo dell'asse minore, la sostituisco con la circonferenza osculatrice di raggio $a^2/b = r/\\cos^2\\alpha$: è la primitiva della ruota fittizia, con il modulo normale $m\\cos\\alpha$. Ne viene $z_{fitt} = z/\\cos^3\\alpha$. Imponendo che la fittizia non interferisca trovo $z_{min} = z^*_{min}\\cos^3\\alpha$, e chiudo con l'esempio: da 17 a 15 denti.",
+    "All'orale direi che sfrutto il risultato dei denti dritti attraverso una ruota fittizia. Taglio il cilindro primitivo con il piano normale all'elica e ottengo un'ellisse di semiassi $r$ e $r/\\cos\\alpha$. Vicino al contatto, all'estremo dell'asse minore, la sostituisco con la circonferenza osculatrice di raggio $a^2/b = r/\\cos^2\\alpha$: è la primitiva della ruota fittizia, con il modulo normale $m\\cos\\alpha$. Ne viene $z_{fitt} = z/\\cos^3\\alpha$. Imponendo che la fittizia non interferisca trovo $z_{min} = z^*_{min}\\cos^3\\alpha$, e chiudo con l'esempio: con θ = α = 20° il limite scende da 17,1 a 14,2, cioè 15 denti.",
 };
 
 export const elicoidaliForze: LezioneArgomento = {
@@ -221,7 +221,7 @@ export const elicoidaliForze: LezioneArgomento = {
     { titolo: "Forza fra due superfici senza attrito", testo: "Se si trascura l'attrito, due corpi a contatto si scambiano una forza perpendicolare alla superficie di contatto. Nei denti a evolvente dritti questa forza sta sulla retta d'azione, inclinata dell'angolo di pressione θ rispetto alla tangente alle primitive." },
     { titolo: "Scomposizione di una forza", testo: "Una forza $F$ che forma un angolo $\\theta$ con una direzione ha componente $F\\cos\\theta$ lungo quella direzione e $F\\sin\\theta$ lungo la perpendicolare. In tre dimensioni si può scomporre in due tempi, prima in un piano e poi nell'altro." },
     { titolo: "Momento rispetto a un asse", testo: "Una forza dà momento rispetto a un asse solo con la componente perpendicolare all'asse e che non lo incontra. Una forza che passa per l'asse ha braccio nullo; una parallela all'asse non lo fa girare. Per un corpo in equilibrio la coppia applicata è bilanciata dai momenti delle forze." },
-    { titolo: "Grandezze normali dell'elicoidale", testo: "Passando dal piano frontale (perpendicolare all'asse) al piano normale al dente compare un $\\cos\\alpha$: per l'angolo di pressione $\\operatorname{tg}\\theta_m = \\operatorname{tg}\\theta\\cos\\alpha$." },
+    { titolo: "Grandezze normali dell'elicoidale", testo: "Passando dal piano frontale (perpendicolare all'asse) al piano normale al dente compare un $\\cos\\alpha$, perché il piano normale è inclinato di α. Per l'angolo di pressione vale $\\operatorname{tg}\\theta_m = \\operatorname{tg}\\theta\\cos\\alpha$: nel piano normale l'angolo di pressione è un po' più piccolo di quello frontale." },
   ],
   ipotesiPerche: [
     "Il dente sta sul cilindro primitivo di raggio r, ed è lì che applichiamo la forza: r sarà il braccio per la coppia.",
@@ -272,7 +272,7 @@ export const elicoidaliForze: LezioneArgomento = {
     },
     "d098.6": {
       tappa: 3,
-      prima: "La radiale contiene $\\operatorname{tg}\\theta_m/\\cos\\alpha$. Ricorda il legame fra l'angolo di pressione normale e quello frontale: $\\operatorname{tg}\\theta_m = \\operatorname{tg}\\theta\\cos\\alpha$. Sostituiscilo e semplifica.",
+      prima: "La radiale contiene $\\operatorname{tg}\\theta_m/\\cos\\alpha$, che sembra diversa da quella dei denti dritti. Lo è davvero? Ricorda il legame fra l'angolo di pressione normale e quello frontale: $\\operatorname{tg}\\theta_m = \\operatorname{tg}\\theta\\cos\\alpha$. Sostituiscilo e guarda che cosa si semplifica.",
       dopo: "Il $\\cos\\alpha$ si semplifica e la radiale diventa $(C/r)\\operatorname{tg}\\theta$: la stessa dei denti dritti, con l'angolo di pressione frontale. Nel piano frontale la ruota elicoidale si comporta come una a denti dritti anche per le forze; la novità è solo l'assiale.",
     },
     "d098.7": {
