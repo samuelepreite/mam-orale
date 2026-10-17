@@ -15,7 +15,7 @@
  */
 import type { Argomento } from '../content/types';
 import type { AppState } from '../storage/store';
-import { CATALOGO, passiDi, pesoOrale, type Catalogo } from './catalogo';
+import { attivo, CATALOGO, passiDi, pesoOrale, type Catalogo } from './catalogo';
 import { giorniRipasso, padronanze } from './mastery';
 import { card, retrievability } from './srs';
 
@@ -54,6 +54,7 @@ export function ricordoAl(state: AppState, a: Argomento, when: Date, cat: Catalo
 }
 
 export function pianoStudio(state: AppState, now: Date = new Date(), cat: Catalogo = CATALOGO, pad = padronanze(state, now, cat)): Piano {
+  cat = attivo(state, cat);
   const N = state.settings.ripassiObiettivo;
   const giorni = giorniRipasso(state, cat);
   const ripassi = (id: string) => giorni[id]?.size ?? 0;

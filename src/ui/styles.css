@@ -581,3 +581,10 @@ details > summary { cursor: pointer; font-weight: 600; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* argomenti disattivati temporaneamente */
+.arg-wrap { display: flex; align-items: flex-start; gap: 8px; }
+.arg-wrap > .arg-row { flex: 1; min-width: 0; }
+.arg-switch { padding-top: 12px; flex: none; }
+.arg-switch input { width: 20px; height: 20px; accent-color: var(--accent); cursor: pointer; }
+.arg-wrap.spento > .arg-row { opacity: 0.5; }

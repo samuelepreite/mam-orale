@@ -5,7 +5,7 @@
  */
 import type { Errore } from '../content/types';
 import type { AppState } from '../storage/store';
-import { CATALOGO, indicePassi, type Catalogo } from './catalogo';
+import { attivo, CATALOGO, indicePassi, type Catalogo } from './catalogo';
 import { calibrazione, padronanzaCapitoli, padronanze, ripassiRiusciti, statoArgomento, type StatoArgomento } from './mastery';
 import { pianoStudio, type Piano } from './plan';
 import { punteggio, rubricaDi } from './rubrica';
@@ -86,6 +86,7 @@ export interface Dashboard {
 }
 
 export function dashboard(state: AppState, now: Date = new Date(), cat: Catalogo = CATALOGO): Dashboard {
+  cat = attivo(state, cat);
   const pad = padronanze(state, now, cat);
   const rip = ripassiRiusciti(state, cat);
   return {

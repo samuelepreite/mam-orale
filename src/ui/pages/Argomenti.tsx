@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import { CAPITOLI } from '../../content';
 import type { Argomento } from '../../content/types';
-import { CATALOGO } from '../../learning/catalogo';
+import { CATALOGO, isDisattivato } from '../../learning/catalogo';
 import { padronanzaCapitoli, padronanze, ripassiRiusciti, statoArgomento, STATO_TESTO } from '../../learning/mastery';
 import { useApp, useNow } from '../state';
 import { Bar, CapChip, pct } from '../components/bits';
@@ -14,7 +14,10 @@ export function FonteBadge({ a }: { a: Argomento }) {
 }
 
 export function Argomenti() {
-  const { state } = useApp();
+  const { state, update } = useApp();
+  const off = state.settings.disattivati ?? [];
+  const setOff = (ids: string[]) => update((s) => ({ ...s, settings: { ...s.settings, disattivati: ids.length ? [...new Set(ids)].sort() : undefined } }));
+  const toggle = (id: string) => setOff(off.includes(id) ? off.filter((x) => x !== id) : [...off, id]);
   const now = useNow();
   const pad = useMemo(() => padronanze(state, now), [state, now]);
   const rip = useMemo(() => ripassiRiusciti(state), [state]);
@@ -24,7 +27,14 @@ export function Argomenti() {
       <h1>Argomenti</h1>
       <p className="muted">
         {CATALOGO.argomenti.filter((a) => a.contenuto).length} argomenti pronti su {CATALOGO.argomenti.length}. Le pagine sono quelle del PDF della dispensa.
+        Con l&apos;interruttore accanto a ogni argomento lo disattivi per un po&apos;: sparisce da Oggi, Progressi, piano e orale, ma resta consultabile e i tuoi progressi restano salvati.
       </p>
+      {off.length > 0 && (
+        <p className="verdict info">
+          {off.length} {off.length === 1 ? 'argomento disattivato' : 'argomenti disattivati'}.{' '}
+          <button type="button" className="link" onClick={() => setOff([])}>Riattiva tutti</button>
+        </p>
+      )}
       {CAPITOLI.map((cap) => {
         const cp = caps.find((x) => x.cap === cap.id)!;
         const as = CATALOGO.argomenti.filter((a) => a.cap === cap.id);
@@ -38,16 +48,28 @@ export function Argomenti() {
               </span>
             </div>
             <Bar v={cp.padronanza} label={`padronanza del capitolo ${cap.id}`} />
+            <div className="row" style={{ marginTop: 6 }}>
+              {as.every((a) => off.includes(a.id)) ? (
+                <button type="button" className="link" onClick={() => setOff(off.filter((x) => !as.some((a) => a.id === x)))}>Riattiva il capitolo</button>
+              ) : (
+                <button type="button" className="link" onClick={() => setOff([...off, ...as.map((a) => a.id)])}>Disattiva tutto il capitolo</button>
+              )}
+            </div>
             <div style={{ marginTop: 8 }}>
               {as.map((a) => {
                 const st = statoArgomento(state, a, pad[a.id] ?? 0, rip[a.id] ?? 0);
+                const spento = isDisattivato(state, a.id);
                 return (
-                  <a key={a.id} className="arg-row" href={`#/argomento/${a.id}`}>
+                  <div key={a.id} className={`arg-wrap${spento ? ' spento' : ''}`}>
+                  <label className="arg-switch" title={spento ? 'riattiva' : 'disattiva per ora'}>
+                    <input type="checkbox" checked={!spento} onChange={() => toggle(a.id)} aria-label={`${a.titolo}: ${spento ? 'disattivato' : 'attivo'}`} />
+                  </label>
+                  <a className="arg-row" href={`#/argomento/${a.id}`}>
                     <span className="t">{a.titolo}</span>
                     <span className="r">
                       <FonteBadge a={a} />
                       {a.complemento && <span className="badge">complemento</span>}
-                      <span className={`badge st-${st}`}>{STATO_TESTO[st]}</span>
+                      {spento ? <span className="badge">disattivato</span> : <span className={`badge st-${st}`}>{STATO_TESTO[st]}</span>}
                       {a.contenuto && <span className="small num muted">{pct(pad[a.id] ?? 0)}</span>}
                     </span>
                     <span className="q">
@@ -55,6 +77,7 @@ export function Argomenti() {
                       {a.formulazioni.length > 0 && <> · {a.formulazioni.map((f) => `q${f.q}`).join(', ')}: {a.formulazioni[0].testo}{a.formulazioni.length > 1 ? ' …' : ''}</>}
                     </span>
                   </a>
+                  </div>
                 );
               })}
             </div>

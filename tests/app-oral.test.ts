@@ -73,3 +73,18 @@ describe('aiuto alla correzione (parole chiave, locale)', () => {
     expect(sospettiDaNonDire('il tamburo frena', frasi)).toEqual([]);
   });
 });
+
+describe('argomenti disattivati', () => {
+  it('spariscono dall\'estrazione e dal catalogo attivo, ma restano interrogabili se aperti apposta', async () => {
+    const { attivo } = await import('../src/learning/catalogo');
+    const s = { ...defaultState(), settings: { ...defaultState().settings, disattivati: ['c2-attrito'] } };
+    expect(attivo(s, CAT2).argomenti.some((a) => a.id === 'c2-attrito')).toBe(false);
+    expect(attivo(defaultState(), CAT2)).toBe(CAT2);
+    expect(pesiEstrazione(s, T(0), CAT2).every((x) => x.argId !== 'c2-attrito')).toBe(true);
+    expect(pesiEstrazione(s, T(0), CAT2, 'c2-attrito').length).toBeGreaterThan(0);
+    const { pianoOggi } = await import('../src/learning/session');
+    const { dashboard } = await import('../src/learning/stats');
+    expect(JSON.stringify(pianoOggi(s, T(0), CAT2))).not.toContain('c2-attrito');
+    expect(dashboard(s, T(0), CAT2).argomenti.some((a) => a.id === 'c2-attrito')).toBe(false);
+  });
+});

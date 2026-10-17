@@ -19,6 +19,8 @@ export interface Settings {
   voce: boolean;
   /** tema: assente = automatico (segue il sistema) */
   tema?: 'chiaro' | 'scuro';
+  /** argomenti disattivati temporaneamente: spariscono da Oggi, Progressi, piano e orale (restano consultabili) */
+  disattivati?: string[];
 }
 
 export type Esito = 'giusto' | 'esitante' | 'sbagliato' | 'fermato';

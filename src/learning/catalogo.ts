@@ -13,6 +13,21 @@ export interface Catalogo {
 
 export const CATALOGO: Catalogo = { argomenti: ARGOMENTI, dimostrazioni: DIMOSTRAZIONI };
 
+/** catalogo senza gli argomenti disattivati nelle impostazioni (stesso oggetto se non ce ne sono) */
+const cacheAtt = new WeakMap<Catalogo, { k: string; c: Catalogo }>();
+export function attivo(state: { settings: { disattivati?: string[] } }, cat: Catalogo = CATALOGO): Catalogo {
+  const off = state.settings.disattivati ?? [];
+  if (!off.length) return cat;
+  const k = off.join('|');
+  const hit = cacheAtt.get(cat);
+  if (hit && hit.k === k) return hit.c;
+  const s = new Set(off);
+  const c = { argomenti: cat.argomenti.filter((a) => !s.has(a.id)), dimostrazioni: cat.dimostrazioni };
+  cacheAtt.set(cat, { k, c });
+  return c;
+}
+export const isDisattivato = (state: { settings: { disattivati?: string[] } }, id: string) => !!state.settings.disattivati?.includes(id);
+
 export const argDi = (cat: Catalogo, id: string) => cat.argomenti.find((a) => a.id === id);
 export const dimsDi = (cat: Catalogo, a: Argomento): Dimostrazione[] => (a.contenuto?.dimostrazioni ?? []).map((d) => cat.dimostrazioni[d]).filter(Boolean);
 export const passiDi = (cat: Catalogo, a: Argomento): { dim: Dimostrazione; passo: Passo; i: number }[] => dimsDi(cat, a).flatMap((dim) => dim.passi.map((passo, i) => ({ dim, passo, i })));

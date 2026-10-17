@@ -11,7 +11,7 @@
  */
 import type { Argomento, VoceRubrica } from '../content/types';
 import type { AppState } from '../storage/store';
-import { CATALOGO, argDi, dimsDi, type Catalogo } from './catalogo';
+import { attivo, CATALOGO, argDi, dimsDi, type Catalogo } from './catalogo';
 import { padronanzaArgomento } from './mastery';
 import { card } from './srs';
 
@@ -28,6 +28,7 @@ export function formulazioniDi(a: Argomento): { q: number; testo: string }[] {
 }
 
 export function pesiEstrazione(state: AppState, now: Date = new Date(), cat: Catalogo = CATALOGO, soloArg?: string): (Estratta & { peso: number })[] {
+  if (!soloArg) cat = attivo(state, cat); // un argomento aperto esplicitamente si può interrogare anche se disattivato
   const recenti = [...state.simulazioni].sort((x, y) => y.at.localeCompare(x.at));
   const ultimi3 = new Set(recenti.slice(0, 3).map((s) => `${s.argId}|${s.q}`));
   const ultimi2g = new Set(recenti.filter((s) => now.getTime() - Date.parse(s.at) < 2 * DAY).map((s) => `${s.argId}|${s.q}`));

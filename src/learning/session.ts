@@ -13,7 +13,7 @@
  */
 import type { Argomento, CapId } from '../content/types';
 import type { AppState } from '../storage/store';
-import { CATALOGO, dimsDi, passiDi, type Catalogo } from './catalogo';
+import { attivo, CATALOGO, dimsDi, passiDi, type Catalogo } from './catalogo';
 import { valorePasso } from './mastery';
 import { card, rebuildSrs } from './srs';
 
@@ -86,6 +86,7 @@ export function prossimoNuovo(state: AppState, t: string, cat: Catalogo = CATALO
 }
 
 export function pianoOggi(state: AppState, now: Date = new Date(), cat: Catalogo = CATALOGO): PianoOggi {
+  cat = attivo(state, cat);
   const start = inizioGiorno(now);
   const t0 = start.toISOString();
   const snap = rebuildSrs(state, t0);
@@ -177,6 +178,7 @@ export interface Avanzamento {
 
 /** Cosa è già fatto oggi del piano (dagli eventi di oggi). */
 export function avanzamento(state: AppState, piano: PianoOggi, now: Date = new Date(), cat: Catalogo = CATALOGO): Avanzamento {
+  cat = attivo(state, cat);
   const t0 = inizioGiorno(now).toISOString();
   const oggi = state.passi.filter((p) => p.at >= t0);
   const recupero = piano.recupero.map((r) => oggi.some((p) => p.passoId === r.passoId && p.dove === 'recupero'));

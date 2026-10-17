@@ -18,7 +18,7 @@
  */
 import type { Argomento, CapId, Dimostrazione } from '../content/types';
 import type { AppState, PassoLog } from '../storage/store';
-import { CATALOGO, argDi, dimsDi, passiDi, pesoOrale, type Catalogo } from './catalogo';
+import { attivo, CATALOGO, argDi, dimsDi, passiDi, pesoOrale, type Catalogo } from './catalogo';
 import { rubricaDi, punteggio } from './rubrica';
 import { card, retrievability, Rating } from './srs';
 
@@ -68,6 +68,7 @@ export interface CapitoloPadronanza {
   totale: number;
 }
 export function padronanzaCapitoli(state: AppState, now: Date = new Date(), cat: Catalogo = CATALOGO, pad = padronanze(state, now, cat)): CapitoloPadronanza[] {
+  cat = attivo(state, cat);
   const caps: CapId[] = ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7'];
   return caps.map((cap) => {
     const as = cat.argomenti.filter((a) => a.cap === cap);
